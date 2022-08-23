@@ -9,7 +9,7 @@
   collections:
     - eingram23.homelab
     - eingram23.pihole
-    
+
   roles:
     - role: add_eingram_user
       tags:
@@ -66,6 +66,9 @@
   become_user: poduser
   become_method: sudo
 
+  collections:
+    - eingram23.homelab
+    
   roles:
     - role: prometheus_target_update_nix
       tags:

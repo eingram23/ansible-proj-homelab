@@ -1,6 +1,6 @@
 ---
-tf_root: /terraform/
-temp_path: "../terraform/vsphere_linux/"
+tf_root: "/terraform"
+temp_path: "../../../tf_templates/vsphere_linux/"
 proj_root: "{{tf_root}}/projects/"
 vm_folder_name: Linux
 

@@ -1,0 +1,23 @@
+---
+- name: test localhost
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  tasks:
+
+    - name: create folder
+      ansible.builtin.file:
+        path: /test_local
+        state: directory
+
+- name: test tower
+  hosts: tower.local.lan
+  become: false
+
+  tasks:
+
+    - name: create folder
+      ansible.builtin.file:
+        path: /test_tower
+        state: directory

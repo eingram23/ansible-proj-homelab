@@ -1,0 +1,16 @@
+---
+- name: Delete local DNS record from Piholes
+  hosts: piholes
+  become: yes
+  become_method: sudo
+  gather_facts: no
+
+  vars_prompt:
+    - name: "dnshostname"
+      prompt: "Enter host to remove"
+      private: no
+
+  tasks:
+
+    - include_role:
+        name: pihole_remove

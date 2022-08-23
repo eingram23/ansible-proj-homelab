@@ -32,6 +32,18 @@
 
   tasks:
 
+    - name: Install terraform pre-req
+      ansible.builtin.dnf:
+        name: dnf-plugins-core
+        state: present
+
+    - name: Install terraform
+      ansible.builtin.dnf:
+        enablerepo:
+          - https://rpm.releases.hashicorp.com/$release/hashicorp.repo
+        name: terraform
+        state: present
+      
     - name: Import inmem_inv role
       import_role:
         name: inmem_inv 

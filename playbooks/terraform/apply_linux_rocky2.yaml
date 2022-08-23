@@ -32,6 +32,9 @@
 
   tasks:
 
+    - name: Intall dnf python module
+      ansible.builtin.shell: pip3 install python3-dnf
+      
     - name: Install terraform pre-req
       ansible.builtin.dnf:
         name: dnf-plugins-core

@@ -15,6 +15,7 @@ vsphere_template: TMP-Rocky85_Packer_2022_07
 
 vm_ram: 1024
 vm_cpu: 1
+# workgroup: WORKGROUP
 
 # All lists must have same # of elements
 
@@ -38,5 +39,7 @@ ip_gateway_list:
   - 10.10.0.1
   # - 10.10.0.1
   # - 10.10.0.1
-dns_domain: local.lan
+dns_suffix_list: 
+  - local.lan
+  # - homelab.local
 

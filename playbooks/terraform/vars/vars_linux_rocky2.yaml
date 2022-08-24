@@ -41,5 +41,6 @@ ip_gateway_list:
   # - 10.10.0.1
 dns_suffix_list: 
   - local.lan
-  # - homelab.local
+  # - local.lan
+  # - local.lan
 

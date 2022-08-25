@@ -19,6 +19,9 @@
   become_method: sudo
   ignore_unreachable: true
 
+  collections:
+    - eingram23.homelab
+
   tasks:
 
     - import_role:

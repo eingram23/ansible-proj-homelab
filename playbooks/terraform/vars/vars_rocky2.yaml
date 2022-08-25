@@ -1,8 +1,6 @@
 ---
 tf_root: "/terraform"
-
 proj_root: "{{ tf_root }}/projects/"
-vm_folder_name: Linux
 
 # proj_name: rocky2
 
@@ -13,10 +11,13 @@ vm_folder_name: Linux
 vsphere_template: TMP-Rocky85_Packer_2022_07
 # vsphere_template: TMP-CentOS_Packer_2022_04
 
-# Edit this to pick terraform OS plan
-temp_path: "../../../tf_templates/vsphere_linux/"
-# temp_path: "../../../tf_templates/vsphere_win_dom/"
-# temp_path: "../../../tf_templates/vsphere_win_wg/"
+vm_folder_name: Linux
+# vm_folder_name: WindowsWG
+# workgroup: WORKGROUP
+# vm_folder_name: WindowsHL
+
+# DO NOT EDIT
+temp_path: "../../../tf_templates/{{ vm_folder_name }}/"
 
 vm_ram: 1024
 vm_cpu: 1

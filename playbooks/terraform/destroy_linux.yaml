@@ -55,7 +55,7 @@
     - ./vars/vars_{{ proj_name }}.yaml
   
   collections:
-    - eingram23.homelab
+    - eingram23.pihole
 
   tasks:
   

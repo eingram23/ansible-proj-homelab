@@ -13,4 +13,4 @@
   tasks:
         
     - include_role:
-        name: pihole_remove
+        name: eingram23.pihole.pihole_remove

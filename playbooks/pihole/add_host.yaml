@@ -1,0 +1,15 @@
+---
+- name: Add local DNS record to Piholes
+  hosts: piholes
+  become: yes
+  become_method: sudo
+
+  vars_prompt:
+    - name: "dns_entry_manual"
+      prompt: "Enter host to add [ip hostfqdn]"
+      private: false
+
+  tasks:
+    - include_role:
+        name: pihole_add
+        

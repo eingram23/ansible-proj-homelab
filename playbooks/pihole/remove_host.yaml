@@ -11,8 +11,6 @@
       private: no
 
   tasks:
-
-    - ansible.builtin.pause:
         
     - include_role:
-        name: eingram23.pihole.pihole_remove
+        name: pihole_remove

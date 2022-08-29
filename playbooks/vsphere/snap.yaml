@@ -1,0 +1,8 @@
+---
+- name: Create a snapshot
+  hosts: localhost
+  become: false
+  gather_facts: true
+
+  roles:
+    - role: '/Users/edwardingram/code/ansible/collections/eingram23/vsphere/roles/create_snapshot'

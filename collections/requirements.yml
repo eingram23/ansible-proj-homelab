@@ -11,4 +11,7 @@ collections:
   - name: https://github.com/eingram23/ansible-col-tf_build.git
     type: git
     version: main
+  - name: https://github.com/eingram23/ansible-col-vsphere.git
+    type: git
+    version: main
   

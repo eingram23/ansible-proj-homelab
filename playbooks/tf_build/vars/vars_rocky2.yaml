@@ -15,9 +15,6 @@ vm_folder_name: Linux
 # workgroup: WORKGROUP
 # vm_folder_name: WindowsHL
 
-# DO NOT EDIT
-temp_path: "../../../tf_templates/{{ vm_folder_name }}/"
-
 vm_ram: 1024
 vm_cpu: 1
 # workgroup: WORKGROUP

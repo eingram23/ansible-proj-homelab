@@ -16,14 +16,9 @@ vm_folder_name: WindowsWG
 workgroup: WORKGROUP
 # vm_folder_name: WindowsHL
 
-### DO NOT EDIT ###
-temp_path: "../../../tf_templates/{{ vm_folder_name }}/"
-###
-
 proj_name: project
 vm_ram: 2048
 vm_cpu: 2
-
 
 # All lists must have same # of elements
 

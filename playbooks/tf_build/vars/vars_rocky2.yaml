@@ -1,6 +1,5 @@
 ---
-tf_root: "/terraform"
-proj_root: "{{ tf_root }}/projects/"
+proj_root: "/var/temp/terraform/projects/"
 
 # proj_name: rocky2
 

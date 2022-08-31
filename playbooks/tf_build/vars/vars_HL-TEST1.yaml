@@ -16,7 +16,7 @@ vsphere_template: TMP-Win2022Core_Packer_2022_08
 # vm_folder_name: WindowsWG
 # workgroup: WORKGROUP
 vm_folder_name: WindowsHL
-
+proj_name: 
 # DO NOT EDIT
 temp_path: "../../../tf_templates/{{ vm_folder_name }}/"
 

@@ -1,5 +1,5 @@
 ---
-proj_root: "/var/temp/terraform/projects/"
+proj_root: "/var/tmp/terraform/projects/"
 
 # proj_name: rocky2
 

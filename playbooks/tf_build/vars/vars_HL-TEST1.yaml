@@ -1,6 +1,5 @@
 ---
-tf_root: "/terraform"
-proj_root: "{{ tf_root }}/projects/"
+proj_root: "/var/tmp/terraform/projects/"
 
 ### MAKE EDITS BELOW ###
 
@@ -16,9 +15,6 @@ vsphere_template: TMP-Win2022Core_Packer_2022_08
 # vm_folder_name: WindowsWG
 # workgroup: WORKGROUP
 vm_folder_name: WindowsHL
-proj_name: 
-# DO NOT EDIT
-temp_path: "../../../tf_templates/{{ vm_folder_name }}/"
 
 vm_ram: 2048
 vm_cpu: 2

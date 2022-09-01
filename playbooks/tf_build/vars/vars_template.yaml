@@ -16,7 +16,6 @@ vm_folder_name: WindowsWG
 workgroup: WORKGROUP
 # vm_folder_name: WindowsHL
 
-proj_name: project
 vm_ram: 2048
 vm_cpu: 2
 

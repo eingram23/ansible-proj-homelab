@@ -1,0 +1,9 @@
+---
+- name: Remove computer from domain
+  hosts: HL-DC1.homelab.local
+  gather_facts: false
+
+  tasks:
+
+    - import_role:
+        role: eingram23.homelab.remove_ad_computer

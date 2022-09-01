@@ -17,7 +17,8 @@
       tags: 
         - always
     - import_role:
-        name: terraform_apply
+        name: terraform
+        tasks_from: apply
       tags:
         - always
 

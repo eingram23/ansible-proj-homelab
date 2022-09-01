@@ -40,7 +40,8 @@
         - always
     - name: Import terraform_apply role
       import_role:
-        name: terraform_apply
+        name: terraform
+        tasks_from: apply
       tags:
         - always
 

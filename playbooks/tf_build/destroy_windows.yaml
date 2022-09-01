@@ -10,9 +10,10 @@
     - eingram23.tf_build
 
   tasks:
-  
+
     - import_role:
-        name: terraform_destroy
+        name: terraform
+        tasks_from: destroy
 
 - name: Remove DNS entries from Pihole
   hosts: piholes

@@ -41,10 +41,9 @@
 
   tasks:
 
-    - include_role:
-        name: "{{ item }}"
-      with_items:
-        - terraform_destroy
+    - import_role:
+        name: terraform
+        tasks_from: destroy
  
 - name: Run terraform destroy and clean inventory/dns
   hosts: piholes

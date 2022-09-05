@@ -35,6 +35,7 @@
 - name: Remove computer object from HOMELAB.LOCAL domain
   hosts: HL-DC1.homelab.local
   become: true
+  become_method: runas
   ignore_unreachable: true
 
   vars_files:

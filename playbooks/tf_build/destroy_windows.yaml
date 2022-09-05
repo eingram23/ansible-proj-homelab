@@ -50,7 +50,7 @@
     - ansible.builtin.include_role:
         name: remove_ad_computer
       vars:
-        ad_computer: "{{ vm_name_list_item }}.HOMELAB.LOCAL"
+        ad_computer: "{{ vm_name_list_item }}"
       with_items:
         - "{{ vm_name_list }}"
       loop_control:

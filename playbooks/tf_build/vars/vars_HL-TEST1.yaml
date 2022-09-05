@@ -14,7 +14,7 @@ vsphere_template: TMP-Win2022Core_Packer_2022_08
 # vm_folder_name: Linux
 # vm_folder_name: WindowsWG
 # workgroup: WORKGROUP
-vm_folder_name: "/HomeLab Datacenter/vm/WindowsHL"
+vm_folder_name: WindowsHL
 
 vm_ram: 2048
 vm_cpu: 2

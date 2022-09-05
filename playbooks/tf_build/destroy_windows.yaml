@@ -35,11 +35,7 @@
 - name: Remove computer object from HOMELAB.LOCAL domain
   hosts: HL-DC1.homelab.local
   gather_facts: false
-  ansible_user: "{{ lookup('hashi_vault','secret=secret/data/win/homelab:hladmin_username') }}"
-  ansible_password: "{{ lookup('hashi_vault','secret=secret/data/win/homelab:hladmin_password') }}"
   become: true
-  become_user: "{{ lookup('hashi_vault','secret=secret/data/win/homelab:hladmin_usernam') }}"
-  become_password: "{{ lookup('hashi_vault','secret=secret/data/win/homelab:hladmin_password') }}"
   ignore_unreachable: true
 
   vars_files:

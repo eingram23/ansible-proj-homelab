@@ -24,25 +24,25 @@ vm_cpu: 2
 
 vsphere_datastore_list:
   - XN_iSCSI_SSD1
-  # - XN_iSCSI_SSD2
+  - XN_iSCSI_SSD2
   # - XN_iSCSI_SSD2
 vsphere_network_list:
   - Lab-LAN1
-  # - Lab-LAN1
+  - Lab-LAN1
   # - Lab-LAN1
 vm_name_list:
   - HL-TEST1
-  # - test2
+  - HL-TEST2
   # - test3
 ip_address_list:
   - 10.10.0.96
-  # - 10.10.0.26
+  - 10.10.0.97
   # - 10.10.0.27
 ip_gateway_list:
   - 10.10.0.1
-  # - 10.10.0.1
+  - 10.10.0.1
   # - 10.10.0.1
 dns_suffix_list:
   - homelab.local
-  # - local.lan
+  - homelab.local
   # - local.lan

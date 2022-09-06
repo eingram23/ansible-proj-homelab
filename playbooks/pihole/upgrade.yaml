@@ -32,7 +32,7 @@
         name: pihole_up
       when: up_host == "pihole"
 
-- name: Update pihole to latest version
+- name: Update pihole2 to latest version
   hosts: pihole2.local.lan
   gather_facts: no
   become: yes

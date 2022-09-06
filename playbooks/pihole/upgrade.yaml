@@ -1,12 +1,49 @@
 ---
-- name: Update piholes to latest version
-  hosts: piholes
+- name: Create a snapshot of pihole.local.lan
+  hosts: localhost
+  become: false
+  gather_facts: true
+
+  collections:
+    - eingram23.vsphere
+
+  tasks:
+  
+    - name: Create snapshot
+      import_role:
+        name: create_snapshot
+      vars:
+        vm_name: pihole.local.lan
+      when: up_host == "pihole"
+
+- name: Update pihole to latest version
+  hosts: pihole.local.lan
   gather_facts: no
-  remote_user: ansible 
   become: yes
   become_method: sudo
 
+  collections:
+    - eingram23.pihole
+
   tasks:
 
-  - name: Run pihole up 
-    command: pihole -up
+    - name: Run pihole_up role on pihole.local.lan
+      import_role:
+        name: pihole_up
+      when: up_host == "pihole"
+
+- name: Update pihole to latest version
+  hosts: pihole2.local.lan
+  gather_facts: no
+  become: yes
+  become_method: sudo
+
+  collections:
+    - eingram23.pihole
+
+  tasks:
+
+    - name: Run pihole_up role on pihole2.local.lan
+      import_role:
+        name: pihole_up
+      when: up_host == "pihole2"

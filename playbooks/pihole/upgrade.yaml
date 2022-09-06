@@ -13,7 +13,7 @@
       import_role:
         name: create_snapshot
       vars:
-        vm_name: pihole.local.lan
+        vm_name: pihole
       when: up_host == "pihole"
 
 - name: Update pihole to latest version

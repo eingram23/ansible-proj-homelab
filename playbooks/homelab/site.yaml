@@ -13,51 +13,51 @@
 
     - ansible.builtin.include_role:
         name: add_eingram_user
-      when: task == "add_eingram_user"
+      when: "'add_eingram_user' in tasks"
 
     - ansible.builtin.include_role: 
         name: add_ansible_user
-      when: task == "add_ansible_user"
+      when: "'add_ansible_user' in tasks"
 
     - ansible.builtin.include_role:
         name: chrony
-      when: task == "chrony"
+      when: "'chrony' in tasks"
 
     - ansible.builtin.include_role: 
         name: install_core_pkgs
-      when: task == "install_core_pkgs"
+      when: "'install_core_pkgs' in tasks"
 
     - ansible.builtin.include_role:
         name: container_host
-      when: task == "container_host"
+      when: "'container_host' in tasks"
 
     - ansible.builtin.include_role:
         name: splunk_uf
-      when: task == "splunk_uf"
+      when: "'splunk_uf' in tasks"
 
     - ansible.builtin.include_role:
         name: snmpd
-      when: task == "snmpd"
+      when: "'snmpd' in tasks"
 
     - ansible.builtin.include_role:
         name: node_exporter
-      when: task == "node_exporter"
+      when: "'node_exporter' in tasks"
 
     - ansible.builtin.include_role:
         name: webapps
-      when: task == "webapps"
+      when: "'webapps' in tasks"
 
     - ansible.builtin.include_role:
         name: rhel_sub_add
-      when: task == "rhel_sub_add"
+      when: "'rhel_sub_add' in tasks"
 
     - ansible.builtin.include_role:
         name: rhel_sub_del
-      when: task == "rhel_sub_del"
+      when: "'rhel_sub_del' in tasks"
 
     - ansible.builtin.include_role:
         name: windows_exporter
-      when: task == "windows_exporter"
+      when: "'windows_exporter' in tasks"
 
 - name: Add target to prometheus server
   hosts: grafana.local.lan
@@ -72,8 +72,8 @@
 
     - ansible.builtin.include_role:
         name: prometheus_target_update_nix
-      when: task == "node_exporter"
+      when: "'node_exporter' in tasks"
 
     - ansible.builtin.include_role:
         name: prometheus_target_update_win
-      when: task == "windows_exporter"
+      when: "'windows_exporter' in tasks"

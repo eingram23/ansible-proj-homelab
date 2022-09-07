@@ -59,23 +59,23 @@
 
     - ansible.builtin.include_role:
         name: container_host
-      when: task == "container_host"
+      when: "'container_host' in tasks"
 
     - ansible.builtin.include_role:
         name: webapps
-      when: task == "webapps"
+      when: "'webapps' in tasks"
 
     - ansible.builtin.include_role:
         name: splunk_uf
-      when: task == "splunk_uf"
+      when: "'splunk_uf' in tasks"
 
     - ansible.builtin.include_role:
         name: snmpd
-      when: task == "snmpd"
+      when: "'snmpd' in tasks"
 
     - ansible.builtin.include_role:
         name: node_exporter
-      when: task == "node_exporter"
+      when: "'node_exporter' in tasks"
 
 - name: Add target to prometheus server
   hosts: grafana.local.lan
@@ -94,4 +94,4 @@
     - name: Import prometheus_target_update_nix role
       import_role:
         name: prometheus_target_update_nix
-      when: task == "node_exporter"
+      when: "'node_exporter' in tasks"

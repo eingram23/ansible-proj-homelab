@@ -1,5 +1,4 @@
 ---
-# TAGS - add_eingram_user, add_ansible_user, chrony, snmpd, splunk, container_host, webapps, node_exporter, windows_exporter, install_core_pkgs
 - name: Run site baseline plays
   hosts: "{{ hostvar | default([]) }}"
   gather_facts: true

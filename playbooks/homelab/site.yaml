@@ -37,7 +37,7 @@
       when: task == "splunk_uf"
 
     - ansible.builtin.include_role:
-        name: snmpd
+        name: snmp
       when: task == "snmpd"
 
     - ansible.builtin.include_role:

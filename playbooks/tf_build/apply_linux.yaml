@@ -110,5 +110,5 @@
     - ansible.builtin.include_role:
         name: snmpd
         tasks_from: add_host.yaml
-      when: "'snmpd' is in tasks"
+      when: "'snmpd' in tasks"
       

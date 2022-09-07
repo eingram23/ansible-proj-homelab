@@ -1,64 +1,64 @@
 ---
 # TAGS - add_eingram_user, add_ansible_user, chrony, snmpd, splunk, container_host, webapps, node_exporter, windows_exporter, install_core_pkgs
 - name: Run site baseline plays
-  hosts: all
+  hosts: "{{ hostvar | default([]) }}"
   gather_facts: true
   become: true
   become_method: sudo
-  
+
   collections:
     - eingram23.homelab
     - eingram23.pihole
 
-  roles:
-    - role: add_eingram_user
-      tags:
-        - never
-        - add_eingram_user
-    - role: add_ansible_user
-      tags:
-        - never
-        - add_ansible_user
-    - role: chrony
-      tags:
-        - never
-        - chrony
-    - role: install_core_pkgs
-      tags:
-        - never
-        - install_core_pkgs
-    - role: container_host
-      tags:
-        - never
-        - container_host
-    - role: splunk_uf
-      tags:
-        - never
-        - splunk_uf
-    - role: snmpd
-      tags:
-        - never
-        - snmpd
-    - role: node_exporter
-      tags:
-        - never
-        - node_exporter
-    - role: webapps
-      tags:
-        - never
-        - webapps
-    - role: rhel_sub_add
-      tags:
-        - never
-        - rhel_sub_add
-    - role: rhel_sub_del 
-      tags:
-        - never
-        - rhel_sub_del
-    - role: windows_exporter
-      tags:
-        - never
-        - windows_exporter
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: add_eingram_user
+      when: task == "add_eingram_user"
+
+    - ansible.builtin.include_role: 
+        name: add_ansible_user
+      when: task == "add_ansible_user"
+
+    - ansible.builtin.include_role:
+        name: chrony
+      when: task == "chrony"
+
+    - ansible.builtin.include_role: 
+        name: install_core_pkgs
+      when: task == "install_core_pkgs"
+
+    - ansible.builtin.include_role:
+        name: container_host
+      when: task == "container_host"
+
+    - ansible.builtin.include_role:
+        name: splunk_uf
+      when: task == "splunk_uf"
+
+    - ansible.builtin.include_role:
+        name: snmpd
+      when: task == "snmpd"
+
+    - ansible.builtin.include_role:
+        name: node_exporter
+      when: task == "node_exporter"
+
+    - ansible.builtin.include_role:
+        name: webapps
+      when: task == "webapps"
+
+    - ansible.builtin.include_role:
+        name: rhel_sub_add
+      when: task == "rhel_sub_add"
+
+    - ansible.builtin.include_role:
+        name: rhel_sub_del
+      when: task == "rhel_sub_del"
+
+    - ansible.builtin.include_role:
+        name: windows_exporter
+      when: task == "windows_exporter"
 
 - name: Add target to prometheus server
   hosts: grafana.local.lan
@@ -68,14 +68,13 @@
 
   collections:
     - eingram23.homelab
-    
-  roles:
-    - role: prometheus_target_update_nix
-      tags:
-        - never
-        - node_exporter
-    - role: prometheus_target_update_win
-      tags:
-        - never
-        - windows_exporter
 
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: prometheus_target_update_nix
+      when: task == "node_exporter"
+
+    - ansible.builtin.include_role:
+        name: prometheus_target_update_win
+      when: task == "windows_exporter"

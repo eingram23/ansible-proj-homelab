@@ -8,14 +8,11 @@
   become_method: sudo
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
-
-  collections:
-    - eingram23.pihole
   
   tasks:
 
     - ansible.builtin.include_role:
-        name: update_localdns
+        name: eingram23.pihole.update_localdns
         tasks_from: add
 
 - name: Run localhost roles
@@ -25,19 +22,15 @@
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
 
-  collections:
-    - eingram23.homelab
-    - eingram23.tf_build
-
   tasks:
 
     - name: Import inmem_inv role
       ansible.builtin.include_role:
-        name: inmem_inv
+        name: eingram23.homelab.inmem_inv
 
     - name: Import terraform_apply role
       ansible.builtin.include_role:
-        name: terraform
+        name: eingram23.tf_build.terraform
         tasks_from: apply
 
 - name: Run post build tasks against new server(s)
@@ -48,38 +41,33 @@
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
 
-  collections:
-    - eingram23.homelab
-    - eingram23.splunk
-    - eingram23.metrics
-
   tasks:
 
     - ansible.builtin.include_role:
-        name: rhel_sub
+        name: eingram23.homelab.rhel_sub
         tasks_from: add
       when: ansible_facts['distribution'] == 'RedHat'
     - ansible.builtin.include_role: 
-        name: add_eingram_user
+        name: eingram23.homelab.add_eingram_user
     - ansible.builtin.include_role: 
-        name: chrony
+        name: eingram23.homelab.chrony
     - ansible.builtin.include_role:
-        name: install_core_pkgs
+        name: eingram23.homelab.install_core_pkgs
 
     - ansible.builtin.include_role:
-        name: container_host
+        name: eingram23.homelab.container_host
       when: "'container_host' in tasks"
     - ansible.builtin.include_role:
-        name: webapps
+        name: eingram23.homelab.webapps
       when: "'webapps' in tasks"
     - ansible.builtin.include_role:
-        name: splunk_uf
+        name: eingram23.splunk.splunk_uf
       when: "'splunk_uf' in tasks"
     - ansible.builtin.include_role:
-        name: snmpd
+        name: eingram23.homelab.snmpd
       when: "'snmpd' in tasks"
-    - ansible.builtin.import_role:
-        name: node_exporter
+    - ansible.builtin.include_role:
+        name: eingram23.metrics.node_exporter
       when: "'node_exporter' in tasks"
 
 - name: Add target to prometheus server
@@ -90,15 +78,11 @@
   become_method: sudo
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
-
-  collections:
-    - eingram23.metrics
-    - eingram23.homelab
      
   tasks:
   
     - ansible.builtin.include_role:
-        name: prom_target_update
+        name: eingram23.metrics.prom_target_update
         tasks_from: add
       when: "'node_exporter' in tasks"
 
@@ -111,13 +95,10 @@
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
 
-  collections:
-    - eingram23.homelab
-
   tasks:
 
     - ansible.builtin.include_role:
-        name: snmpd
+        name: eingram23.homelab.snmpd
         tasks_from: add
       when: "'snmpd' in tasks"
       

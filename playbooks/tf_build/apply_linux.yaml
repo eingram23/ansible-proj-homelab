@@ -28,8 +28,6 @@
   collections:
     - eingram23.homelab
     - eingram23.tf_build
-    - eingram23.splunk
-    - eingram23.metrics
 
   tasks:
 
@@ -80,7 +78,7 @@
     - ansible.builtin.include_role:
         name: snmpd
       when: "'snmpd' in tasks"
-    - ansible.builtin.include_role:
+    - ansible.builtin.import_role:
         name: node_exporter
       when: "'node_exporter' in tasks"
 

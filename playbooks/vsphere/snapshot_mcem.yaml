@@ -31,12 +31,20 @@
       loop_control:
         loop_var: vm_name_item
 
-    - name: Power on MCEM VMs
+    - name: Power on HL-SQL1
       ansible.builtin.include_role:
         name: eingram23.vsphere.common_vm_tasks
         tasks_from: vm_poweron.yml
       vars:
-        vm_name: "{{ vm_name_item }}"
-      loop: "{{ mcem_vms }}"
-      loop_control:
-        loop_var: vm_name_item
+        vm_name: "HL-SQL1"
+    
+    - name: Wait 2 minutes before starting HL-SRV1
+      ansible.builtin.pause:
+        minutes: 2
+
+    - name: Power on HL-SRV1
+      ansible.builtin.include_role:
+        name: eingram23.vsphere.common_vm_tasks
+        tasks_from: vm_poweron.yml
+      vars:
+        vm_name: "HL-SRV1"

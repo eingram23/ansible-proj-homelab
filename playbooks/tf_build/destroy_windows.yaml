@@ -51,7 +51,7 @@
         name: remove_ad_computer
       vars:
         ad_computer: "{{ vm_name_list_item }}"
-      with_items:
+      loop:
         - "{{ vm_name_list }}"
       loop_control:
         loop_var: vm_name_list_item

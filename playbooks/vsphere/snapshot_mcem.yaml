@@ -1,0 +1,45 @@
+---
+- name: Take snapshot of MCEM config and sql servers prior to updates
+  hosts: localhost
+  gather_facts: true
+  become: false
+
+  vars:
+    mcem_vms:
+      - HL-SRV1
+      - HL-SQL1
+
+  collections:
+    - eingram23.vsphere
+
+  tasks:
+
+    - name: Shutdown MCEM VMs
+      ansible.builtin.include_role:
+        name: common_vm_tasks
+        tasks_from: vm_shutdown_guest.yml
+      vars:
+        vm_name: "{{ vm_name_item }}"
+      loop: "{{ mcem_vms }}"
+      loop_control:
+        loop_var: vm_name_item
+
+    - name: Snapshot MCEM VMs
+      ansible.builtin.include_role:
+        name: common_vm_tasks
+        tasks_from: vm_create_snap.yml
+      vars:
+        vm_name: "{{ vm_name_item }}"
+      loop: "{{ mcem_vms }}"
+      loop_control:
+        loop_var: vm_name_item
+
+    - name: Power on MCEM VMs
+      ansible.builtin.include_role:
+        name: common_vm_tasks
+        tasks_from: vm_poweron.yml
+      vars:
+        vm_name: "{{ vm_name_item }}"
+      loop: "{{ mcem_vms }}"
+      loop_control:
+        loop_var: vm_name_item

@@ -11,7 +11,7 @@
 
   tasks:
 
-    - import_role:
+    - ansible.builtin.include_role:
         name: terraform
         tasks_from: destroy
 
@@ -28,7 +28,7 @@
 
   tasks:
 
-    - import_role:
+    - ansible.builtin.include_role:
         name: pihole_remove
       when: vm_folder_name == "WindowsWG"
 
@@ -47,7 +47,7 @@
 
   tasks:
 
-    - include_role:
+    - ansible.builtin.include_role:
         name: remove_ad_computer
       vars:
         ad_computer: "{{ vm_name_list_item }}"

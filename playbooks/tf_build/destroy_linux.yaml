@@ -11,7 +11,7 @@
 
   tasks:
 
-    - import_role:
+    - ansible.builtin.include_role:
         name: inmem_inv
       
 - name: Run pre destroy tasks on host
@@ -26,7 +26,7 @@
 
   tasks:
 
-    - include_role:
+    - ansible.builtin.include_role:
         name: rhel_sub
         tasks_from: remove
       when: ansible_facts['distribution'] is defined and ansible_facts['distribution'] == 'RedHat'    
@@ -44,7 +44,7 @@
 
   tasks:
 
-    - import_role:
+    - ansible.builtin.include_role:
         name: terraform
         tasks_from: destroy
  
@@ -61,7 +61,7 @@
 
   tasks:
   
-    - import_role:
+    - ansible.builtin.include_role:
         name: update_localdns
         tasks_from: remove
 
@@ -79,7 +79,7 @@
      
   tasks:
   
-    - import_role:
+    - ansible.builtin.include_role:
         name: prom_target_update
         tasks_from: remove
       when: "'node_exporter' in tasks"

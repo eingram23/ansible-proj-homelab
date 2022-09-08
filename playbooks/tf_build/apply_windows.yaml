@@ -12,10 +12,10 @@
 
   tasks:
 
-    - import_role:
+    - ansible.builtin.include_role:
         name: inmem_inv
 
-    - import_role:
+    - ansible.builtin.include_role:
         name: terraform
         tasks_from: apply
 
@@ -32,7 +32,7 @@
 
   tasks:
 
-    - import_role:
+    - ansible.builtin.include_role:
         name: update_localdns
         tasks_from: add
       when: vm_folder_name == "WindowsWG"

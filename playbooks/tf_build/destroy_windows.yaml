@@ -6,13 +6,10 @@
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
 
-  collections:
-    - eingram23.tf_build
-
   tasks:
 
     - ansible.builtin.include_role:
-        name: terraform
+        name: eingram23.tf_build.terraform
         tasks_from: destroy
 
 - name: Remove DNS entries from Pihole
@@ -22,14 +19,11 @@
   become_method: sudo
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
-  
-  collections:
-    - eingram23.pihole
 
   tasks:
 
     - ansible.builtin.include_role:
-        name: pihole_remove
+        name: eingram23.pihole.pihole_remove
       when: vm_folder_name == "WindowsWG"
 
 - name: Remove computer object from HOMELAB.LOCAL domain
@@ -42,13 +36,10 @@
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
 
-  collections:
-    - eingram23.homelab
-
   tasks:
 
     - ansible.builtin.include_role:
-        name: remove_ad_computer
+        name: eingram23.homelab.remove_ad_computer
       vars:
         ad_computer: "{{ vm_name_list_item }}"
       loop:

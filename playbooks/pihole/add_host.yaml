@@ -11,5 +11,5 @@
 
   tasks:
     - include_role:
-        name: pihole_add
+        name: eingram23.pihole.pihole_add
         

@@ -4,14 +4,12 @@
   become: false
   gather_facts: true
 
-  collections:
-    - eingram23.vsphere
-
   tasks:
   
     - name: Create snapshot
       import_role:
-        name: create_snapshot
+        name: eingram23.vsphere.common_vm_tasks
+        tasks_from: vm_create_snap.yml
       vars:
         vm_name: pihole
       when: up_host == "pihole"
@@ -22,14 +20,11 @@
   become: yes
   become_method: sudo
 
-  collections:
-    - eingram23.pihole
-
   tasks:
 
     - name: Run pihole_up role on pihole.local.lan
       import_role:
-        name: pihole_up
+        name: eingram23.pihole.pihole_up
       when: up_host == "pihole"
 
 - name: Update pihole2 to latest version
@@ -38,12 +33,9 @@
   become: yes
   become_method: sudo
 
-  collections:
-    - eingram23.pihole
-
   tasks:
 
     - name: Run pihole_up role on pihole2.local.lan
       import_role:
-        name: pihole_up
+        name: eingram23.pihole.pihole_up
       when: up_host == "pihole2"

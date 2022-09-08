@@ -6,13 +6,10 @@
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
 
-  collections:
-    - eingram23.homelab
-
   tasks:
 
     - ansible.builtin.include_role:
-        name: inmem_inv
+        name: eingram23.homelab.inmem_inv
       
 - name: Run pre destroy tasks on host
   hosts: temp_group
@@ -21,13 +18,10 @@
   become_method: sudo
   ignore_unreachable: true
 
-  collections:
-    - eingram23.homelab
-
   tasks:
 
     - ansible.builtin.include_role:
-        name: rhel_sub
+        name: eingram23.homelab.rhel_sub
         tasks_from: remove
       when: ansible_facts['distribution'] is defined and ansible_facts['distribution'] == 'RedHat'    
 
@@ -38,14 +32,10 @@
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
 
-  collections:
-    - eingram23.homelab
-    - eingram23.tf_build
-
   tasks:
 
     - ansible.builtin.include_role:
-        name: terraform
+        name: eingram23.tf_build.terraform
         tasks_from: destroy
  
 - name: Remove host(s) from DNS
@@ -55,14 +45,11 @@
   become_method: sudo
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
-  
-  collections:
-    - eingram23.pihole
 
   tasks:
   
     - ansible.builtin.include_role:
-        name: update_localdns
+        name: eingram23.pihole.update_localdns
         tasks_from: remove
 
 - name: Remove target(s) from prometheus server
@@ -74,13 +61,10 @@
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
 
-  collections:
-    - eingram23.metrics
-     
   tasks:
   
     - ansible.builtin.include_role:
-        name: prom_target_update
+        name: eingram23.metrics.prom_target_update
         tasks_from: remove
       when: "'node_exporter' in tasks"
 
@@ -93,13 +77,9 @@
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
 
-  collections:
-    - eingram23.homelab
-
   tasks:
 
     - ansible.builtin.include_role:
-        name: snmpd
+        name: eingram23.homelab.snmpd
         tasks_from: remove
       when: "'snmpd' in tasks"
-      

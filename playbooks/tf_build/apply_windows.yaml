@@ -6,17 +6,13 @@
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
 
-  collections:
-    - eingram23.homelab
-    - eingram23.tf_build
-
   tasks:
 
     - ansible.builtin.include_role:
-        name: inmem_inv
+        name: eingram23.homelab.inmem_inv
 
     - ansible.builtin.include_role:
-        name: terraform
+        name: eingram23.tf_build.terraform
         tasks_from: apply
 
 - name: Create DNS entries in Pihole
@@ -27,12 +23,9 @@
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
   
-  collections:
-    - eingram23.pihole
-
   tasks:
 
     - ansible.builtin.include_role:
-        name: update_localdns
+        name: eingram23.pihole.update_localdns
         tasks_from: add
       when: vm_folder_name == "WindowsWG"

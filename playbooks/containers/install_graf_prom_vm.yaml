@@ -1,0 +1,59 @@
+---
+- name: Deploy grafana/prometheus containers
+  hosts: "{{ hostvar | default([]) }}"
+  gather_facts: false
+  become: true
+  become_method: sudo
+
+  tasks:
+
+    - name: Create prometheus folder
+      ansible.builtin.file:
+        path: /opt/prometheus
+        state: directory
+        mode: '0755'
+        owner: poduser
+        group: poduser
+
+    - name: Copy prometheus.yml to remote server
+      ansible.builtin.copy:
+        src: ./roles/prometheus/files/prometheus.yml
+        dest: /opt/prometheus/prometheus.yml
+        mode: '0644'
+        owner: poduser
+        group: poduser
+
+    - name: Open firewall ports
+      include_role: 
+        name: eingram23.homelab.firewall
+      loop:
+        - "9091/tcp"
+        - "3000/tcp"
+        - "9272/tcp"
+      loop_control:
+        loop_var: port
+
+    - name: Create app pod
+      ansible.builtin.include_role:
+        name: eingram23.containers.create_pod
+      vars:
+        pod_name: "graf_prom_vm"
+        publish_ports:
+          - "9091:9090"
+          - "3000:3000"
+          - "9272:9272"
+
+    - name: Create pod and containers
+      ansible.builtin.include_role:
+        name: "{{ pod_role_item }}"
+        apply:
+          become: true
+          become_user: poduser
+          become_method: sudo
+      loop:
+        - eingram23.containers.grafana
+        - eingram23.containers.prometheus
+        - eingram23.containers.vmware_exporter
+      loop_control:
+        loop_var: pod_role_item
+

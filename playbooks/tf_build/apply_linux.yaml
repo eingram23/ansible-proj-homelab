@@ -47,6 +47,9 @@
   become: true
   become_method: sudo
 
+  vars_files:
+    - ./vars/vars_{{ proj_name }}.yaml
+
   collections:
     - eingram23.homelab
     - eingram23.splunk

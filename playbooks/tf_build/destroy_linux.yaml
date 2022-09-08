@@ -14,7 +14,9 @@
     - import_role:
         name: inmem_inv
       
-- hosts: temp_group
+- name: Run pre destroy tasks on host
+  hosts: temp_group
+  gather_facts: true
   become: true
   become_method: sudo
   ignore_unreachable: true
@@ -24,9 +26,10 @@
 
   tasks:
 
-    - import_role:
-        name: rhel_sub_del
-      when: ansible_facts['distribution'] is defined and ansible_facts['distribution'] == 'RedHat'
+    - include_role:
+        name: rhel_sub
+        tasks_from: remove
+      when: ansible_facts['distribution'] is defined and ansible_facts['distribution'] == 'RedHat'    
 
 - name: Destroy Terraform
   hosts: localhost
@@ -45,7 +48,7 @@
         name: terraform
         tasks_from: destroy
  
-- name: Run terraform destroy and clean inventory/dns
+- name: Remove host(s) from DNS
   hosts: piholes
   gather_facts: false
   become: true
@@ -59,4 +62,44 @@
   tasks:
   
     - import_role:
-        name: pihole_remove
+        name: update_localdns
+        tasks_from: remove
+
+- name: Remove target(s) from prometheus server
+  hosts: grafana.local.lan
+  gather_facts: false
+  become: true
+  become_user: poduser
+  become_method: sudo
+  vars_files:
+    - ./vars/vars_{{ proj_name }}.yaml
+
+  collections:
+    - eingram23.metrics
+     
+  tasks:
+  
+    - import_role:
+        name: prom_target_update
+        tasks_from: remove
+      when: "'node_exporter' in tasks"
+
+- name: Remove host(s) from LibreNMS
+  hosts: librenms.local.lan
+  gather_facts: false
+  become: true
+  become_user: librenms
+  become_method: sudo
+  vars_files:
+    - ./vars/vars_{{ proj_name }}.yaml
+
+  collections:
+    - eingram23.homelab
+
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: snmpd
+        tasks_from: remove
+      when: "'snmpd' in tasks"
+      

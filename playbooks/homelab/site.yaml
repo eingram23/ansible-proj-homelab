@@ -7,7 +7,8 @@
 
   collections:
     - eingram23.homelab
-    - eingram23.pihole
+    - eingram23.splunk
+    - eingram23.metrics
 
   tasks:
 
@@ -48,11 +49,13 @@
       when: "'webapps' in tasks"
 
     - ansible.builtin.include_role:
-        name: rhel_sub_add
+        name: rhel_sub
+        tasks_from: add
       when: "'rhel_sub_add' in tasks"
 
     - ansible.builtin.include_role:
-        name: rhel_sub_del
+        name: rhel_sub
+        tasks_from: remove
       when: "'rhel_sub_del' in tasks"
 
     - ansible.builtin.include_role:
@@ -62,20 +65,23 @@
 - name: Add target to prometheus server
   hosts: grafana.local.lan
   gather_facts: false
+  become: true
   become_user: poduser
   become_method: sudo
 
   collections:
-    - eingram23.homelab
+    - eingram23.metrics
 
   tasks:
 
     - ansible.builtin.include_role:
-        name: prometheus_target_update_nix
+        name: prom_target_update
+        tasks_from: add
       when: "'node_exporter' in tasks"
 
     - ansible.builtin.include_role:
-        name: prometheus_target_update_win
+        name: prom_target_update
+        tasks_from: add
       when: "'windows_exporter' in tasks"
 
 - name: Add host to LibreNMS
@@ -91,5 +97,5 @@
 
     - ansible.builtin.include_role:
         name: snmpd
-        tasks_from: add_host.yaml
+        tasks_from: add
       when: "'snmpd' is in tasks"

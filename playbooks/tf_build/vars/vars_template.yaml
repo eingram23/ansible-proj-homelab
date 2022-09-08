@@ -45,3 +45,11 @@ dns_suffix_list:
   - local.lan
   # - local.lan
   # - local.lan
+
+# Uncomment post build tasks to run
+tasks:
+  - container_host
+  - webapps
+  - splunk_uf
+  - snmpd
+  - node_exporter

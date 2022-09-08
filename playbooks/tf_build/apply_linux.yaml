@@ -14,9 +14,9 @@
   
   tasks:
 
-    - name: Import pihole_add role
-      import_role:
-        name: pihole_add
+    - import_role:
+        name: update_localdns
+        tasks_from: add
 
 - name: Run localhost roles
   hosts: localhost
@@ -28,6 +28,8 @@
   collections:
     - eingram23.homelab
     - eingram23.tf_build
+    - eingram23.splunk
+    - eingram23.metrics
 
   tasks:
 
@@ -47,32 +49,34 @@
 
   collections:
     - eingram23.homelab
-
-  roles:
-    - role: rhel_sub_add
-      when: ansible_facts['distribution'] == 'RedHat'
-    - role: add_eingram_user
-    - role: chrony
-    - role: install_core_pkgs
+    - eingram23.splunk
+    - eingram23.metrics
 
   tasks:
 
     - ansible.builtin.include_role:
+        name: rhel_sub
+        tasks_from: add
+        when: ansible_facts['distribution'] == 'RedHat'
+    - ansible.builtin.include_role: 
+        name: add_eingram_user
+    - ansible.builtin.include_role: 
+        name: chrony
+    - ansible.builtin.include_role:
+        name: install_core_pkgs
+
+    - ansible.builtin.include_role:
         name: container_host
       when: "'container_host' in tasks"
-
     - ansible.builtin.include_role:
         name: webapps
       when: "'webapps' in tasks"
-
     - ansible.builtin.include_role:
         name: splunk_uf
       when: "'splunk_uf' in tasks"
-
     - ansible.builtin.include_role:
         name: snmpd
       when: "'snmpd' in tasks"
-
     - ansible.builtin.include_role:
         name: node_exporter
       when: "'node_exporter' in tasks"
@@ -87,13 +91,13 @@
     - ./vars/vars_{{ proj_name }}.yaml
 
   collections:
-    - eingram23.homelab
+    - eingram23.metrics
      
   tasks:
   
-    - name: Import prometheus_target_update_nix role
-      import_role:
-        name: prometheus_target_update_nix
+    - import_role:
+        name: prom_target_update
+        tasks_from: add
       when: "'node_exporter' in tasks"
 
 - name: Add host to LibreNMS
@@ -112,6 +116,6 @@
 
     - ansible.builtin.include_role:
         name: snmpd
-        tasks_from: add_host.yaml
+        tasks_from: add
       when: "'snmpd' in tasks"
       

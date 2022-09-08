@@ -33,5 +33,6 @@
   tasks:
 
     - import_role:
-        name: pihole_add
+        name: update_localdns
+        tasks_from: add
       when: vm_folder_name == "WindowsWG"

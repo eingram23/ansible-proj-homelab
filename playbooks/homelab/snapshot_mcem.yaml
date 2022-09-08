@@ -1,0 +1,7 @@
+---
+- name: Take snapshot of MCEM config and sql servers prior to updates
+  hosts: localhost
+  gather_facts: true
+  become: false
+
+  

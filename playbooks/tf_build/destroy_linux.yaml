@@ -66,7 +66,7 @@
     - ansible.builtin.include_role:
         name: eingram23.metrics.prom_target_update
         tasks_from: remove
-      when: "'node_exporter' in tasks"
+      when: "'node_exporter' in task"
 
 - name: Remove host(s) from LibreNMS
   hosts: librenms.local.lan
@@ -82,4 +82,4 @@
     - ansible.builtin.include_role:
         name: eingram23.homelab.snmpd
         tasks_from: remove
-      when: "'snmpd' in tasks"
+      when: "'snmpd' in task"

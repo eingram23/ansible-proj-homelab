@@ -14,4 +14,10 @@ collections:
   - name: https://github.com/eingram23/ansible-col-vsphere.git
     type: git
     version: main
+  - name: https://github.com/eingram23/ansible-col-splunk.git
+    type: git
+    version: main
+  - name: https://github.com/eingram23/ansible-col-metrics.git
+    type: git
+    version: main
   

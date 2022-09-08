@@ -57,7 +57,7 @@
     - ansible.builtin.include_role:
         name: rhel_sub
         tasks_from: add
-        when: ansible_facts['distribution'] == 'RedHat'
+      when: ansible_facts['distribution'] == 'RedHat'
     - ansible.builtin.include_role: 
         name: add_eingram_user
     - ansible.builtin.include_role: 

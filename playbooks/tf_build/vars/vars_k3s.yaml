@@ -16,8 +16,8 @@ vm_folder_name: Linux
 # workgroup: WORKGROUP
 # vm_folder_name: WindowsHL
 
-vm_ram: 2148
-vm_cpu: 2
+vm_ram: 1024
+vm_cpu: 1
 
 # All lists must have same # of elements
 
@@ -30,9 +30,9 @@ vsphere_network_list:
   - LAN
   - LAN
 vm_name_list:
-  - mkube1
-  - mkube2
-  - mkube3
+  - k3s1
+  - k3s2
+  - k3s3
 ip_address_list:
   - 192.168.1.241
   - 192.168.1.242
@@ -48,7 +48,7 @@ dns_suffix_list:
 
 # Uncomment post build tasks to run
 tasks:
-  - container_host
+  # - container_host
   # - webapps
   # - splunk_uf
   - snmpd

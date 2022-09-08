@@ -47,7 +47,7 @@ dns_suffix_list:
   # - local.lan
 
 # Uncomment post build tasks to run
-tasks:
+task:
   - container_host
   # - webapps
   # - splunk_uf

@@ -99,6 +99,7 @@
 - name: Add host to LibreNMS
   hosts: librenms.local.lan
   gather_facts: false
+  become: true
   become_user: librenms
   become_method: sudo
   vars_files:

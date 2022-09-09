@@ -54,16 +54,6 @@
         login_user: root
         login_password: "{{ lookup('hashi_vault', 'secret=secret/data/ssh/eingram:ssh_password') }}"
         state: present
-        name: eingram@127.0.0.1
-        password: "{{ lookup('hashi_vault', 'secret=secret/data/ssh/eingram:ssh_password') }}"
-        priv: '*.*:ALL,GRANT'
-
-    - name: Remove mariadb superuser
-      community.mysql.mysql_user:
-        login_host: 127.0.0.1
-        login_user: root
-        login_password: "{{ lookup('hashi_vault', 'secret=secret/data/ssh/eingram:ssh_password') }}"
-        state: absent
         name: eingram
         password: "{{ lookup('hashi_vault', 'secret=secret/data/ssh/eingram:ssh_password') }}"
         priv: '*.*:ALL,GRANT'

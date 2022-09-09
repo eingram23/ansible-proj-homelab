@@ -10,6 +10,8 @@
     - name: Open firewall port for mariadb 
       ansible.builtin.include_role:
         name: eingram23.homelab.firewall
+      vars:
+        - fw_port: "{{ mariadb_port.split('\n') }}"
 
     - block:
         - name: Create container

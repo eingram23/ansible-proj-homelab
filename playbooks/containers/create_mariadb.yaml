@@ -14,7 +14,7 @@
     pod_name: "mariadb_pod"
     publish_ports:
       - "3306:3306"
-      - "80:8080"
+      - "8080:80"
 
   tasks:
 

@@ -12,12 +12,13 @@
         name: eingram23.homelab.firewall
       vars:
         - fw_port: "{{ mariadb_port.split('\n') | product(['/tcp']) | map('join') | list }}"
-        - mysql_port: "{{ mariadb_port.split('\n') | first }}"
 
     - block:
         - name: Create container
           ansible.builtin.include_role:
             name: eingram23.containers.mariadb
+          vars:
+            - mysql_port: "{{ mariadb_port.split('\n') | first }}"
       become: true
       become_user: poduser
       become_method: sudo

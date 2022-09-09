@@ -11,7 +11,8 @@
       ansible.builtin.include_role:
         name: eingram23.homelab.firewall
       vars:
-        - fw_port: "{{ mariadb_port.split('\n') }}"
+        - fw_port: "{{ mariadb_port.split('\n') }}/tcp"
+        - mysql_port: "{{ mariadb_port.split('\n') | first }}"
 
     - block:
         - name: Create container

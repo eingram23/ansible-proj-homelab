@@ -11,6 +11,8 @@
     fw_port:
       - "3306/tcp"
       - "8080/tcp"
+    mariadb_container: "mariadb"
+    phpmyadmin_container: "phpmyadmin"
     pod_name: "mariadb_pod"
     publish_ports:
       - "3306:3306"
@@ -55,5 +57,6 @@
         login_password: "{{ lookup('hashi_vault', 'secret=secret/data/ssh/eingram:ssh_password') }}"
         state: present
         name: eingram
+        host: localhost
         password: "{{ lookup('hashi_vault', 'secret=secret/data/ssh/eingram:ssh_password') }}"
         priv: '*.*:ALL,GRANT'

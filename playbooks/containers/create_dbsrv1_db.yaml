@@ -3,11 +3,18 @@
   hosts: "{{ hostvar | default([]) }}"
   gather_facts: false
   become: true
-  become_user: poduser
   become_method: sudo
 
   tasks:
 
-    - ansible.builtin.include_role:
+    - name: Open firewall port for mariadb 
+      ansible.builtin.include_role:
+        name: eingram23.homelab.firewall
+
+    - name: Create container
+      ansible.builtin.include_role:
         name: eingram23.containers.mariadb
+      become: true
+      become_user: poduser
+      become_method: sudo
 

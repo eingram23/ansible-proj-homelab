@@ -12,7 +12,7 @@
       - "3306/tcp"
       - "8080/tcp"
     pod_name: "mariadb_pod"
-    publish_port:
+    publish_ports:
       - "3306:3306"
       - "8080:8080"
 

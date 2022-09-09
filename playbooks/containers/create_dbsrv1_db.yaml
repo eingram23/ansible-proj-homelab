@@ -10,10 +10,4 @@
 
     - ansible.builtin.include_role:
         name: eingram23.containers.mariadb
-      vars:
-        - dbsrv_name: "mariadb1"
-        - db_name: "k3sdb"
-        - db_name: "k3sdbuser"
-        - db_root_pw: "{{ lookup('hashi_vault','secret=secret/data/mysql/mariadb1:root') }}"
-        - db_user_pw: "{{ lookup('hashi_vault','secret=secret/data/mysql/mariadb1:user') }}"
-        
+

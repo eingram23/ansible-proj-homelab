@@ -38,10 +38,15 @@
       become_user: poduser
       become_method: sudo
 
-    - name: Install python3-mysql
+    - name: Install software req
       ansible.builtin.package:
-        name: python3-mysql
+        name: "{{ package_item }}"
         state: present
+      loop:
+        - python3-mysql
+        - mysql
+      loop_control:
+        loop_var: package_item
 
     - name: Create mariadb superuser
       community.mysql.mysql_user:

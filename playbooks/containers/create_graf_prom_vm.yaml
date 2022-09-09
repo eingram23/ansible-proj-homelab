@@ -26,12 +26,11 @@
     - name: Open firewall ports
       include_role: 
         name: eingram23.homelab.firewall
-      loop:
-        - "9091/tcp"
-        - "3000/tcp"
-        - "9272/tcp"
-      loop_control:
-        loop_var: port
+      vars:
+        fw_port:
+          - "9091/tcp"
+          - "3000/tcp"
+          - "9272/tcp"
 
     - name: Create app pod
       ansible.builtin.include_role:

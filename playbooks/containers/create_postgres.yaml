@@ -8,8 +8,8 @@
 
   vars:
     fw_port:
-      - "3306/tcp"
       - "5432/tcp"
+      - "8081/tcp"
     postgres_container: "postgres"
     pgadmin_container: "pgadmin"
     pod_name: "postgres_pod"

@@ -44,7 +44,7 @@
         name: "{{ package_item }}"
         state: present
       loop:
-        - https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+        - 'https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm'
         - python3-psycopg2
         - postgresql14
       loop_control:

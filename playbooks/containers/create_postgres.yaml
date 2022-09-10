@@ -15,7 +15,7 @@
     pod_name: "postgres_pod"
     publish_ports:
       - "5432:5432"
-      - "8081:8081"
+      - "8081:80"
 
   tasks:
 

@@ -7,4 +7,5 @@
   tasks:
   
     - import_role:
-        name: create_snapshot
+        name: eingram23.vsphere.common_vm_tasks
+        tasks_from: vm_create_snap

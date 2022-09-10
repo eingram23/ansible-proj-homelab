@@ -40,7 +40,7 @@
       become_method: sudo
 
     - name: Install software req
-      ansible.builtin.package:
+      ansible.builtin.dnf:
         name: "{{ package_item }}"
         state: present
       loop:

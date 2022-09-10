@@ -22,6 +22,14 @@
           - "5432/tcp"
           - "8081/tcp"
 
+    - name: Create pgadmin4 directory
+      ansible.builtin.file:
+        path: /opt/pgadmin4
+        state: directory
+        mode: '0755'
+        owner: poduser
+        group: poduser
+
     - block:
         - name: Create pod
           ansible.builtin.include_role:

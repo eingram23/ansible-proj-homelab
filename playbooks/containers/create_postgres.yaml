@@ -11,7 +11,7 @@
       - "3306/tcp"
       - "5432/tcp"
     postgres_container: "postgres"
-    phpmyadmin_container: "pgadmin"
+    pgadmin_container: "pgadmin"
     pod_name: "postgres_pod"
     publish_ports:
       - "5432:5432"

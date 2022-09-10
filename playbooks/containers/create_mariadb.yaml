@@ -1,5 +1,5 @@
 ---
-# VARS NEEDED - hostvar, db_root_pw
+# VARS NEEDED - hostvar
 - name: Create mariadb pod and containers (mariadb, phpmyadmin)
   hosts: "{{ hostvar | default([]) }}"
   gather_facts: false
@@ -7,7 +7,6 @@
   become_method: sudo
 
   vars:
-    # - fw_port: "{{ mariadb_port.split('\n') | product(['/tcp']) | map('join') | list }}"
     fw_port:
       - "3306/tcp"
       - "8080/tcp"

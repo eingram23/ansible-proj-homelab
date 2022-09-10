@@ -1,0 +1,51 @@
+---
+# VARS NEEDED - hostvar
+- name: Create postgres pod and containers (postgres, pgadmin)
+  hosts: "{{ hostvar | default([]) }}"
+  gather_facts: false
+  become: true
+  become_method: sudo
+
+  vars:
+    fw_port:
+      - "3306/tcp"
+      - "5432/tcp"
+    postgres_container: "postgres"
+    phpmyadmin_container: "pgadmin"
+    pod_name: "postgres_pod"
+    publish_ports:
+      - "5432:5432"
+      - "8081:8081"
+
+  tasks:
+
+    - name: Open firewall port for postgres/phpmyadmin
+      ansible.builtin.include_role:
+        name: eingram23.homelab.firewall
+
+    - block:
+        - name: Create pod
+          ansible.builtin.include_role:
+            name: eingram23.containers.create_pod
+
+        - name: Create postgres container
+          ansible.builtin.include_role:
+            name: eingram23.containers.postgres
+
+        - name: Create pgadmin container
+          ansible.builtin.include_role:
+            name: eingram23.containers.pgadmin
+      become: true
+      become_user: poduser
+      become_method: sudo
+
+    - name: Install software req
+      ansible.builtin.package:
+        name: "{{ package_item }}"
+        state: present
+      loop:
+        - python3-psycopg2
+        - postresql14
+      loop_control:
+        loop_var: package_item
+

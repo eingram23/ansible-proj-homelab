@@ -1,0 +1,39 @@
+---
+- name: Deploy prometheus container
+  hosts: "{{ hostvar | default([]) }}"
+  gather_facts: false
+  become: true
+  become_method: sudo
+
+  vars:
+    pod_name: "prometheus_pod"
+    prometheus_container_ver: "v2.36.2"
+    prometheus_container_name: "prometheus-{{ prometheus_container_ver }}"
+
+  tasks:
+
+    - name: Open firewall ports
+      ansible.builtin.include_role:
+        name: eingram23.homelab.firewall
+      vars:
+        fw_port:
+          - "9091/tcp"
+
+    - block:
+        - name: Create app pod
+          ansible.builtin.include_role:
+            name: eingram23.containers.create_pod
+          vars:
+            publish_ports:
+              - "9091:9090"
+
+        - name: Create container
+          ansible.builtin.include_role:
+            name: eingram23.containers.prometheus
+          vars:
+            container_name: "{{ prometheus_container_name }}"
+            ver: "{{ prometheus_container_ver }}"
+
+      become: true
+      become_user: poduser
+      become_method: sudo

@@ -1,5 +1,4 @@
 ---
-# VARS NEEDED - hostvar
 - name: Create postgres pod and containers (postgres, pgadmin)
   hosts: "{{ hostvar | default([]) }}"
   gather_facts: false
@@ -7,34 +6,45 @@
   become_method: sudo
 
   vars:
-    fw_port:
-      - "5432/tcp"
-      - "8081/tcp"
-    postgres_container: "postgres"
-    pgadmin_container: "pgadmin"
     pod_name: "postgres_pod"
-    publish_ports:
-      - "5432:5432"
-      - "8081:80"
+    postgres_container_ver: "13.8"
+    postgres_container_name: "postgres-{{ postgres_container_ver }}"
+    pgadmin_container_ver: "6.13"
+    pgadmin_container_name: "pgadmin4-{{ pgadmin_container_ver }}"
 
   tasks:
 
     - name: Open firewall port for postgres/phpmyadmin
       ansible.builtin.include_role:
         name: eingram23.homelab.firewall
+      vars:
+        fw_port:
+          - "5432/tcp"
+          - "8081/tcp"
 
     - block:
         - name: Create pod
           ansible.builtin.include_role:
             name: eingram23.containers.create_pod
+          vars:
+            publish_ports:
+              - "5432:5432"
+              - "8081:80"
 
         - name: Create postgres container
           ansible.builtin.include_role:
             name: eingram23.containers.postgres
+          vars:
+            container_name: "{{ postgres_container_name }}"
+            ver: "{{ postgres_container_ver }}"
 
         - name: Create pgadmin container
           ansible.builtin.include_role:
             name: eingram23.containers.pgadmin
+          vars:
+            container_name: "{{ pgadmin_container_name }}"
+            ver: "{{ pgadmin_container_ver }}"
+
       become: true
       become_user: poduser
       become_method: sudo
@@ -53,8 +63,8 @@
     - name: Disable default postgresql repo
       command: dnf -qy module disable postgresql
 
-    - name: Install postgresql14
+    - name: Install postgresql
       ansible.builtin.dnf:
-        name: postgresql14
+        name: postgresql13
         state: present
 

@@ -1,5 +1,4 @@
 ---
-# VARS NEEDED - hostvar
 - name: Create mariadb pod and containers (mariadb, phpmyadmin)
   hosts: "{{ hostvar | default([]) }}"
   gather_facts: false
@@ -7,34 +6,45 @@
   become_method: sudo
 
   vars:
-    fw_port:
-      - "3306/tcp"
-      - "8080/tcp"
-    mariadb_container: "mariadb"
-    phpmyadmin_container: "phpmyadmin"
     pod_name: "mariadb_pod"
-    publish_ports:
-      - "3306:3306"
-      - "8080:80"
+    mariadb_container_ver: "10.9.2"
+    mariadb_container_name: "mariadb-{{ mariadb_container_ver }}"
+    phpmyadmin_container_ver: "5.2.0-apache"
+    phpmyadmin_container_name: "phpmyadmin-{{ phpmyadmin_container_ver }}"
 
   tasks:
 
-    - name: Open firewall port for mariadb/phpmyadmin
+    - name: Open firewall ports
       ansible.builtin.include_role:
         name: eingram23.homelab.firewall
+      vars:
+        fw_port:
+          - "3306/tcp"
+          - "8080/tcp"
 
     - block:
         - name: Create pod
           ansible.builtin.include_role:
             name: eingram23.containers.create_pod
+          vars:
+            publish_ports:
+              - "3306:3306"
+              - "8080:80"
 
         - name: Create mariadb container
           ansible.builtin.include_role:
             name: eingram23.containers.mariadb
+          vars:
+            container_name: "{{ mariadb_container_name }}"
+            ver: "{{ mariadb_container_ver }}"
 
         - name: Create phpmyadmin container
           ansible.builtin.include_role:
             name: eingram23.containers.phpmyadmin
+          vars:
+            container_name: "{{ phpmyadmin_container_name }}"
+            ver: "{{ phpmyadmin_container_ver }}"
+
       become: true
       become_user: poduser
       become_method: sudo

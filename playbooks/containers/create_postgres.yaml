@@ -47,7 +47,14 @@
       loop:
         - 'https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm'
         - python3-psycopg2
-        - postgresql14
       loop_control:
         loop_var: package_item
+
+    - name: Disable default postgresql repo
+      command: dnf -qy module disable postgresql
+
+    - name: Install postgresql14
+      ansible.builtin.dnf:
+        name: postgresql14
+        state: present
 

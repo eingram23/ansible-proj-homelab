@@ -50,5 +50,5 @@
     #     state: started
 
     - debug:
-        var: "{{ hostvar['k3s1.local.lan']['token'] }}"
+        var: "{{ hostvars['k3s1.local.lan']['token'] }}"
         when: inventory_hostname != "k3s1.local.lan"

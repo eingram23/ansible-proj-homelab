@@ -39,12 +39,12 @@
             var: token
       when: inventory_hostname == "k3s1.local.lan" 
 
-    - name: Run k3s install script
-      ansible.builtin.shell: curl -sfL https://get.k3s.io | K3S_URL=https://k3s1.local.lan:6443 K3S_TOKEN={{ hostvars['k3s1.local.lan']['token'] }} sh -
-      when: inventory_hostname != "k3s1.local.lan" and not k3s_installed.stat.exists
+    # - name: Run k3s install script
+    #   ansible.builtin.shell: curl -sfL https://get.k3s.io | K3S_URL=https://k3s1.local.lan:6443 K3S_TOKEN={{ hostvars['k3s1.local.lan']['token'] }} sh -
+    #   when: inventory_hostname != "k3s1.local.lan" and not k3s_installed.stat.exists
 
-    - name: Install k3s service
-      ansible.builtin.systemd:
-        name: k3s
-        enabled: true
-        state: started
+    # - name: Install k3s service
+    #   ansible.builtin.systemd:
+    #     name: k3s
+    #     enabled: true
+    #     state: started

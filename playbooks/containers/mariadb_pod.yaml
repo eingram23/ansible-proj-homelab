@@ -66,4 +66,4 @@
       vars:
         mariadb_user: eingram
         mariadb_user_pw: "{{ lookup('hashi_vault', 'secret=secret/data/ssh/eingram:ssh_password') }}"
-        mariadb_user_priv: "'*.*:ALL,GRANT'"
+        mariadb_user_priv: '*.*:ALL,GRANT'

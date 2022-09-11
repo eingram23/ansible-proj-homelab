@@ -48,3 +48,7 @@
     #     name: k3s
     #     enabled: true
     #     state: started
+
+    - debug:
+        var: "{{ hostvar['k3s1.local.lan']['token'] }}"
+        when: inventory_hostname != "k3s1.local.lan"

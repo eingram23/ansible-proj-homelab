@@ -8,12 +8,12 @@
 
   tasks:
 
-    - name: Open firewall ports
-      ansible.builtin.include_role:
-        name: eingram23.homelab.firewall
-      vars:
-        fw_port:
-          - "6443/tcp"
+    # - name: Open firewall ports
+    #   ansible.builtin.include_role:
+    #     name: eingram23.homelab.firewall
+    #   vars:
+    #     fw_port:
+    #       - "6443/tcp"
 
     - name: Check if already installed
       ansible.builtin.stat:

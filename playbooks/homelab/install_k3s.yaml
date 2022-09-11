@@ -8,31 +8,34 @@
 
   tasks:
 
-    # - name: Open firewall ports
-    #   ansible.builtin.include_role:
-    #     name: eingram23.homelab.firewall
-    #   vars:
-    #     fw_port:
-    #       - "6443/tcp"
+    - name: Open firewall ports
+      ansible.builtin.include_role:
+        name: eingram23.homelab.firewall
+      vars:
+        fw_port:
+          - "6443/tcp"
+
+    - name: Check if already installed
+      ansible.builtin.stat:
+        path: /usr/local/bin/k3s
+      register: k3s_installed
+
     - block:
-        # - name: Run k3s install script
-        #   ansible.builtin.shell: curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
+        - name: Run k3s install script
+          ansible.builtin.shell: curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
 
         - name: Grab token from master node
           ansible.builtin.slurp:
             src: /var/lib/rancher/k3s/server/node-token
           register: k3s_master_token
-      when: inventory_hostname == "k3s1.local.lan"
+      when: inventory_hostname == "k3s1.local.lan" and not k3s_installed.stat.exists
 
-    - ansible.builtin.debug:
-        var: hostvars['k3s1.local.lan']['k3s_master_token']['content']
+    - name: Run k3s install script
+      ansible.builtin.shell: curl -sfL https://get.k3s.io | K3S_URL=https://k3s1.local.lan:6443 K3S_TOKEN={{ hostvars['k3s1.local.lan']['k3s_master_token']['content'] }} sh -
+      when: inventory_hostname != "k3s1.local.lan" and not k3s_installed.stat.exists
 
-    # - name: Run k3s install script
-    #   ansible.builtin.shell: curl -sfL https://get.k3s.io | K3S_URL=https://k3s1.local.lan:6443 K3S_TOKEN={{ hostvars['k3s1.local.lan']['k3s_master_token'] }} sh -
-    #   when: inventory_hostname != "k3s1.local.lan"
-
-    # - name: Install k3s service
-    #   ansible.builtin.systemd:
-    #     name: k3s
-    #     enabled: true
-    #     state: started
+    - name: Install k3s service
+      ansible.builtin.systemd:
+        name: k3s
+        enabled: true
+        state: started

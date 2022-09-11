@@ -1,0 +1,14 @@
+---
+- name: Drop mariadb user
+  hosts: "{{ hostvar | default([]) }}"
+  gather_facts: false
+  become: false
+
+  vars:
+    # mariadb_user:
+
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: eingram23.database.mariadb
+        tasks_from: drop_user

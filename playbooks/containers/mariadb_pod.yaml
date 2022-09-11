@@ -60,6 +60,7 @@
         loop_var: package_item
 
     - name: Create mariadb superuser
+      become: false
       ansible.builtin.include_role:
         name: eingram23.database.mariadb
         tasks_from: create_new_user

@@ -8,12 +8,11 @@
 
   tasks:
 
-    # - name: Open firewall ports
-    #   ansible.builtin.include_role:
-    #     name: eingram23.homelab.firewall
-    #   vars:
-    #     fw_port:
-    #       - "6443/tcp"
+    - name: Disable firewall (RHEL/CentOS)
+      ansible.builtin.systemd:
+        name: firewalld
+        state: stopped
+        enabled: false
 
     - name: Check if already installed
       ansible.builtin.stat:
@@ -25,30 +24,29 @@
           ansible.builtin.shell: curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
           when: not k3s_installed.stat.exists
 
+        - name: Install k3s service
+          ansible.builtin.systemd:
+            name: k3s
+            enabled: true
+            state: started
+
         - name: Grab token from master node
-          ansible.builtin.slurp:
-            src: /var/lib/rancher/k3s/server/node-token
+          ansible.builtin.shell: cat /var/lib/rancher/k3s/server/node-token
           register: k3s_master_token
 
         - name: Set var to token
           ansible.builtin.set_fact:
-            token: "{{ k3s_master_token['content'] | b64decode }}"
-
-        - name: debug
-          ansible.builtin.debug:
-            var: token
+            token: "{{ k3s_master_token.stdout }}"
       when: inventory_hostname == "k3s1.local.lan" 
 
-    # - name: Run k3s install script
-    #   ansible.builtin.shell: curl -sfL https://get.k3s.io | K3S_URL=https://k3s1.local.lan:6443 K3S_TOKEN={{ hostvars['k3s1.local.lan']['token'] }} sh -
-    #   when: inventory_hostname != "k3s1.local.lan" and not k3s_installed.stat.exists
+    - block:
+        - name: Run k3s install script
+          ansible.builtin.shell: curl -sfL https://get.k3s.io | K3S_URL=https://k3s1.local.lan:6443 K3S_TOKEN={{ hostvars['k3s1.local.lan']['token'] }} sh -
+          when: not k3s_installed.stat.exists
 
-    # - name: Install k3s service
-    #   ansible.builtin.systemd:
-    #     name: k3s
-    #     enabled: true
-    #     state: started
-
-    - debug:
-        var: "{{ hostvars['k3s1.local.lan']['token'] }}"
-        when: inventory_hostname != "k3s1.local.lan"
+        - name: Install k3s-agent service
+          ansible.builtin.systemd:
+            name: k3s-agent
+            enabled: true
+            state: started
+      when: inventory_hostname != "k3s1.local.lan"

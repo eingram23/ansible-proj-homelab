@@ -8,7 +8,7 @@
     # mariadb_user: 
     # mariadb_db_name: 
     mariadb_user_pw: "{{ lookup('hashi_vault', 'secret=secret/data/ssh/eingram:ssh_password') }}"
-    mariadb_user_priv: "'{{ maria_db_name }}.*:ALL,GRANT'"
+    mariadb_user_priv: '{{ maria_db_name }}.*:ALL,GRANT'
 
   tasks:
 

@@ -8,7 +8,7 @@
   vars:
     pod_name: "prometheus_pod"
     prometheus_container_ver: "v2.36.2"
-    prometheus_container_name: "prometheus-{{ prometheus_container_ver }}"
+    prometheus_container_name: "prometheus"
 
   tasks:
 

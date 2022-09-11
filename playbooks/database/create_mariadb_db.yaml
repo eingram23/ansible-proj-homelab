@@ -1,0 +1,21 @@
+---
+- name: Create new mariadb database and user
+  hosts: "{{ hostvar | default([]) }}"
+  gather_facts: false
+  become: false
+
+  vars:
+    mariadb_user: 
+    mariadb_db_name: 
+    mariadb_user_pw: "{{ lookup('hashi_vault', 'secret=secret/data/ssh/eingram:ssh_password') }}"
+    mariadb_user_priv: "'*.*:ALL,GRANT'"
+
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: eingram23.database.mariadb
+        tasks_from: create_new_db
+
+    - ansible.builtin.include_role:
+        name: eingram23.database.mariadb
+        tasks_from: create_new_user

@@ -8,9 +8,9 @@
   vars:
     pod_name: "mariadb_pod"
     mariadb_container_ver: "10.9.2"
-    mariadb_container_name: "mariadb-{{ mariadb_container_ver }}"
+    mariadb_container_name: "mariadb"
     phpmyadmin_container_ver: "5.2.0-apache"
-    phpmyadmin_container_name: "phpmyadmin-{{ phpmyadmin_container_ver }}"
+    phpmyadmin_container_name: "phpmyadmin"
 
   tasks:
 
@@ -60,12 +60,10 @@
         loop_var: package_item
 
     - name: Create mariadb superuser
-      community.mysql.mysql_user:
-        login_host: 127.0.0.1
-        login_user: root
-        login_password: "{{ lookup('hashi_vault', 'secret=secret/data/ssh/eingram:ssh_password') }}"
-        state: present
-        name: eingram
-        host: 127.0.0.1
-        password: "{{ lookup('hashi_vault', 'secret=secret/data/ssh/eingram:ssh_password') }}"
-        priv: '*.*:ALL,GRANT'
+      ansible.builtin.include_role:
+        name: eingram23.database.mariadb
+        tasks_from: create_new_user
+        vars:
+          mariadb_user: eingram
+          mariadb_user_pw: "{{ lookup('hashi_vault', 'secret=secret/data/ssh/eingram:ssh_password') }}"
+          mariadb_user_priv: "'*.*:ALL,GRANT'"

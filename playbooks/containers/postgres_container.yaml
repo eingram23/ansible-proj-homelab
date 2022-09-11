@@ -8,9 +8,9 @@
   vars:
     pod_name: "postgres_pod"
     postgres_container_ver: "13.8"
-    postgres_container_name: "postgres-{{ postgres_container_ver }}"
+    postgres_container_name: "postgres"
     pgadmin_container_ver: "6.13"
-    pgadmin_container_name: "pgadmin4-{{ pgadmin_container_ver }}"
+    pgadmin_container_name: "pgadmin4"
 
   tasks:
 

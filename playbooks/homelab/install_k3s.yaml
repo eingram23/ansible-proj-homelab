@@ -21,7 +21,11 @@
 
     - block:
         - name: Run k3s install script
-          ansible.builtin.shell: curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
+          ansible.builtin.shell: >
+            curl -sfL https://get.k3s.io | sh -s - server
+            --token=k3s
+            --datastore-endpoint="mysql://"
+            --write-kubeconfig-mode 644
           when: not k3s_installed.stat.exists
 
         - name: Install k3s service
@@ -31,17 +35,20 @@
             state: started
 
         - name: Grab token from master node
-          ansible.builtin.shell: cat /var/lib/rancher/k3s/server/node-token
+          ansible.builtin.shell: 
+            cmd: cat /var/lib/rancher/k3s/server/node-token
           register: k3s_master_token
 
         - name: Set var to token
           ansible.builtin.set_fact:
             token: "{{ k3s_master_token.stdout }}"
-      when: inventory_hostname == "k3s1.local.lan" 
+      when: inventory_hostname != "k3s3.local.lan"
 
     - block:
         - name: Run k3s install script
-          ansible.builtin.shell: curl -sfL https://get.k3s.io | K3S_URL=https://k3s1.local.lan:6443 K3S_TOKEN={{ hostvars['k3s1.local.lan']['token'] }} sh -
+          ansible.builtin.shell: >
+            curl -sfL https://get.k3s.io | K3S_URL=https://k3s1.local.lan:6443
+            K3S_TOKEN={{ hostvars['k3s1.local.lan']['token'] }} sh -
           when: not k3s_installed.stat.exists
 
         - name: Install k3s-agent service
@@ -49,4 +56,4 @@
             name: k3s-agent
             enabled: true
             state: started
-      when: inventory_hostname != "k3s1.local.lan"
+      when: inventory_hostname == "k3s3.local.lan"

@@ -1,0 +1,12 @@
+---
+- name: Kubernetes Deployment
+  hosts: "{{ hostvar | default([]) }}"
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - name: Deploy from local file
+      kubernetes.core.k8s:
+        state: present
+        src: ./files/dashboard.yml

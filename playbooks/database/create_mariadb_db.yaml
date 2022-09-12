@@ -12,10 +12,12 @@
 
   tasks:
 
-    - ansible.builtin.include_role:
+    - name: Create new database
+      ansible.builtin.include_role:
         name: eingram23.database.mariadb
         tasks_from: create_new_db
 
-    - ansible.builtin.include_role:
+    - name: Create new database user
+      ansible.builtin.include_role:
         name: eingram23.database.mariadb
         tasks_from: create_new_user

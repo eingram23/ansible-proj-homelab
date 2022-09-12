@@ -1,5 +1,5 @@
 ---
-- name: Deploy grafana/prometheus containers
+- name: Deploy grafana pod
   hosts: "{{ hostvar | default([]) }}"
   gather_facts: false
   become: true
@@ -19,7 +19,6 @@
         name: eingram23.homelab.firewall
       vars:
         fw_port:
-          - "9091/tcp"
           - "3000/tcp"
           - "9272/tcp"
 
@@ -29,7 +28,6 @@
             name: eingram23.containers.create_pod
           vars:
             publish_ports:
-              - "9091:9090"
               - "3000:3000"
               - "9272:9272"
 
@@ -46,7 +44,6 @@
           vars:
             container_name: "{{ vmware_exporter_container_name }}"
             ver: "{{ vmware_exporter_container_ver }}"
-
       become: true
       become_user: poduser
       become_method: sudo

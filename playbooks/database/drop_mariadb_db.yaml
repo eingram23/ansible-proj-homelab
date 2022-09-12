@@ -1,0 +1,21 @@
+---
+- name: Create new mariadb database and user
+  hosts: "{{ hostvar | default([]) }}"
+  gather_facts: false
+  become: false
+
+  vars:
+    # mariadb_db_name:
+    mariadb_user: "{{ maria_db_name }}"
+
+  tasks:
+
+    - name: Drop database user
+      ansible.builtin.include_role:
+        name: eingram23.database.mariadb
+        tasks_from: drop_user
+
+    - name: Drop database
+      ansible.builtin.include_role:
+        name: eingram23.database.mariadb
+        tasks_from: drop_db

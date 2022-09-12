@@ -1,20 +1,17 @@
 ---
-- name: Install k3s on master node
-  hosts: "{{ host_prefix }}[1:3].local.lan }}"
+### VARS NEEDED: host_prefix, mariadb_srv
+- name: Create database for k3s
+  hosts: "{{ mariadb_srv }}"
   gather_facts: false
-  become: true
-  become_method: sudo
-  serial: 1
+  become: false
 
   vars:
-    # host_prefix: 
+    # mariadb_srv:
     mariadb_user: "{{ host_prefix }}"
-    mariadb_db_name: "{{ host_prefix }}"
-    dbsrv: "dbsrv1.local.lan"
-    k3s_token: "{{ host_prefix }}"
+    mariadb_db: "{{ host_prefix }}"
     mariadb_user_pw: "{{ lookup('hashi_vault', 'secret=secret/data/ssh/eingram:ssh_password') }}"
-    mariadb_user_priv: '{{ maria_db_name }}.*:ALL,GRANT'
-
+    mariadb_user_priv: '{{ mariadb_name }}.*:ALL,GRANT'
+    
   tasks:
 
     - name: Setup mariadb database for k3s 
@@ -27,6 +24,23 @@
         name: eingram23.database.mariadb
         tasks_from: create_new_user
 
+- name: Install k3s on master node
+  hosts: "{{ host_prefix }}[1:3].local.lan"
+  gather_facts: false
+  become: true
+  become_method: sudo
+  serial: 1
+
+  vars:
+    # host_prefix: 
+    k3s_token: "{{ host_prefix }}"
+
+  tasks:
+
+    - name: Install kubernetes python module
+      ansible.builtin.pip:
+        name: kubernetes
+        
     - name: Disable firewall (RHEL/CentOS)
       ansible.builtin.systemd:
         name: firewalld
@@ -43,7 +57,7 @@
           ansible.builtin.shell: >
             curl -sfL https://get.k3s.io | sh -s - server
             --token=k3s
-            --datastore-endpoint="mysql://{{ host_prefix }}:{{ lookup('hashi_vault', 'secret=secret/data/ssh/eingram:ssh_password') }}@tcp({{ dbsrv }}:3306)/{{ host_prefix }}"
+            --datastore-endpoint="mysql://{{ host_prefix }}:{{ lookup('hashi_vault', 'secret=secret/data/ssh/eingram:ssh_password') }}@tcp({{ mariadb_srv }}:3306)/{{ host_prefix }}"
             --write-kubeconfig-mode 644
           when: not k3s_installed.stat.exists
 

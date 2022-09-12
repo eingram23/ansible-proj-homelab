@@ -5,8 +5,8 @@
   become: false
 
   vars:
-    # mariadb_db_name:
-    mariadb_user: "{{ maria_db_name }}"
+    # mariadb_db:
+    mariadb_user: "{{ mariadb_db }}"
 
   tasks:
 

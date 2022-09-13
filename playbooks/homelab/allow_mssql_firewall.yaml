@@ -1,0 +1,15 @@
+---
+- name: Allow mssql through firewall
+  hosts: "{{ hostvar }}"
+  gather_facts: false
+  become: true
+  
+  vars:
+    rule_name: "MSSQL"
+    port: "1433"
+    protocol: "tcp"
+    
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: eingram23.homelab.win_firewall

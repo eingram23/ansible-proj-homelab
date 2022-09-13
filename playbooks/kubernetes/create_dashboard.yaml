@@ -6,7 +6,14 @@
 
   tasks:
 
+    - name: Copy definition to master node
+      ansible.builtin.copy:
+        src: ./files/dashboard.yaml
+        dest: /opt/kubernetes/defs/dashboard.yaml
+        mode: '0644'
+      
     - name: Deploy from local file
       kubernetes.core.k8s:
         state: present
-        src: ./files/dashboard.yml
+        src: /opt/kubernetes/defs/dashboard.yaml
+        kubeconfig: /etc/rancher/k3s/k3s.yaml

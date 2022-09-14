@@ -53,7 +53,7 @@
         tasks_from: remove
 
 - name: Remove target(s) from prometheus server
-  hosts: grafana.local.lan
+  hosts: dbsrv1.local.lan
   gather_facts: false
   become: true
   become_user: poduser

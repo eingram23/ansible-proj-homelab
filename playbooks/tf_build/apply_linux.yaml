@@ -70,7 +70,7 @@
       when: "'node_exporter' in task"
 
 - name: Add target to prometheus server
-  hosts: grafana.local.lan
+  hosts: dbsrv1.local.lan
   gather_facts: false
   become: true
   become_user: poduser

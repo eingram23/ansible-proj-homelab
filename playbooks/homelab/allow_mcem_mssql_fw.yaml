@@ -19,3 +19,17 @@
         rule_name: "MSSQL Admin"
         fw_port: "1434"
         protocol: "udp"
+
+    - ansible.builtin.include_role:
+        name: eingram23.homelab.win_firewall
+      vars:
+        rule_name: "MSSQL Broker"
+        fw_port: "4022"
+        protocol: "tcp"
+
+    - ansible.builtin.include_role:
+        name: eingram23.homelab.win_firewall
+      vars:
+        rule_name: "MSSQL Reporting Services"
+        fw_port: "5723,5724"
+        protocol: "tcp"

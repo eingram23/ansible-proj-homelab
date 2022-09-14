@@ -17,7 +17,7 @@ vsphere_template: TMP-Win2022_Packer_2022_09
 # workgroup: WORKGROUP
 vm_folder_name: WindowsHL
 
-vm_ram: 2048
+vm_ram: 4096
 vm_cpu: 2
 
 # All lists must have same # of elements

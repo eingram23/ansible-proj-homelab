@@ -69,12 +69,9 @@
     - ansible.builtin.include_role:
         name: eingram23.metrics.prom_target_update
         tasks_from: add
+      vars:
+        prom_port: "9100"
       when: "'node_exporter' in task"
-
-    - ansible.builtin.include_role:
-        name: eingram23.metrics.prom_target_update
-        tasks_from: add
-      when: "'windows_exporter' in task"
 
 - name: Add host to LibreNMS
   hosts: librenms.local.lan

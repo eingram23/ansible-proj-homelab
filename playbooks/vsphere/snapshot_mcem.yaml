@@ -13,7 +13,7 @@
 
     - name: Shutdown MCEM VMs
       ansible.builtin.include_role:
-        name: eingram23.vsphere.common_vm_tasks
+        name: eingram23.vsphere.common
         tasks_from: vm_shutdown_guest.yml
       vars:
         vm_name: "{{ vm_name_item }}"
@@ -23,7 +23,7 @@
 
     - name: Snapshot MCEM VMs
       ansible.builtin.include_role:
-        name: eingram23.vsphere.common_vm_tasks
+        name: eingram23.vsphere.common
         tasks_from: vm_create_snap.yml
       vars:
         vm_name: "{{ vm_name_item }}"
@@ -33,7 +33,7 @@
 
     - name: Power on HL-SQL1
       ansible.builtin.include_role:
-        name: eingram23.vsphere.common_vm_tasks
+        name: eingram23.vsphere.common
         tasks_from: vm_poweron.yml
       vars:
         vm_name: "HL-SQL1"
@@ -44,7 +44,7 @@
 
     - name: Power on HL-SRV1
       ansible.builtin.include_role:
-        name: eingram23.vsphere.common_vm_tasks
+        name: eingram23.vsphere.common
         tasks_from: vm_poweron.yml
       vars:
         vm_name: "HL-SRV1"

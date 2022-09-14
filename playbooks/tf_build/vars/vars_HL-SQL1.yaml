@@ -52,5 +52,5 @@ dns_suffix_list:
 #   - container_host
 #   - webapps
 #   - splunk_uf
-#   - snmpd
-#   - node_exporter
+  - snmp
+  - windows_exporter

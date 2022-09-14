@@ -4,12 +4,18 @@
   gather_facts: false
   become: true
   
-  vars:
-    rule_name: "MSSQL"
-    port: "1433"
-    protocol: "tcp"
-    
   tasks:
 
     - ansible.builtin.include_role:
         name: eingram23.homelab.win_firewall
+      vars:
+        rule_name: "MSSQL"
+        fw_port: "1433"
+        protocol: "tcp"
+
+    - ansible.builtin.include_role:
+        name: eingram23.homelab.win_firewall
+      vars:
+        rule_name: "MSSQL Admin"
+        fw_port: "1434"
+        protocol: "udp"

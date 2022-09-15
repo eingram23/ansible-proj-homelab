@@ -1,0 +1,12 @@
+---
+# VARS NEEDED: vm_name
+- name: get disk info
+  hosts: localhost
+  gather_facts: true
+  become: false
+
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: eingram23.vsphere.commmon
+        tasks_from: disk_info

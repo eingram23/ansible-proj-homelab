@@ -86,6 +86,7 @@
           ansible.builtin.shell: >
             curl -sfL https://get.k3s.io | sh -s - server
             --token=k3s
+            --disable servicelb
             --datastore-endpoint="mysql://{{ host_prefix }}:{{ lookup('hashi_vault', 'secret=secret/data/ssh/eingram:ssh_password') }}@tcp({{ mariadb_srv }}:3306)/{{ host_prefix }}"
             --write-kubeconfig-mode 644
           when: not k3s_installed.stat.exists

@@ -1,0 +1,13 @@
+---
+# VARS NEEDED: customhost
+- name: Delete local DNS record from Piholes
+  hosts: piholes
+  become: true
+  become_method: sudo
+  gather_facts: false
+
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: eingram23.pihole.update_localdns
+        tasks_from: remove

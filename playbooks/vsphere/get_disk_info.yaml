@@ -8,5 +8,5 @@
   tasks:
 
     - ansible.builtin.include_role:
-        name: eingram23.vsphere.commmon
+        name: eingram23.vsphere.common
         tasks_from: disk_info

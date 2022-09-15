@@ -10,3 +10,23 @@
     - ansible.builtin.include_role:
         name: eingram23.vsphere.common
         tasks_from: disk_info
+
+    - name: show disk info
+      ansible.builtin.debug:
+        var: disk_info
+
+    - name: get count of disks
+      ansible.builtin.debug:
+        var: disk_info['guest_disk_info'] | count
+
+    - name: Add 1 to count of disks
+      ansible.builtin.debug:
+        msg: "{{ (( disk_info['guest_disk_info'] | count ) + 1) | int }}"
+
+    - name: Set unit_number if not defined
+      ansible.builtin.set_fact:
+        unit_number: "{{ (( disk_info['guest_disk_info'] | count ) + 1) | int }}"
+
+    - name: show unit_number
+      ansible.builtin.debug:
+        var: unit_number

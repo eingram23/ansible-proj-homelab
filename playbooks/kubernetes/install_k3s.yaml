@@ -20,6 +20,7 @@
         vm_name: "{{ host_prefix_item }}"
         vmdk_size: "20"
         datastore: "XN_iSCSI_SSD2"
+        unit_number: 1
 
 - name: Create database for k3s
   hosts: "{{ mariadb_srv }}"

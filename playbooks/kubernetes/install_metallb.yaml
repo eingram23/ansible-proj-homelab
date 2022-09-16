@@ -5,14 +5,23 @@
 
   tasks:
 
-    - name: Install metallb and create ip pool
+    - name: Install metallb
       ansible.builtin.include_role:
         name: eingram23.kubernetes.manifest
         tasks_from: apply
-      loop:
-        - "metallb-native"
-        - "metallb-ippool"
-      loop_control:
-        loop_var: manifest_item
       vars:
-        manifest: "{{ manifest_item }}"
+        manifest: "metallb-dashboard"
+
+    - name: Make sure speaker DaemonSet is running before proceeding
+      ansible.builtin.shell: kubectl get daemonset speaker -n metallb-system
+      register: result
+      until: result.rc == 0
+      retries: 10
+      delay: 5
+
+    - name: Create IP pool
+      ansible.builtin.include_role:
+        name: eingram23.kubernetes.manifest
+        tasks_from: apply
+      vars:
+        manifest: "metallb-ippool-dashboard"

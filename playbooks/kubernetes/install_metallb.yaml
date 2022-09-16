@@ -12,12 +12,16 @@
       vars:
         manifest: "metallb"
 
-    - name: Make sure speaker DaemonSet is running before proceeding
-      ansible.builtin.shell: kubectl get daemonset speaker -n metallb-system
-      register: result
-      until: result.rc == 0
-      retries: 10
-      delay: 5
+    # - name: Make sure speaker DaemonSet is running before proceeding
+    #   ansible.builtin.shell: kubectl get daemonset speaker -n metallb-system
+    #   register: result
+    #   until: result.rc == 0
+    #   retries: 10
+    #   delay: 5
+
+    - name: Pause for 20 seconds
+      ansible.builtin.pause:
+        seconds: 20
 
     - name: Create IP pool
       ansible.builtin.include_role:

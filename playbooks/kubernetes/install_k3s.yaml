@@ -133,7 +133,7 @@
 
     - name: Mount longhorn disks
       ansible.posix.mount:
-        path: /longhorn
+        path: /var/lib/longhorn
         src: /dev/sdb1
         fstype: xfs
         state: mounted

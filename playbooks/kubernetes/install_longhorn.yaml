@@ -12,3 +12,14 @@
         tasks_from: apply
       vars:
         manifest: "longhorn-iscsi-install"
+
+    - name: Pause for 20 seconds
+      ansible.builtin.pause:
+        seconds: 20
+
+    - name: Deploy longhorn manifest
+      ansible.builtin.include_role:
+        name: eingram23.kubernetes.manifest
+        tasks_from: apply
+      vars:
+        manifest: "longhorn"

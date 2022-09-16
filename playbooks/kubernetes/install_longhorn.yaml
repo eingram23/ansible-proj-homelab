@@ -23,3 +23,10 @@
         tasks_from: apply
       vars:
         manifest: "longhorn"
+
+    - name: Remove longhorn-iscsi-install pods
+      ansible.builtin.include_role:
+        name: eingram23.kubernetes.manifest
+        tasks_from: delete
+      vars:
+        manifest: "longhorn-iscsi-install"

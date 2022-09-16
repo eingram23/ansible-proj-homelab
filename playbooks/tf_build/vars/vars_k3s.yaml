@@ -26,9 +26,9 @@ vsphere_datastore_list:
   - XN_iSCSI_SSD1
   - XN_iSCSI_SSD1
 vsphere_network_list:
-  - LAN
-  - LAN
-  - LAN
+  - Lab-LAN1
+  - Lab-LAN1
+  - Lab-LAN1
 vm_name_list:
   - k3s1
   - k3s2

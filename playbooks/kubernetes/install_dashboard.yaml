@@ -1,0 +1,11 @@
+- name: Install kubernetes dashboard (requires metallb)
+  hosts: "{{ hostvar }}"
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - name: Check to see if metallb is installed
+      
+
+    

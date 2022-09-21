@@ -114,6 +114,8 @@
           ansible.builtin.shell: >
             curl -sfL https://get.k3s.io | K3S_URL=https://{{ host_prefix }}1.local.lan:6443
             K3S_TOKEN={{ k3s_token }} sh -
+          environment:
+            PATH: /usr/local/bin:{{ ansible_env.PATH }}
           when: not k3s_installed.stat.exists
 
         - name: Install k3s-agent service

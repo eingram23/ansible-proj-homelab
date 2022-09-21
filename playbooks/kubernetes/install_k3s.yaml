@@ -87,7 +87,8 @@
           ansible.builtin.shell: >
             curl -sfL https://get.k3s.io | sh -s - server
             --token=k3s
-            --disable servicelb
+            --disable=servicelb
+            --disable=traefik
             --datastore-endpoint="mysql://{{ host_prefix }}:{{ lookup('hashi_vault', 'secret=secret/data/ssh/eingram:ssh_password') }}@tcp({{ mariadb_srv }}:3306)/{{ host_prefix }}"
             --write-kubeconfig-mode 644
           when: not k3s_installed.stat.exists
@@ -148,31 +149,3 @@
         src: /dev/sdb1
         fstype: xfs
         state: mounted
-
-    - block:
-        - name: Deploy traefik IngressRoute
-          ansible.builtin.include_role:
-            name: eingram23.kubernetes.manifest
-            tasks_from: apply_url
-          vars:
-            manifest_url: "https://raw.githubusercontent.com/traefik/traefik/v2.8/docs/content/reference/dynamic-configuration/kubernetes-crd-definition-v1.yml"
-            manifest: "kubernetes-crd-definition-v1"
-
-        - name: Deploy metallb
-          ansible.builtin.include_role:
-            name: eingram23.kubernetes.manifest
-            tasks_from: apply_url
-          vars:
-
-        - name: Deploy kubernetes dashboard
-          ansible.builtin.include_role:
-            name: eingram23.kubernetes.manifest
-            tasks_from: apply_url
-          vars:
-
-        - name: Deploy longhorn
-          ansible.builtin.include_role:
-            name: eingram23.kubernetes.manifest
-            tasks_from: apply_url
-          vars:
-    

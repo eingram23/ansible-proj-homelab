@@ -105,7 +105,7 @@
           register: helm_bin
 
         - name: Install helm
-          ansible.builtin.shell: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | sh
+          ansible.builtin.shell: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
           when: not helm_bin.stat.exists
       when: inventory_hostname != host_prefix + "3.local.lan"
 

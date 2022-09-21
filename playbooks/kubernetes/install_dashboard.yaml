@@ -21,6 +21,3 @@
       vars:
         manifest: "dashboard-metallb"
       when: metallb_installed['resources']
-      
-
-    

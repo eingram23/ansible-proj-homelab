@@ -107,8 +107,6 @@
         - name: Install helm
           ansible.builtin.shell: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | sh
           when: not helm_bin.stat.exists
-          become: true
-          become_method: sudo
       when: inventory_hostname != host_prefix + "3.local.lan"
 
     - block:

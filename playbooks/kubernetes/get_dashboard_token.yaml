@@ -10,4 +10,4 @@
       register: admin_token
 
     - ansible.builtin.debug:
-        var: admin_token
+        var: admin_token.stdout

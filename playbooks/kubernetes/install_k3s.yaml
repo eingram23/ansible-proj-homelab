@@ -97,6 +97,17 @@
             name: k3s
             enabled: true
             state: started
+
+        - name: Check if helm is installed
+          ansible.builtin.stat:
+            path: /usr/local/bin/helm
+          register: helm_bin
+
+        - name: Install helm
+          ansible.builtin.shell: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | sh
+          when: not helm_bin.stat.exists
+          become: true
+          become_method: sudo
       when: inventory_hostname != host_prefix + "3.local.lan"
 
     - block:
@@ -138,5 +149,30 @@
         fstype: xfs
         state: mounted
 
-      
-      
+    - block:
+        - name: Deploy traefik IngressRoute
+          ansible.builtin.include_role:
+            name: eingram23.kubernetes.manifest
+            tasks_from: apply_url
+          vars:
+            manifest_url: "https://raw.githubusercontent.com/traefik/traefik/v2.8/docs/content/reference/dynamic-configuration/kubernetes-crd-definition-v1.yml"
+            manifest: "kubernetes-crd-definition-v1"
+
+        - name: Deploy metallb
+          ansible.builtin.include_role:
+            name: eingram23.kubernetes.manifest
+            tasks_from: apply_url
+          vars:
+
+        - name: Deploy kubernetes dashboard
+          ansible.builtin.include_role:
+            name: eingram23.kubernetes.manifest
+            tasks_from: apply_url
+          vars:
+
+        - name: Deploy longhorn
+          ansible.builtin.include_role:
+            name: eingram23.kubernetes.manifest
+            tasks_from: apply_url
+          vars:
+    

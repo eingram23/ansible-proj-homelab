@@ -16,3 +16,7 @@
     - name: Deploy kubernetes dashboard
       ansible.builtin.include_role:
         name: eingram23.kubernetes.kubernetes_dashboard
+
+    - name: Deploy longhorn
+      ansible.builtin.include_role:
+        name: eingram23.kubernetes.longhorn

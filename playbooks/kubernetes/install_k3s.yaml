@@ -111,7 +111,7 @@
       when: inventory_hostname != host_prefix + "3.local.lan"
 
     - block:
-        - name: Run k3s install script
+        - name: Run k3s-agent install script
           ansible.builtin.shell: >
             curl -sfL https://get.k3s.io | K3S_URL=https://{{ host_prefix }}1.local.lan:6443
             K3S_TOKEN={{ k3s_token }} sh -

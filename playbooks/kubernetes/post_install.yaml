@@ -11,4 +11,8 @@
 
     - name: Deploy traefik dashboard ingressroute
       ansible.builtin.include_role:
-        name: eingram23.kubernetes.traefik-ingressroute
+        name: eingram23.kubernetes.traefik
+
+    - name: Deploy kubernetes dashboard
+      ansible.builtin.include_role:
+        name: eingram23.kubernetes.kubernetes-dashboard

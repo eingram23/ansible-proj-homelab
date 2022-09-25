@@ -1,0 +1,10 @@
+---
+- name: Deploy metrics to k3s
+  hosts: "{{ hostvar }}"
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: eingram23.kubernetes.metrics

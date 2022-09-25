@@ -1,0 +1,9 @@
+- name: Deploy test manifest
+  hosts: k3s1.local.lan
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: eingram23.kubernetes.nginx_test

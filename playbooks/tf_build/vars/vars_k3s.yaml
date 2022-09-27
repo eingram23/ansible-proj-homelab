@@ -47,14 +47,10 @@ dns_suffix_list:
   - local.lan
 
 vm_disks_list:
-  [
-    {
-      label: "longhorn1",
-      id: 1,
-      size: 60,
-      thin_provisioned: true,
-    }
-  ]
+  - label: "longhorn1"
+    id: 1
+    size: 60
+    thin_provisioned: true
 
 # Uncomment post build tasks to run
 task:

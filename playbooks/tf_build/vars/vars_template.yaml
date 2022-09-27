@@ -50,6 +50,7 @@ dns_suffix_list:
 #     [
 #         {
 #             label: "my_disk",
+#             id: 1,    ### CHANGE THIS TO 2 FOR WINDOWS VMS
 #             size: "60",
 #             thin_provisioned: "True",
 #             eagerly_scrub: "False"

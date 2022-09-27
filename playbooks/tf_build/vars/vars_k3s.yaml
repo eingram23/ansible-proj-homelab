@@ -53,7 +53,6 @@ vm_disks_list:
       id: 1,
       size: 60,
       thin_provisioned: true,
-      eagerly_scrub: false
     }
   ]
 

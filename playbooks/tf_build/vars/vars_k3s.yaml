@@ -22,9 +22,9 @@ vm_cpu: 2
 # All lists must have same # of elements
 
 vsphere_datastore_list:
-  - XN_iSCSI_SSD1
-  - XN_iSCSI_SSD1
-  - XN_iSCSI_SSD1
+  - XN_iSCSI_SSD2
+  - XN_iSCSI_SSD2
+  - XN_iSCSI_SSD2
 vsphere_network_list:
   - Lab-LAN1
   - Lab-LAN1

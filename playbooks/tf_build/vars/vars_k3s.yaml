@@ -51,6 +51,10 @@ vm_disks_list:
     id: 1
     size: 60
     thin_provisioned: true
+  - label: "longhorn2"
+    id: 2
+    size: 60
+    thin_provisioned: true
 
 # Uncomment post build tasks to run
 task:

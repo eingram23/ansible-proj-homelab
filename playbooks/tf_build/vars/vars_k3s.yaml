@@ -46,7 +46,7 @@ dns_suffix_list:
   - local.lan
   - local.lan
 
-vm_disks:
+vm_disks_list:
   [
     {
       label: "longhorn1",

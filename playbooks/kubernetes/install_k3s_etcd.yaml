@@ -1,27 +1,5 @@
 ---
 ### VARS NEEDED: host_prefix
-- name: Setup longhorn disks
-  hosts: localhost
-  gather_facts: true
-  become: false
-
-  tasks:
-
-    - ansible.builtin.include_role:
-        name: eingram23.vsphere.common
-        tasks_from: add_vmdk
-      loop:
-        - "{{ host_prefix }}1"
-        - "{{ host_prefix }}2"
-        - "{{ host_prefix }}3"
-      loop_control:
-        loop_var: host_prefix_item
-      vars:
-        vm_name: "{{ host_prefix_item }}"
-        vmdk_size: "20"
-        datastore: "XN_iSCSI_SSD2"
-        unit_number: 1
-
 - name: Install k3s on first node
   hosts: "{{ host_prefix }}1.local.lan"
   gather_facts: false

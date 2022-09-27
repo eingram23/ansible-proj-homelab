@@ -46,6 +46,16 @@ dns_suffix_list:
   # - local.lan
   # - local.lan
 
+# vm_disks:
+#     [
+#         {
+#             label: "my_disk",
+#             size: "60",
+#             thin_provisioned: "True",
+#             eagerly_scrub: "False"
+#         }
+#     ]
+
 # Uncomment post build tasks to run
 task:
   - container_host

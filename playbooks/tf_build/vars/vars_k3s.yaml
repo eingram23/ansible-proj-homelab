@@ -46,10 +46,20 @@ dns_suffix_list:
   - local.lan
   - local.lan
 
+vm_disks:
+  [
+    {
+      label: "longhorn1",
+      size: "60",
+      thin_provisioned: "True",
+      eagerly_scrub: "False"
+    }
+  ]
+
 # Uncomment post build tasks to run
 task:
   # - container_host
   # - webapps
   # - splunk_uf
   - snmpd
-  - node_exporter
+  # - node_exporter

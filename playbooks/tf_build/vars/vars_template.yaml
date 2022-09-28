@@ -20,41 +20,15 @@ vm_ram: 2048
 vm_cpu: 2
 
 # All lists must have same # of elements
+vsphere_datastore_list: '"XN_iSCSI_SSD1"," XN_iSCSI_SSD1"'
+vsphere_network_list: ''"Lab-LAN1", "Lab-LAN1"
+vm_name_list: '"vm1", "vm2"'
+ip_address_list: '"10.10.0.95", "10.10.0.26"'
+ip_gateway_list: '"10.10.0.1", "10.10.0.1"'
+dns_suffix_list: '"local.lan", "local.lan"'
 
-vsphere_datastore_list:
-  - XN_iSCSI_SSD1
-  # - XN_iSCSI_SSD2
-  # - XN_iSCSI_SSD2
-vsphere_network_list:
-  - Lab-LAN1
-  # - Lab-LAN1
-  # - Lab-LAN1
-vm_name_list:
-  - wincore1
-  # - test2
-  # - test3
-ip_address_list:
-  - 10.10.0.95
-  # - 10.10.0.26
-  # - 10.10.0.27
-ip_gateway_list:
-  - 10.10.0.1
-  # - 10.10.0.1
-  # - 10.10.0.1
-dns_suffix_list:
-  - local.lan
-  # - local.lan
-  # - local.lan
-
-# vm_disks_list:
-#     [
-#         {
-#             label: "my_disk",
-#             id: 1,    ### CHANGE THIS TO 2 FOR WINDOWS VMS
-#             size: 60,
-#             thin_provisioned: true,
-#         }
-#     ]
+# For any extra vmdks
+vm_disks_list: 'vm_disks_list = [{ label = "label1", id = 2, size = 60, thin_provisioned = true }]'
 
 # Uncomment post build tasks to run
 task:

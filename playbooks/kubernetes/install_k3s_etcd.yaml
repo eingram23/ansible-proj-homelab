@@ -66,6 +66,7 @@
         --disable=servicelb
         --write-kubeconfig-mode 644
       when: not k3s_installed.stat.exists
+      throttle: 1
 
     - name: Install k3s service
       ansible.builtin.systemd:

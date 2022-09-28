@@ -19,7 +19,7 @@ collections:
   - name: https://github.com/eingram23/ansible-col-splunk.git
     type: git
     version: main
-  - name: https://github.com/eingram23/ansible-col-metrics.git
+  - name: https://github.com/eingram23/ansible-col-monitoring.git
     type: git
     version: main
   - name: https://github.com/eingram23/ansible-col-containers.git

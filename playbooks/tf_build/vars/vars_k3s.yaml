@@ -5,9 +5,9 @@ proj_root: "/var/tmp/terraform/projects/"
 
 # Edit this to change distro
 # vsphere_template: TMP-RHEL85_Packer_2022_07
-# vsphere_template: TMP-Rocky85_Packer_2022_09
+vsphere_template: TMP-Rocky85_Packer_2022_09
 # vsphere_template: TMP-CentOS_Packer_2022_04
-vsphere_template: TMP-Win2022Core_Packer_2022_09
+# vsphere_template: TMP-Win2022Core_Packer_2022_08
 # vsphere_template: TMP-Win2016_Packer_2022_08
 # vsphere_template: TMP-Win2019_Packer_2022_08
 
@@ -20,12 +20,31 @@ vm_ram: 4096
 vm_cpu: 2
 
 # All lists must have same # of elements
-vsphere_datastore_list: '"XN_iSCSI_SSD2"," XN_iSCSI_SSD2", XN_iSCSI_SSD2"'
-vsphere_network_list: ''"Lab-LAN1", "Lab-LAN1", "Lab-LAN1"''
-vm_name_list: '"k3s1", "k3s2", "k3s3"'
-ip_address_list: '"10.10.0.51", "10.10.0.52", "10.10.0.53"'
-ip_gateway_list: '"10.10.0.1", "10.10.0.1", "10.10.0.1"'
-dns_suffix_list: '"local.lan", "local.lan". "local.lan"'
+
+vsphere_datastore_list:
+  - XN_iSCSI_SSD2
+  - XN_iSCSI_SSD2
+  - XN_iSCSI_SSD2
+vsphere_network_list:
+  - Lab-LAN1
+  - Lab-LAN1
+  - Lab-LAN1
+vm_name_list:
+  - k3s1
+  - k3s2
+  - k3s3
+ip_address_list:
+  - 10.10.0.51
+  - 10.10.0.52
+  - 10.10.0.53
+ip_gateway_list:
+  - 10.10.0.1
+  - 10.10.0.1
+  - 10.10.0.1
+dns_suffix_list:
+  - local.lan
+  - local.lan
+  - local.lan
 
 # For any extra vmdks (For Windows, start with ID 2)
 vm_disks_list: 'vm_disks_list = [{ label = "longhorn1", id = 1, size = 60, thin_provisioned = true }]'

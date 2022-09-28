@@ -21,13 +21,13 @@ vm_cpu: 2
 
 # All lists must have same # of elements
 vsphere_datastore_list: '"XN_iSCSI_SSD1"," XN_iSCSI_SSD1"'
-vsphere_network_list: ''"Lab-LAN1", "Lab-LAN1"
+vsphere_network_list: ''"Lab-LAN1", "Lab-LAN1"''
 vm_name_list: '"vm1", "vm2"'
 ip_address_list: '"10.10.0.95", "10.10.0.26"'
 ip_gateway_list: '"10.10.0.1", "10.10.0.1"'
 dns_suffix_list: '"local.lan", "local.lan"'
 
-# For any extra vmdks
+# For any extra vmdks (For Windows, start with ID 2)
 vm_disks_list: 'vm_disks_list = [{ label = "label1", id = 2, size = 60, thin_provisioned = true }]'
 
 # Uncomment post build tasks to run

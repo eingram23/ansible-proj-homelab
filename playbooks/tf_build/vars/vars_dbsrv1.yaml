@@ -46,6 +46,9 @@ dns_suffix_list:
   # - local.lan
   # - local.lan
 
+# For any extra vmdks (For Windows, start with ID 2)
+vm_disks_list: 'vm_disks_list = [{ label = "label1", id = 2, size = 60, thin_provisioned = true }]'
+
 # Uncomment post build tasks to run
 task:
   - container_host

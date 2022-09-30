@@ -4,17 +4,10 @@ proj_root: "/var/tmp/terraform/projects/"
 ### MAKE EDITS BELOW ###
 
 # Edit this to change distro
-# vsphere_template: TMP-RHEL85_Packer_2022_07
-vsphere_template: TMP-Rocky85_Packer_2022_09
-# vsphere_template: TMP-CentOS_Packer_2022_04
-# vsphere_template: TMP-Win2022Core_Packer_2022_08
-# vsphere_template: TMP-Win2016_Packer_2022_08
-# vsphere_template: TMP-Win2019_Packer_2022_08
+
+vsphere_template: TMP-Rocky85_Packer
 
 vm_folder_name: Linux
-# vm_folder_name: WindowsWG
-# workgroup: WORKGROUP
-# vm_folder_name: WindowsHL
 
 vm_ram: 1024
 vm_cpu: 1

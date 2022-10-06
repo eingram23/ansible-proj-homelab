@@ -40,10 +40,6 @@
       when: "'node_exporter' in task"
 
     - ansible.builtin.include_role:
-        name: eingram23.homelab.webapps
-      when: "'webapps' in task"
-
-    - ansible.builtin.include_role:
         name: eingram23.homelab.rhel_sub
         tasks_from: add
       when: "'rhel_sub_add' in task"

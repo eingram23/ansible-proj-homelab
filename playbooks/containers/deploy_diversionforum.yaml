@@ -12,6 +12,34 @@
 
   tasks:
 
+    - name: Set facts (www)
+      when: env == "www"
+      block:
+        - ansible.builtin.set_fact:
+            nginx_port: 8081
+
+        - ansible.builtin.set_fact:
+            phpmyadmin_port: 8084
+
+    - name: Set facts (test)
+      when: env == "test"
+      block:
+        - ansible.builtin.set_fact:
+            nginx_port: 8082
+
+        - ansible.builtin.set_fact:
+            phpmyadmin_port: 8085
+
     - name: Deploy diversionforum.net site
       ansible.builtin.include_role:
         name: eingram23.containers.diversionforum
+
+    - name: Create phpmyadmin container
+      ansible.builtin.include_role:
+        name: eingram23.containers.phpmyadmin
+      vars:
+        container_name: "{{ app }}-phpmyadmin"
+        mariadb_container_name: "{{ app }}-mariadb"
+        mysql_root_password: "{{ mysql_root }}"
+        pod_name: "{{ app }}"
+        # network: "{{ podman_network }}"

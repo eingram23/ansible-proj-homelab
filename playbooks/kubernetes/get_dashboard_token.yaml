@@ -1,5 +1,5 @@
 - name: Obtain admin-user bearer token
-  hosts: "{{ hostvar }}"
+  hosts: k3s1.local.lan 
   gather_facts: false
   become: false
 

@@ -1,5 +1,4 @@
 ---
-# Run with -kK and -e "ansible_user= " to create initial user
 - name: Add ansible user
   hosts: "{{ hostvar | default([]) }}"
   gather_facts: false
@@ -9,4 +8,4 @@
   tasks:
 
     - ansible.builtin.import_role:
-        name: eingram23.homelab.add_ansible_user
+        name: eingram23.homelab.add_eingram_user

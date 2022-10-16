@@ -4,6 +4,7 @@ collections:
   - containers.podman
   - community.mysql
   - kubernetes.core
+  - lvrfrc87.git_acp
   - name: https://github.com/eingram23/ansible-col-homelab.git
     type: git
     version: main

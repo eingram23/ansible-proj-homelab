@@ -1,11 +1,10 @@
 ---
-# VARS NEEDED: customhost, customip
+# VARS NEEDED: customip customhost
 - name: Add/Update local DNS record to Piholes
-  hosts: piholes
+  hosts: "{{ hostvar | default('piholes') }}"
   become: true
   become_method: sudo
   gather_facts: false
-  ignore_unreachable: true
 
   tasks:
     - ansible.builtin.include_role:

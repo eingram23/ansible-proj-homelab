@@ -1,4 +1,5 @@
-- name: Deploy longhorn
+- name: Migrate pvc
+# VARS needed: namespace, source, target
   hosts: "{{ hostvar }}"
   gather_facts: false
   become: false
@@ -7,4 +8,4 @@
 
     - name: Deploy longhorn
       ansible.builtin.include_role:
-        name: eingram23.kubernetes.longhorn
+        name: eingram23.kubernetes.migrate_pvc

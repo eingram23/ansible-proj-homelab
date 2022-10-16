@@ -1,5 +1,20 @@
 ---
 # VARS NEEDED: customip customhost
+- name: Pull custom.list from git and update
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: eingram23.pihole.localdns
+        tasks_from: pull
+
+    - ansible.builtin.include_role:
+        name: eingram23.pihole.localdns
+        tasks_from: addchange
+
 - name: Add/Update local DNS record to Piholes
   hosts: "{{ hostvar | default('piholes') }}"
   become: true
@@ -9,4 +24,15 @@
   tasks:
     - ansible.builtin.include_role:
         name: eingram23.pihole.localdns
-        tasks_from: update.yaml
+        tasks_from: update
+
+- name: Push updated custom.list to git
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: eingram23.pihole.localdns
+        tasks_from: push

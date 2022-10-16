@@ -1,13 +1,38 @@
 ---
 # VARS NEEDED: customhost
-- name: Delete local DNS record from Piholes
-  hosts: piholes
-  become: true
-  become_method: sudo
+- name: Pull custom.list from git and update
+  hosts: localhost
+  become: false
   gather_facts: false
 
   tasks:
 
     - ansible.builtin.include_role:
-        name: eingram23.pihole.update_localdns
+        name: eingram23.pihole.localdns
+        tasks_from: pull
+
+    - ansible.builtin.include_role:
+        name: eingram23.pihole.localdns
+        tasks_from: addchange
+
+- name: Remove local DNS record from Piholes
+  hosts: "{{ hostvar | default('piholes') }}"
+  become: true
+  become_method: sudo
+  gather_facts: false
+
+  tasks:
+    - ansible.builtin.include_role:
+        name: eingram23.pihole.localdns
         tasks_from: remove
+
+- name: Push updated custom.list to git
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: eingram23.pihole.localdns
+        tasks_from: push

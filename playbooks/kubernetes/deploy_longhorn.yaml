@@ -1,0 +1,10 @@
+- name: Post k3s install tasks
+  hosts: "{{ hostvar }}"
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - name: Deploy longhorn
+      ansible.builtin.include_role:
+        name: eingram23.kubernetes.longhorn

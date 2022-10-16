@@ -6,7 +6,7 @@
 
   tasks:
     - name: Read /etc/pihole/custom.list file
-      shell: cat /etc/pihole/custom.list
+      shell: cat /opt/pihole/etc-pihole/custom.list
       register: dns_list
 
     - name: Output results

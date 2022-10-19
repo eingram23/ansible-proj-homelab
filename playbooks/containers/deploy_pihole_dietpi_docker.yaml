@@ -1,10 +1,21 @@
 ---
+# VARS NEEDED: hostvar
+- name: Pull custom.list from git and update
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: eingram23.pihole.localdns
+        tasks_from: pull
+
 - name: Deploy docker pihole
-  hosts: piholes
+  hosts: "{{ hostvar | default('piholes') }}"
   gather_facts: false
   become: true
   become_method: sudo
-  serial: 1
 
   tasks:
 
@@ -14,7 +25,7 @@
       loop:
         - requests
         - docker
-    
+
     - name: Install openssh-client for scp access
       ansible.builtin.apt:
         name: openssh-client
@@ -22,3 +33,24 @@
 
     - ansible.builtin.include_role:
         name: eingram23.containers.pihole_docker
+
+    - ansible.builtin.include_role:
+        name: eingram23.pihole.localdns
+        tasks_from: update
+
+- name: Post clean up
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  tasks:
+
+    - name: Clean up tmp files
+      ansible.builtin.file:
+        path: /var/tmp/configs
+        state: absent
+
+    - name: Clean up key
+      ansible.builtin.file:
+        path: /var/tmp/ssh-key-git.key
+        state: absent

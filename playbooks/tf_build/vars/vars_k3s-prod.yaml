@@ -1,0 +1,50 @@
+---
+proj_root: "/var/tmp/terraform/projects/"
+
+### MAKE EDITS BELOW ###
+
+# Edit this to change distro
+vsphere_template: TMP-Rocky85_Packer
+
+vm_folder_name: Linux
+
+vm_ram: 4096
+vm_cpu: 2
+
+# All lists must have same # of elements
+
+vsphere_datastore_list:
+  - XN_iSCSI_SSD1
+  - XN_iSCSI_SSD1
+  - XN_iSCSI_SSD1
+vsphere_network_list:
+  - LAN
+  - LAN
+  - LAN
+vm_name_list:
+  - k3s1-prod
+  - k3s2-prod
+  - k3s3-prod
+ip_address_list:
+  - 192.168.1.221
+  - 192.168.1.222
+  - 192.168.1.223
+ip_gateway_list:
+  - 192.168.1.1
+  - 192.168.1.1
+  - 192.168.1.1
+dns_suffix_list:
+  - local.lan
+  - local.lan
+  - local.lan
+
+# For any extra vmdks (For Windows, start with ID 2)
+vm_disks_list: 'vm_disks_list = [{ label = "longhorn1", id = 1, size = 100, thin_provisioned = true }]'
+
+# Uncomment post build tasks to run
+task:
+  # - container_host
+  # - webapps
+  # - splunk_uf
+  # - snmpd
+  # - node_exporter

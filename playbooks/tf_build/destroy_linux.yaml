@@ -9,6 +9,18 @@
   tasks:
 
     - ansible.builtin.include_role:
+        name: eingram23.pihole.localdns
+        tasks_from: pull
+
+    - ansible.builtin.include_role:
+        name: eingram23.pihole.localdns
+        tasks_from: addchange
+
+    - ansible.builtin.include_role:
+        name: eingram23.pihole.localdns
+        tasks_from: push
+
+    - ansible.builtin.include_role:
         name: eingram23.homelab.inmem_inv
       
 - name: Run pre destroy tasks on host

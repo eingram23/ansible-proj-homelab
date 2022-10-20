@@ -1,5 +1,35 @@
 ---
 # Requires proj_name set at runtime
+- name: Run localhost roles
+  hosts: localhost
+  gather_facts: false
+  become: false
+  vars_files:
+    - ./vars/vars_{{ proj_name }}.yaml
+
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: eingram23.pihole.localdns
+        tasks_from: pull
+
+    - ansible.builtin.include_role:
+        name: eingram23.pihole.localdns
+        tasks_from: addchange
+
+    - ansible.builtin.include_role:
+        name: eingram23.pihole.localdns
+        tasks_from: push
+
+    - name: Import inmem_inv role
+      ansible.builtin.include_role:
+        name: eingram23.homelab.inmem_inv
+
+    - name: Import terraform_apply role
+      ansible.builtin.include_role:
+        name: eingram23.tf_build.terraform
+        tasks_from: apply
+
 - name: Deploy new server(s) - run roles against piholes
   hosts: piholes
   gather_facts: false
@@ -13,24 +43,6 @@
     - ansible.builtin.include_role:
         name: eingram23.pihole.localdns
         tasks_from: update
-
-- name: Run localhost roles
-  hosts: localhost
-  gather_facts: false
-  become: false
-  vars_files:
-    - ./vars/vars_{{ proj_name }}.yaml
-
-  tasks:
-
-    - name: Import inmem_inv role
-      ansible.builtin.include_role:
-        name: eingram23.homelab.inmem_inv
-
-    - name: Import terraform_apply role
-      ansible.builtin.include_role:
-        name: eingram23.tf_build.terraform
-        tasks_from: apply
 
 - name: Run post build tasks against new server(s)
   hosts: temp_group

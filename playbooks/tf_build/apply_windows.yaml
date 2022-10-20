@@ -18,10 +18,6 @@
         tasks_from: addchange
 
     - ansible.builtin.include_role:
-        name: eingram23.pihole.localdns
-        tasks_from: push
-
-    - ansible.builtin.include_role:
         name: eingram23.homelab.inmem_inv
 
     - ansible.builtin.include_role:
@@ -42,6 +38,18 @@
         name: eingram23.pihole.localdns
         tasks_from: update
       when: vm_folder_name == "WindowsWG"
+
+- name: Run localhost roles
+  hosts: localhost
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - name: Push custom.list to git and clean up
+      ansible.builtin.include_role:
+        name: eingram23.pihole.localdns
+        tasks_from: push
 
 - name: Run post build tasks against new server(s)
   hosts: temp_group

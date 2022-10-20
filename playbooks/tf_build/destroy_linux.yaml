@@ -17,10 +17,6 @@
         tasks_from: addchange
 
     - ansible.builtin.include_role:
-        name: eingram23.pihole.localdns
-        tasks_from: push
-
-    - ansible.builtin.include_role:
         name: eingram23.homelab.inmem_inv
       
 - name: Run pre destroy tasks on host
@@ -63,6 +59,18 @@
     - ansible.builtin.include_role:
         name: eingram23.pihole.localdns
         tasks_from: remove
+
+- name: Run localhost roles
+  hosts: localhost
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - name: Push custom.list to git and clean up
+      ansible.builtin.include_role:
+        name: eingram23.pihole.localdns
+        tasks_from: push
 
 - name: Remove target(s) from prometheus server
   hosts: dbsrv1.local.lan

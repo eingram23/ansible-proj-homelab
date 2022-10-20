@@ -17,10 +17,6 @@
         tasks_from: addchange
 
     - ansible.builtin.include_role:
-        name: eingram23.pihole.localdns
-        tasks_from: push
-        
-    - ansible.builtin.include_role:
         name: eingram23.tf_build.terraform
         tasks_from: destroy
 
@@ -38,6 +34,18 @@
         name: eingram23.pihole.localdns
         tasks_from: remove
       when: vm_folder_name == "WindowsWG"
+
+- name: Run localhost roles
+  hosts: localhost
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - name: Push custom.list to git and clean up
+      ansible.builtin.include_role:
+        name: eingram23.pihole.localdns
+        tasks_from: push
 
 - name: Remove computer object from HOMELAB.LOCAL domain
   hosts: HL-DC1.homelab.local

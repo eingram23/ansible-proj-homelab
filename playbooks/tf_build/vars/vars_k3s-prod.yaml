@@ -22,9 +22,9 @@ vsphere_network_list:
   - LAN
   - LAN
 vm_name_list:
-  - k3s1-prod
-  - k3s2-prod
-  - k3s3-prod
+  - k3s-prod1
+  - k3s-prod2
+  - k3s-prod3
 ip_address_list:
   - 192.168.1.221
   - 192.168.1.222

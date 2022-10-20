@@ -49,7 +49,7 @@
   tasks:
   
     - ansible.builtin.include_role:
-        name: eingram23.pihole.update_localdns
+        name: eingram23.pihole.localdns
         tasks_from: remove
 
 - name: Remove target(s) from prometheus server

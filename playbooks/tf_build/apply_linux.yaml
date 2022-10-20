@@ -11,7 +11,7 @@
   tasks:
 
     - ansible.builtin.include_role:
-        name: eingram23.pihole.update_localdns
+        name: eingram23.pihole.localdns
         tasks_from: update
 
 - name: Run localhost roles

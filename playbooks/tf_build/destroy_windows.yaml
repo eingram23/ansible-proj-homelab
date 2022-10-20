@@ -23,7 +23,8 @@
   tasks:
 
     - ansible.builtin.include_role:
-        name: eingram23.pihole.pihole_remove
+        name: eingram23.pihole.localdns
+        tasks_from: remove
       when: vm_folder_name == "WindowsWG"
 
 - name: Remove computer object from HOMELAB.LOCAL domain

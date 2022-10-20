@@ -1,4 +1,5 @@
 - name: Post k3s install tasks
+# VARS NEEDED: hostvar, ip_range (xxx.xxx.xxx.xxx-xxx.xxx.xxx.xxx)
   hosts: "{{ hostvar }}"
   gather_facts: false
   become: false

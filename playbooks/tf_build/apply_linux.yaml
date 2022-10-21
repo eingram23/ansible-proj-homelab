@@ -52,6 +52,10 @@
         name: eingram23.pihole.localdns
         tasks_from: push
 
+    - ansible.builtin.include_role:
+        name: eingram23.pihole.localdns
+        tasks_from: cleanup
+
 - name: Run post build tasks against new server(s)
   hosts: temp_group
   become: true

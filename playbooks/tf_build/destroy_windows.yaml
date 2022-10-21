@@ -47,6 +47,10 @@
         name: eingram23.pihole.localdns
         tasks_from: push
 
+    - ansible.builtin.include_role:
+        name: eingram23.pihole.localdns
+        tasks_from: cleanup
+        
 - name: Remove computer object from HOMELAB.LOCAL domain
   hosts: HL-DC1.homelab.local
   gather_facts: false

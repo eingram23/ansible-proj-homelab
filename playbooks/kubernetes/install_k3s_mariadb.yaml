@@ -31,7 +31,7 @@
     # mariadb_srv:
     mariadb_user: "{{ host_prefix }}"
     mariadb_db: "{{ host_prefix }}"
-    mariadb_user_pw: "{{ lookup('hashi_vault', 'secret=secret/data/ssh/eingram:ssh_password') }}"
+    mariadb_user_pw: "{{ lookup('hashi_vault', 'secret=secret/ssh/eingram:ssh_password') }}"
     mariadb_user_priv: '{{ mariadb_db }}.*:ALL,GRANT'
     
   tasks:
@@ -88,7 +88,7 @@
             curl -sfL https://get.k3s.io | sh -s - server
             --token=k3s
             --disable=servicelb
-            --datastore-endpoint="mysql://{{ host_prefix }}:{{ lookup('hashi_vault', 'secret=secret/data/ssh/eingram:ssh_password') }}@tcp({{ mariadb_srv }}:3306)/{{ host_prefix }}"
+            --datastore-endpoint="mysql://{{ host_prefix }}:{{ lookup('hashi_vault', 'secret=secret/ssh/eingram:ssh_password') }}@tcp({{ mariadb_srv }}:3306)/{{ host_prefix }}"
             --write-kubeconfig-mode 644
           when: not k3s_installed.stat.exists
 

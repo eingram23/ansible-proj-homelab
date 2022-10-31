@@ -1,0 +1,28 @@
+---
+- hosts: "{{ hostvar }}"
+  become: false
+  gather_facts: false
+
+  tasks:
+
+    - kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Pod
+        namespace: "{{ namespace }}"
+        label_selectors:
+          - app = unifi-controller
+        kubeconfig: "/etc/rancher/k3s/k3s.yaml"
+      register: pod_list
+
+    - ansible.builtin.set_fact:
+        test: "{{ pod_list.resources[0].metadata.name }}"
+
+    - kubernetes.core.k8s_exec:
+        namespace: unifi
+        pod: "{{ test }}"
+        command:  cat /etc/hosts
+        kubeconfig: "/etc/rancher/k3s/k3s.yaml"
+      register: cmd_output
+
+    - ansible.builtin.debug:
+        var: cmd_output.stdout

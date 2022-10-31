@@ -1,0 +1,11 @@
+---
+- name: Unseal vault
+  hosts: "{{ hostvar }}"
+  become: false
+  gather_facts: false
+
+  tasks:
+
+   - ansible.builtin.include_role:
+      name: eingram23.kubernetes.vault
+      tasks_from: unseal

@@ -29,7 +29,7 @@
 
         - name: Build container
           ansible.builtin.include_role:
-            name: eingram23.containers.vault
+            name: eingram23.containers.vault-dev
           vars:
             container_name: "{{ vault_container_name }}"
             ver: "{{ vault_container_ver }}"

@@ -1,4 +1,5 @@
 ---
+# VARS NEEDED: hostvar, pgadmin4_ip, postgres13_ip
 - name: Deploy monitoring to k3s
   hosts: "{{ hostvar }}"
   gather_facts: false

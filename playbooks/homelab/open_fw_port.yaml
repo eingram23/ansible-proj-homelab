@@ -7,7 +7,10 @@
 
   tasks: 
 
-    - ansible.builtin.include_role:
-        eingram23.homelab.firewall
-      vars:
-        fw_port: fw_port_list
+    - name: Open firewall ports
+      ansible.posix.firewalld:
+        port: "{{ item }}"
+        zone: public
+        permanent: true
+        state: enabled
+      loop: "{{ fw_port.split('\n') }}"

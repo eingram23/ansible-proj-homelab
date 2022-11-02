@@ -13,4 +13,4 @@
         zone: public
         permanent: true
         state: enabled
-      loop: "{{ fw_port.split('\n') }}"
+      loop: "{{ fw_ports.split('\n') }}"

@@ -34,9 +34,9 @@
 
   tasks:
 
-    - ansible.builtin.pause:
-        prompt: pause
-        
+    # - ansible.builtin.pause:
+    #     prompt: pause
+
     - ansible.builtin.include_role:
         name: eingram23.pihole.localdns
         tasks_from: push

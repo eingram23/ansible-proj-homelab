@@ -8,13 +8,15 @@
 
   tasks:
 
-    - ansible.builtin.include_role:
-        name: eingram23.pihole.localdns
-        tasks_from: pull
+    - block:
+        - ansible.builtin.include_role:
+            name: eingram23.pihole.localdns
+            tasks_from: pull
 
-    - ansible.builtin.include_role:
-        name: eingram23.pihole.localdns
-        tasks_from: addchange
+        - ansible.builtin.include_role:
+            name: eingram23.pihole.localdns
+            tasks_from: remove
+      when: vm_folder_name == "WindowsWG"
 
     - ansible.builtin.include_role:
         name: eingram23.tf_build.terraform
@@ -30,9 +32,14 @@
 
   tasks:
 
-    - ansible.builtin.include_role:
-        name: eingram23.pihole.localdns
-        tasks_from: remove
+    - block:
+        - ansible.builtin.include_role:
+            name: eingram23.pihole.localdns
+            tasks_from: update
+
+        - name: Pause 20 seconds for pihole update
+          ansible.builtin.pause:
+            seconds: 20
       when: vm_folder_name == "WindowsWG"
 
 - name: Run localhost roles
@@ -42,15 +49,17 @@
 
   tasks:
 
-    - name: Push custom.list to git and clean up
-      ansible.builtin.include_role:
-        name: eingram23.pihole.localdns
-        tasks_from: push
+    - block:
+        - name: Push custom.list to git and clean up
+          ansible.builtin.include_role:
+            name: eingram23.pihole.localdns
+            tasks_from: push
 
-    - ansible.builtin.include_role:
-        name: eingram23.pihole.localdns
-        tasks_from: cleanup
-        
+        - ansible.builtin.include_role:
+            name: eingram23.pihole.localdns
+            tasks_from: cleanup
+      when: vm_folder_name == "WindowsWG"
+
 - name: Remove computer object from HOMELAB.LOCAL domain
   hosts: HL-DC1.homelab.local
   gather_facts: false

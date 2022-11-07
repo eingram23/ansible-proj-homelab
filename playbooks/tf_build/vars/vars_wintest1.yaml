@@ -7,7 +7,7 @@ proj_root: "/var/tmp/terraform/projects/"
 # vsphere_template: TMP-RHEL85_Packer
 # vsphere_template: TMP-Rocky85_Packer
 # vsphere_template: TMP-CentOS_Packer
-vsphere_template: TMP-Win2022Core_Packer
+vsphere_template: TMP-Win2022_Packer
 # vsphere_template: TMP-Win2016_Packer
 # vsphere_template: TMP-Win2019_Packer
 

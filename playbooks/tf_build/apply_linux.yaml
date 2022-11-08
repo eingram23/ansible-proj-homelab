@@ -51,7 +51,7 @@
 
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
-    
+
   tasks:
 
     - name: Push custom.list to git and clean up
@@ -103,23 +103,23 @@
         name: eingram23.metrics.node_exporter
       when: "'node_exporter' in task"
 
-- name: Add target to prometheus server
-  hosts: dbsrv1.local.lan
-  gather_facts: false
-  become: true
-  become_user: poduser
-  become_method: sudo
-  vars_files:
-    - ./vars/vars_{{ proj_name }}.yaml
+# - name: Add target to prometheus server
+#   hosts: dbsrv1.local.lan
+#   gather_facts: false
+#   become: true
+#   become_user: poduser
+#   become_method: sudo
+#   vars_files:
+#     - ./vars/vars_{{ proj_name }}.yaml
 
-  tasks:
+#   tasks:
 
-    - ansible.builtin.include_role:
-        name: eingram23.metrics.prom_target_update
-        tasks_from: add
-      vars:
-        prom_port: "9100"
-      when: "'node_exporter' in task"
+#     - ansible.builtin.include_role:
+#         name: eingram23.metrics.prom_target_update
+#         tasks_from: add
+#       vars:
+#         prom_port: "9100"
+#       when: "'node_exporter' in task"
 
 - name: Add host to LibreNMS
   hosts: librenms.local.lan

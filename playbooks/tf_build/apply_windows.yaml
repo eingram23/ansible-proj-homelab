@@ -49,10 +49,6 @@
         - ansible.builtin.include_role:
             name: eingram23.pihole.localdns
             tasks_from: update
-        
-        - name: Pause for 20 seconds for pihole update
-          ansible.builtin.pause:
-            seconds: 20
       when: vm_folder_name == "WindowsWG"
 
 - name: Run localhost roles

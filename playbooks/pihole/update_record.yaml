@@ -27,10 +27,6 @@
         name: eingram23.pihole.localdns
         tasks_from: update
 
-    - name: Pause 20 seconds for pihole update
-      ansible.builtin.pause:
-        seconds: 20
-
 - name: Push updated custom.list to git
   hosts: localhost
   become: false

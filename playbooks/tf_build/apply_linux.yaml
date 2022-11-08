@@ -40,10 +40,6 @@
         name: eingram23.pihole.localdns
         tasks_from: update
 
-    - name: Pause 20 seconds for pihole update
-      ansible.builtin.pause:
-        seconds: 20
-
 - name: Run localhost roles
   hosts: localhost
   gather_facts: false

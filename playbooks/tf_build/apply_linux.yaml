@@ -49,6 +49,9 @@
   gather_facts: false
   become: false
 
+  vars_files:
+    - ./vars/vars_{{ proj_name }}.yaml
+    
   tasks:
 
     - name: Push custom.list to git and clean up

@@ -4,6 +4,7 @@
   hosts: localhost
   gather_facts: false
   become: false
+
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
 
@@ -52,6 +53,7 @@
   gather_facts: false
   become: true
   become_method: sudo
+
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
 
@@ -70,6 +72,9 @@
   gather_facts: false
   become: false
 
+  vars_files:
+    - ./vars/vars_{{ proj_name }}.yaml
+
   tasks:
 
     - name: Push custom.list to git and clean up
@@ -87,6 +92,7 @@
   become: true
   become_user: poduser
   become_method: sudo
+
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
 
@@ -103,6 +109,7 @@
   become: true
   become_user: librenms
   become_method: sudo
+  
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml
 

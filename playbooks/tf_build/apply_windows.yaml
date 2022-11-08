@@ -51,6 +51,9 @@
   gather_facts: false
   become: false
 
+  vars_files:
+    - ./vars/vars_{{ proj_name }}.yaml
+    
   tasks:
 
     - block:

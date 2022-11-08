@@ -9,6 +9,7 @@
   vars:
     # host_prefix: 
     k3s_token: "{{ host_prefix }}"
+    k3s_version: "v1.24.7+k3s1"
 
   tasks:
 
@@ -19,7 +20,9 @@
 
     - name: Run k3s install script
       ansible.builtin.shell: >
-        curl -sfL https://get.k3s.io | K3S_TOKEN={{ host_prefix }} sh -s - server
+        curl -sfL https://get.k3s.io | 
+        INSTALL_K3S_VERSION={{ k3s_version }}
+        K3S_TOKEN={{ host_prefix }} sh -s - server
         --disable=servicelb
         --write-kubeconfig-mode 644
         --cluster-init
@@ -62,7 +65,10 @@
 
     - name: Run k3s install script
       ansible.builtin.shell: >
-        curl -sfL https://get.k3s.io | K3S_TOKEN={{ host_prefix }} sh -s - server --server https://{{ host_prefix }}1.local.lan:6443
+        curl -sfL https://get.k3s.io |
+        INSTALL_K3S_VERSION={{ k3s_version }}
+        K3S_TOKEN={{ host_prefix }} 
+        sh -s - server --server https://{{ host_prefix }}1.local.lan:6443
         --disable=servicelb
         --write-kubeconfig-mode 644
       when: not k3s_installed.stat.exists
@@ -80,7 +86,8 @@
       register: helm_bin
 
     - name: Install helm
-      ansible.builtin.shell: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+      ansible.builtin.shell: |
+        curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
       when: not helm_bin.stat.exists
       register: install_result
       failed_when: install_result.rc != 1

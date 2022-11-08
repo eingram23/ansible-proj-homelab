@@ -37,6 +37,7 @@
   vars:
     # host_prefix: 
     k3s_token: "{{ host_prefix }}"
+    k3s_version: "v1.24.7+k3s1"
   
   tasks:
 

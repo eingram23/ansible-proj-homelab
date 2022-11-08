@@ -22,9 +22,9 @@ vsphere_network_list:
   - Lab-LAN1
   - Lab-LAN1
 vm_name_list:
-  - k3s-dev
-  - k3s2-dev
-  - k3s3-dev
+  - k3s-dev1
+  - k3s-dev2
+  - k3s-dev3
 ip_address_list:
   - 10.10.0.51
   - 10.10.0.52

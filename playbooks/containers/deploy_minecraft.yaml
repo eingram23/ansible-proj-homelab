@@ -1,0 +1,27 @@
+---
+- name: Deploy minecraft paper server container
+  hosts: "{{ hostvar | default([]) }}"
+  gather_facts: false
+  become: true
+
+  vars:
+    fw_port: "25565"
+
+  tasks:
+
+    - name: Open firewall port
+      ansible.builtin.include_role:
+        eingram23.homelab.firewall
+
+- name: Start minecraft container
+  hosts: "{{ hostvar | default([]) }}"
+  gather_facts: false
+  become: false
+
+  vars:
+    fw_port: "25565"
+
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: eingram23.containers.minecraft

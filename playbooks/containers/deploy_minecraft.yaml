@@ -6,7 +6,7 @@
 
   vars:
     fw_port:
-      - "25565"
+      - "25565/tcp"
 
   tasks:
 
@@ -14,14 +14,20 @@
       ansible.builtin.include_role:
         name: eingram23.homelab.firewall
 
+    - name: Create bind mount folder 
+      ansible.builtin.file:
+        path: /opt/minecraft
+        state: directory
+        mode: '0755'
+        owner: poduser
+        group: poduser
+
 - name: Start minecraft container
   hosts: "{{ hostvar | default([]) }}"
   gather_facts: false
-  become: false
-
-  vars:
-    fw_port:
-      - "25565"
+  become: true
+  become_method: sudo
+  become_user: poduser
 
   tasks:
 

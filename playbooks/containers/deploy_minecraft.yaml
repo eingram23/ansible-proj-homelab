@@ -5,13 +5,14 @@
   become: true
 
   vars:
-    fw_port: "25565"
+    fw_port:
+      - "25565"
 
   tasks:
 
     - name: Open firewall port
       ansible.builtin.include_role:
-        eingram23.homelab.firewall
+        name: eingram23.homelab.firewall
 
 - name: Start minecraft container
   hosts: "{{ hostvar | default([]) }}"
@@ -19,7 +20,8 @@
   become: false
 
   vars:
-    fw_port: "25565"
+    fw_port:
+      - "25565"
 
   tasks:
 

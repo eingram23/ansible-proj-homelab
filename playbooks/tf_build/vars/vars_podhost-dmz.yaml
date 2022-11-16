@@ -26,7 +26,7 @@ vsphere_datastore_list:
   # - XN_iSCSI_SSD2
   # - XN_iSCSI_SSD2
 vsphere_network_list:
-  - Guest
+  - InternetServices
   # - Lab-LAN1
   # - Lab-LAN1
 vm_name_list:
@@ -34,11 +34,11 @@ vm_name_list:
   # - k3s2
   # - k3s3
 ip_address_list:
-  - 10.2.0.5
+  - 10.3.0.5
   # - 10.10.0.52
   # - 10.10.0.53
 ip_gateway_list:
-  - 10.2.0.1
+  - 10.3.0.1
   # - 10.10.0.1
   # - 10.10.0.1
 dns_suffix_list:

@@ -16,7 +16,8 @@
 
     - name: Create bind mount folder 
       ansible.builtin.file:
-        path: /opt/minecraft
+        path: /opt/minecraft/plugins
+        recurse: true
         state: directory
         mode: '0755'
         owner: poduser

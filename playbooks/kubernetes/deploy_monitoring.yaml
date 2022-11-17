@@ -9,13 +9,9 @@
     - name: Deploy monitoring stack
       ansible.builtin.include_role:
         name: eingram23.kubernetes.monitoring
-
-    - name: Update prometheus config
-      ansible.builtin.import_role:
-        name: eingram23.kubernetes.monitoring
-        tasks_from: update_prom_config
       tags:
-        - update
+        - always
+        - update_prom
 
     - name: Post config message
       ansible.builtin.debug:

@@ -7,29 +7,20 @@
   become_user: poduser
   gather_facts: false
 
-  vars:
-  # env: "test" or "www"
-
   tasks:
 
     - name: Set facts (www)
-      when: env == "www"
+      when: env is not defined
       block:
         - ansible.builtin.set_fact:
-            nginx_port: 8080
+            wp_port: 8086
 
-        - ansible.builtin.set_fact:
-            phpmyadmin_port: 8084
-
-    - name: Set facts (test)
-      when: env == "test"
+    - name: Set facts (dev)
+      when: env == "-dev"
       block:
         - ansible.builtin.set_fact:
-            nginx_port: 8082
+            wp_port: 8087
 
-        - ansible.builtin.set_fact:
-            phpmyadmin_port: 8085
-
-    - name: Deploy diversionforum.net site
+    - name: Deploy wordpress
       ansible.builtin.include_role:
-        name: eingram23.containers.diversionforum
+        name: eingram23.containers.wordpress

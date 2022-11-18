@@ -21,6 +21,7 @@
   become: true
   become_method: sudo
   gather_facts: false
+  serial: 1
 
   tasks:
     - ansible.builtin.include_role:

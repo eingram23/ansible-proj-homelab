@@ -93,6 +93,16 @@
       register: install_result
       failed_when: install_result.rc != 1
 
+    - name: Check if kustomize is installed
+      ansible.builtin.stat:
+        path: /usr/local/bin/kustomize
+      register: kustomize_bin
+
+    - name: Install kustomize
+      ansible.builtin.shell: |
+        curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+        mv kustomize /usr/bin
+
     - name: Create longhorn mount point
       ansible.builtin.file:
         path: /longhorn

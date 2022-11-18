@@ -12,14 +12,5 @@
       tags:
         - always
         - update_prom
+        - update_graf
 
-    - name: Post config message
-      ansible.builtin.debug:
-        msg:
-        - "Grafana default user/pw - admin/admin"
-        - "Add the following dashboards"
-        - "   15282 - k3s"
-        - "   1860 - node exporter"
-        - "   11243 - vmware"
-        - "   14694 - windows exporter"
-        - "   13032 - longhorn"

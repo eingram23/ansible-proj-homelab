@@ -1,5 +1,6 @@
 ---
-# VARS NEEDED: hostvar
+# VARS NEEDED: hostvar, env
+# TAGS: unseal
 - name: Deploy vault to k3s
   hosts: "{{ hostvar }}"
   gather_facts: false
@@ -9,3 +10,6 @@
 
     - ansible.builtin.include_role:
         name: eingram23.kubernetes.vault
+      tags:
+        - always
+        - unseal

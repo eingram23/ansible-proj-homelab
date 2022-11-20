@@ -1,6 +1,6 @@
 ---
 # VARS NEEDED: hostvar, env
-# TAGS: unseal
+# TAGS: unseal, show_token
 - name: Deploy vault to k3s
   hosts: "{{ hostvar }}"
   gather_facts: false
@@ -13,3 +13,4 @@
       tags:
         - always
         - unseal
+        - show_token

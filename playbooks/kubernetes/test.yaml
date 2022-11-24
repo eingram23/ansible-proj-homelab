@@ -1,0 +1,25 @@
+---
+- hosts: k3s-dev1.local.lan
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - name: Check to see if vault is already deployed
+      kubernetes.core.k8s_info:
+        kind: Pod
+        name: vault-0
+        namespace: vault
+        kubeconfig: /etc/rancher/k3s/k3s.yaml
+      register: vault_ready
+
+    - ansible.builtin.debug:
+        var: vault_ready
+
+    - ansible.builtin.debug:
+        var: vault_ready | json_query('resources[0].status.conditions[?type==`ContainersReady`].status') | first
+
+    - name: Init and export cluster-keys.json
+      debug:
+        msg: "test"
+      when: vault_ready | json_query('resources[0].status.containerStatuses[?name==`vault`].started') | first | bool == true

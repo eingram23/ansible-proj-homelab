@@ -12,15 +12,15 @@
 
     - name: Post config message
       ansible.builtin.debug:
-        msg:
-        - "Run calibre at calibre(-dev).local.lan and create db at /config/Calibre Library"
-        - "Run calibre-web at calibre-web(-dev).local.lan and set database to same location"
-        - "Configure calibre-web:"
-        - "   Server Config - Feature Config - Enable Uploads"
-        - "   Basic Config - E-Book Converter Path - /usr/bin/ebook-convert"
-        - "   SMTP - smtp.gmail.com - TLS 587 - edward.ingram@ycdisp.com - {{ lookup('hashi_vault', 'secret=secret/google/smtp:password') }}"
-        - "   Configure user email addresses:"
-        - "       - 3D9999@kindle.com"
-        - "       - B09999@kindle.com"
-        - "       - C49999@kindle.com"
-        - "       - Y39999@kindle.com"
+        msg: |
+          Run calibre at calibre(-dev).local.lan and create db at /config/Calibre Library
+          Run calibre-web at calibre-web(-dev).local.lan and set database to same location
+          Configure calibre-web:
+            Server Config - Feature Config - Enable Uploads
+            Basic Config - E-Book Converter Path - /usr/bin/ebook-convert
+            SMTP - smtp.gmail.com - TLS 587 - edward.ingram@ycdisp.com - {{ lookup('hashi_vault', 'secret=secret/google/smtp:password') }}
+            Configure user email addresses:
+                - 3D9999@kindle.com
+                - B09999@kindle.com
+                - C49999@kindle.com
+                - Y39999@kindle.com

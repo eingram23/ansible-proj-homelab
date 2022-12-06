@@ -12,11 +12,11 @@
       tags:
         - metallb
 
-    # - name: Deploy longhorn
-    #   ansible.builtin.include_role:
-    #     name: eingram23.kubernetes.longhorn
-    #   tags:
-    #     - longhorn
+    - name: Deploy longhorn
+      ansible.builtin.import_role:
+        name: eingram23.kubernetes.longhorn
+      tags:
+        - longhorn
 
     # - name: Deploy vault
     #   ansible.builtin.include_role:
@@ -24,11 +24,11 @@
     #   tags:
     #     - vault
 
-    # - name: Deploy cert-manager
-    #   ansible.builtin.include_role:
-    #     name: eingram23.kubernetes.cert-manager
-    #   tags:
-    #     - cert-manager
+    - name: Deploy cert_manager
+      ansible.builtin.include_role:
+        name: eingram23.kubernetes.cert_manager
+      tags:
+        - cert-manager
 
     - name: Deploy traefik dashboard ingressroute
       ansible.builtin.include_role:

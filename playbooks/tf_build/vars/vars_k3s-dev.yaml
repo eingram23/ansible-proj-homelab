@@ -4,7 +4,7 @@ proj_root: "/var/tmp/terraform/projects/"
 ### MAKE EDITS BELOW ###
 
 # Edit this to change distro
-vsphere_template: TMP-Rocky85_Packer
+vsphere_template: TMP-Rocky9_Packer
 
 vm_folder_name: Linux
 
@@ -14,7 +14,7 @@ vm_cpu: 2
 # All lists must have same # of elements
 
 vsphere_datastore_list:
-  - XN_iSCSI_SSD2
+  - XN_iSCSI_SSD1
   - XN_iSCSI_SSD2
   - XN_iSCSI_SSD2
 vsphere_network_list:
@@ -43,7 +43,8 @@ vm_disks_list: 'vm_disks_list = [{ label = "longhorn1", id = 1, size = 60, thin_
 
 # Uncomment post build tasks to run
 task:
-  - none
+  # - none
+  - mount_nas
   # - container_host
   # - webapps
   # - splunk_uf

@@ -13,6 +13,13 @@
         - all
         - metallb
 
+    - name: Deploy longhorn
+      ansible.builtin.include_role:
+        name: eingram23.kubernetes.longhorn
+      tags:
+        - all
+        - longhorn
+
     - name: Deploy vault
       ansible.builtin.include_role:
         name: eingram23.kubernetes.vault
@@ -40,10 +47,3 @@
       tags:
         - all
         - dashboard
-
-    - name: Deploy longhorn
-      ansible.builtin.include_role:
-        name: eingram23.kubernetes.longhorn
-      tags:
-        - all
-        - longhorn

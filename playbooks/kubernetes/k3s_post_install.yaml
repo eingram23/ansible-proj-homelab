@@ -12,18 +12,6 @@
       tags:
         - metallb
 
-    - name: Deploy longhorn
-      ansible.builtin.import_role:
-        name: eingram23.kubernetes.longhorn
-      tags:
-        - longhorn
-
-    # - name: Deploy vault
-    #   ansible.builtin.include_role:
-    #     name: eingram23.kubernetes.vault
-    #   tags:
-    #     - vault
-
     - name: Deploy cert_manager
       ansible.builtin.include_role:
         name: eingram23.kubernetes.cert_manager
@@ -41,3 +29,19 @@
         name: eingram23.kubernetes.kubernetes_dashboard
       tags:
         - dashboard
+
+    - name: Deploy longhorn
+      ansible.builtin.import_role:
+        name: eingram23.kubernetes.longhorn
+      tags:
+        - longhorn
+
+    - name: Deploy monitoring stack
+      ansible.builtin.include_role:
+        name: eingram23.kubernetes.monitoring
+        
+    - name: Deploy vault
+      ansible.builtin.include_role:
+        name: eingram23.kubernetes.vault
+      tags:
+        - vault

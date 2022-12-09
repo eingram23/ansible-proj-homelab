@@ -1,0 +1,18 @@
+---
+- name: Windows updates
+  hosts: "{{ hostvar | default([]) }}"
+  gather_facts: false
+  become: true
+
+  tasks:
+
+    - name: Search-only, return list of found updates (if any)
+      ansible.windows.win_updates:
+        category_names: "*"
+        state: searched
+        # reboot: true
+      register: update_list
+
+    - name: Show results
+      ansible.builtin.debug:
+        var: update_list

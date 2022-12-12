@@ -6,13 +6,34 @@
 
   tasks:
 
+    - ansible.builtin.import_role:
+        name: eingram23.homelab.wol
+      tags: always
+
     - name: Search-only, return list of found updates (if any)
       ansible.windows.win_updates:
-        category_names: "*"
+        category_names:
+          - SecurityUpdates
+          - CriticalUpdates
+          - UpdateRollups
         state: searched
-        # reboot: true
       register: update_list
+
+    - name: Install updates and reboot
+      ansible.windows.win_updates:
+        category_names:
+          - SecurityUpdates
+          - CriticalUpdates
+          - UpdateRollups
+        state: installed
+        reboot: true
+        reboot_timeout: 1200
+      register: update_list
+      tags:
+        - install
+        - never
 
     - name: Show results
       ansible.builtin.debug:
         var: update_list
+      tags: always

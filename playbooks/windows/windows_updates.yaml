@@ -25,6 +25,8 @@
           - SecurityUpdates
           - CriticalUpdates
           - UpdateRollups
+          - Definition Updates
+          - Microsoft Defender Antivirus
         state: installed
         reboot: true
         reboot_timeout: 1200

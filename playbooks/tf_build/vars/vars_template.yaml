@@ -23,13 +23,15 @@ vm_cpu: 2
 # All lists must have same # of elements
 
 vsphere_datastore_list:
-  - XN_iSCSI_SSD2
-  - XN_iSCSI_SSD2
-  - XN_iSCSI_SSD2
+  - vsanDatastore
+  # - XN_iSCSI_SSD2
+  # - XN_iSCSI_SSD2
+# vsphere_storage_policy: vSAN - No Fault Tolerance
+vsphere_storage_policy: vSAN Default Storage Policy
 vsphere_network_list:
-  - Lab-LAN1
-  - Lab-LAN1
-  - Lab-LAN1
+  - DPG-Services
+  - DPG-Services
+  - DPG-Services
 vm_name_list:
   - k3s1
   - k3s2

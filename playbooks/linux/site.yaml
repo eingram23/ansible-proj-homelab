@@ -57,6 +57,10 @@
         name: eingram23.metrics.windows_exporter
       when: "'windows_exporter' in task"
 
+    - ansible.builtin.include_role:
+        name: eingram23.homelab.zfs
+      when: "'zfs' in task"
+
 # - name: Add target to prometheus server
 #   hosts: dbsrv1.local.lan
 #   gather_facts: false

@@ -29,29 +29,29 @@ vsphere_datastore_list:
 # vsphere_storage_policy: vSAN - No Fault Tolerance
 vsphere_storage_policy: vSAN Default Storage Policy
 vsphere_network_list:
-  - Lab-LAN1
-  - Lab-LAN1
-  - Lab-LAN1
+  - DPG-Services
+  # - Lab-LAN1
+  # - Lab-LAN1
 vm_name_list:
-  - k3s1
-  - k3s2
-  - k3s3
+  - homenas-1
+  # - k3s2
+  # - k3s3
 ip_address_list:
-  - 10.10.0.51
-  - 10.10.0.52
-  - 10.10.0.53
+  - 192.168.1.212
+  # - 10.10.0.52
+  # - 10.10.0.53
 ip_gateway_list:
   - 10.10.0.1
-  - 10.10.0.1
-  - 10.10.0.1
+  # - 10.10.0.1
+  # - 10.10.0.1
 dns_suffix_list:
   - local.lan
-  - local.lan
-  - local.lan
+  # - local.lan
+  # - local.lan
 
 # For any extra vmdks (For Windows, start with ID 2)
-# vm_disks_list: 'vm_disks_list = []'
-vm_disks_list: 'vm_disks_list = [{ label = "longhorn1", id = 1, size = 60, thin_provisioned = true }]'
+vm_disks_list: 'vm_disks_list = []'
+# vm_disks_list: 'vm_disks_list = [{ label = "longhorn1", id = 1, size = 60, thin_provisioned = true }]'
 
 # Uncomment post build tasks to run
 task:

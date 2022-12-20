@@ -58,8 +58,19 @@
       when: "'windows_exporter' in task"
 
     - ansible.builtin.include_role:
-        name: eingram23.homelab.zfs
+        name: eingram23.homelab.filesystem
+        tasks_from: zfs
       when: "'zfs' in task"
+
+    - ansible.builtin.include_role:
+        name: eingram23.homelab.filesystem
+        tasks_from: nfs
+      when: "'nfs' in task"
+
+    - ansible.builtin.include_role:
+        name: eingram23.homelab.filesystem
+        tasks_from: samba
+      when: "'samba' in task"
 
 # - name: Add target to prometheus server
 #   hosts: dbsrv1.local.lan

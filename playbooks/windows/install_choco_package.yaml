@@ -10,6 +10,5 @@
 
     - name: Install/Upgrade VNC Connect
       chocolatey.chocolatey.win_chocolatey:
-        name: vnc-connect
-        version: '6.11.0'
-        state: present
+        name: "{{ package }}"
+        state: latest

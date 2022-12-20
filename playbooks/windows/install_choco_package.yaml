@@ -8,7 +8,7 @@
     - ansible.builtin.include_role:
         name: eingram23.homelab.wol
 
-    - name: Install/Upgrade VNC Connect
+    - name: Install/Upgrade Choco Package
       chocolatey.chocolatey.win_chocolatey:
         name: "{{ package }}"
         state: latest

@@ -37,20 +37,3 @@
     - ansible.builtin.include_role:
         name: eingram23.pihole.localdns
         tasks_from: update
-
-- name: Post clean up
-  hosts: localhost
-  become: false
-  gather_facts: false
-
-  tasks:
-
-    - name: Clean up tmp files
-      ansible.builtin.file:
-        path: /var/tmp/configs
-        state: absent
-
-    - name: Clean up key
-      ansible.builtin.file:
-        path: /var/tmp/ssh-key-git.key
-        state: absent

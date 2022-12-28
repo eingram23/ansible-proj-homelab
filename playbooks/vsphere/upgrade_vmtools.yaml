@@ -1,0 +1,10 @@
+---
+- name: Upgrade VMware Tools on host and reboot
+  hosts: "{{ hostvar | default([]) }}"
+  become: false
+  gather_facts: false
+
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: eingram23.vsphere.upgrade_vmtools

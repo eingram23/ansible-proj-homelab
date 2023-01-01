@@ -7,6 +7,7 @@ collections:
   - kubernetes.core
   - lvrfrc87.git_acp
   - community.crypto
+  - google.cloud
   - name: https://github.com/eingram23/ansible-col-homelab.git
     type: git
     version: main
@@ -32,6 +33,9 @@ collections:
     type: git
     version: main
   - name: https://github.com/eingram23/ansible-col-kubernetes.git
+    type: git
+    version: main
+  - name: https://github.com/eingram23/ansible-col-gcp.git
     type: git
     version: main
   

@@ -5,21 +5,17 @@
 
   tasks:
 
-    - name: Check to see if vault is already deployed
+    - name: Get svc info
       kubernetes.core.k8s_info:
-        kind: Pod
-        name: vault-0
-        namespace: vault
+        api_version: v1
+        kind: Service
+        name: traefik
+        namespace: kube-system
         kubeconfig: /etc/rancher/k3s/k3s.yaml
-      register: vault_ready
+      register: service
 
-    - ansible.builtin.debug:
-        var: vault_ready
+    - ansible.builtin.set_fact:
+        ip_address: "{{ service | json_query('resources[0].status.loadBalancer.ingress[0].ip') }}"
 
-    - ansible.builtin.debug:
-        var: vault_ready | json_query('resources[0].status.conditions[?type==`ContainersReady`].status') | first
-
-    - name: Init and export cluster-keys.json
-      debug:
-        msg: "test"
-      when: vault_ready | json_query('resources[0].status.containerStatuses[?name==`vault`].started') | first | bool == true
+    - ansible.builtin.debug: 
+        var: ip_address

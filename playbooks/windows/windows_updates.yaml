@@ -7,7 +7,7 @@
   tasks:
 
     - ansible.builtin.import_role:
-        name: eingram23.homelab.wol
+        name: eingram23.homelab.win_wol
       tags: always
 
     - name: Search-only, return list of found updates (if any)

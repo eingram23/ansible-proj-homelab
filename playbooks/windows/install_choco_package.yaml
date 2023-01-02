@@ -6,7 +6,7 @@
   tasks:
 
     - ansible.builtin.include_role:
-        name: eingram23.homelab.wol
+        name: eingram23.homelab.win_wol
 
     - name: Install/Upgrade Choco Package
       chocolatey.chocolatey.win_chocolatey:

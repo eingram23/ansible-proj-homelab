@@ -1,0 +1,10 @@
+---
+- name: Test vault lookup
+  hosts: localhost
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - ansible.builtin.debug:
+        var: "{{ lookup('hashi_vault', 'secret=secret/ssh/eingram:ssh_password') }}"

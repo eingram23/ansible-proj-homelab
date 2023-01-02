@@ -10,6 +10,5 @@
         name: eingram23.gcp.cloud_dns
         tasks_from: add
       vars:
-        hostname: test
-        record_type: A
+        appname: test
         target: 10.10.0.61

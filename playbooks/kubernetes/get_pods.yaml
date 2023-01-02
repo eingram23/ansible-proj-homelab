@@ -1,5 +1,5 @@
 ---
-- hosts: "{{ hostvar }}"
+- hosts: "{{ hostvar | default([])}}"
   become: false
   gather_facts: false
 
@@ -9,8 +9,8 @@
         api_version: v1
         kind: Pod
         namespace: "{{ namespace }}"
-        label_selectors:
-          - app = unifi-controller
+        # label_selectors:
+        #   - app = unifi-controller
         kubeconfig: "/etc/rancher/k3s/k3s.yaml"
       register: pod_list
 

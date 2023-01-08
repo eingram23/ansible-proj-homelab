@@ -61,3 +61,4 @@ task:
   # - splunk_uf
   # - snmpd
   # - node_exporter
+  # - windows_exporter

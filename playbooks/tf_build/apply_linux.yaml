@@ -117,18 +117,18 @@
 #         prom_port: "9100"
 #       when: "'node_exporter' in task"
 
-- name: Add host to LibreNMS
-  hosts: librenms.local.lan
-  gather_facts: false
-  become: true
-  become_user: librenms
-  become_method: sudo
-  vars_files:
-    - ./vars/vars_{{ proj_name }}.yaml
+# - name: Add host to LibreNMS
+#   hosts: librenms.local.lan
+#   gather_facts: false
+#   become: true
+#   become_user: librenms
+#   become_method: sudo
+#   vars_files:
+#     - ./vars/vars_{{ proj_name }}.yaml
 
-  tasks:
+#   tasks:
 
-    - ansible.builtin.include_role:
-        name: eingram23.homelab.snmpd
-        tasks_from: add
-      when: "'snmpd' in task"
+#     - ansible.builtin.include_role:
+#         name: eingram23.homelab.snmpd
+#         tasks_from: add
+#       when: "'snmpd' in task"

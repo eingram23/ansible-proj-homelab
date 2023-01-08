@@ -82,36 +82,36 @@
         name: eingram23.pihole.localdns
         tasks_from: cleanup
         
-- name: Remove target(s) from prometheus server
-  hosts: dbsrv1.local.lan
-  gather_facts: false
-  become: true
-  become_user: poduser
-  become_method: sudo
+# - name: Remove target(s) from prometheus server
+#   hosts: dbsrv1.local.lan
+#   gather_facts: false
+#   become: true
+#   become_user: poduser
+#   become_method: sudo
 
-  vars_files:
-    - ./vars/vars_{{ proj_name }}.yaml
+#   vars_files:
+#     - ./vars/vars_{{ proj_name }}.yaml
 
-  tasks:
+#   tasks:
   
-    - ansible.builtin.include_role:
-        name: eingram23.metrics.prom_target_update
-        tasks_from: remove
-      when: "'node_exporter' in task"
+#     - ansible.builtin.include_role:
+#         name: eingram23.metrics.prom_target_update
+#         tasks_from: remove
+#       when: "'node_exporter' in task"
 
-- name: Remove host(s) from LibreNMS
-  hosts: librenms.local.lan
-  gather_facts: false
-  become: true
-  become_user: librenms
-  become_method: sudo
+# - name: Remove host(s) from LibreNMS
+#   hosts: librenms.local.lan
+#   gather_facts: false
+#   become: true
+#   become_user: librenms
+#   become_method: sudo
   
-  vars_files:
-    - ./vars/vars_{{ proj_name }}.yaml
+#   vars_files:
+#     - ./vars/vars_{{ proj_name }}.yaml
 
-  tasks:
+#   tasks:
 
-    - ansible.builtin.include_role:
-        name: eingram23.homelab.snmpd
-        tasks_from: remove
-      when: "'snmpd' in task"
+#     - ansible.builtin.include_role:
+#         name: eingram23.homelab.snmpd
+#         tasks_from: remove
+#       when: "'snmpd' in task"

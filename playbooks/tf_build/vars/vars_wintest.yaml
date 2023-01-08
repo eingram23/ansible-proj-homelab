@@ -5,9 +5,10 @@ proj_root: "/var/tmp/terraform/projects/"
 
 # Edit this to change distro
 # vsphere_template: TMP-RHEL85_Packer
+# vsphere_template: TMP-Rocky9_Packer
 # vsphere_template: TMP-Rocky85_Packer
 # vsphere_template: TMP-CentOS_Packer
-vsphere_template: TMP-Win2022_Packer
+vsphere_template: TMP-Win2022Core_Packer
 # vsphere_template: TMP-Win2016_Packer
 # vsphere_template: TMP-Win2019_Packer
 
@@ -22,19 +23,21 @@ vm_cpu: 2
 # All lists must have same # of elements
 
 vsphere_datastore_list:
-  - XN_iSCSI_SSD2
+  - vsanDatastore
   # - XN_iSCSI_SSD2
   # - XN_iSCSI_SSD2
+vsphere_storage_policy: vSAN - No Fault Tolerance
+# vsphere_storage_policy: vSAN Default Storage Policy
 vsphere_network_list:
-  - Lab-LAN1
-  # - Lab-LAN1
-  # - Lab-LAN1
+  - DPG-Lab-LAN1
+  # - DPG-Services
+  # - DPG-Services
 vm_name_list:
-  - wintest1
+  - wintest
   # - k3s2
   # - k3s3
 ip_address_list:
-  - 10.10.0.109
+  - 10.10.0.89
   # - 10.10.0.52
   # - 10.10.0.53
 ip_gateway_list:

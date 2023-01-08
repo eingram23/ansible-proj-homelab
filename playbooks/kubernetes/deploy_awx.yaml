@@ -9,16 +9,5 @@
     - name: Deploy awx
       ansible.builtin.include_role:
         name: eingram23.kubernetes.awx
-      # tags:
-      #   - always
-
-    # - name: Post config message
-    #   ansible.builtin.debug:
-    #     msg:
-    #     - "Grafana default user/pw - admin/admin"
-    #     - "Add the following dashboards"
-    #     - "   15282 - k3s"
-    #     - "   1860 - node exporter"
-    #     - "   11243 - vmware"
-    #     - "   14694 - windows exporter"
-    #     - "   13032 - longhorn"
+      tags:
+        - always

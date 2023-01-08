@@ -11,6 +11,4 @@
     - ansible.builtin.include_role:
         name: eingram23.kubernetes.vault
       tags:
-        - unseal
-        - show_token
         - always

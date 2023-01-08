@@ -11,6 +11,5 @@
         name: eingram23.kubernetes.monitoring
       tags:
         - always
-        - update_prom
-        - update_graf
+
 

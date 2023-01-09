@@ -1,0 +1,10 @@
+---
+- name: Backup awx
+  hosts: "{{ hostvar | default([]) }}"
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: eingram23.kubernetes.awx-backup

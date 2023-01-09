@@ -21,14 +21,12 @@
 
     - ansible.builtin.include_role:
         name: eingram23.homelab.inmem_inv
-      vars:
-        inmem_user: "ansible"
+        tasks_from: WindowsWG
       when: vm_folder_name == "WindowsWG"
 
     - ansible.builtin.include_role:
         name: eingram23.homelab.inmem_inv
-      vars:
-        inmem_user: "ansible@HOMELAB.LOCAL"
+        tasks_from: WindowsHL
       when: vm_folder_name == "WindowsHL"
 
     - ansible.builtin.include_role:

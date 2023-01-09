@@ -20,6 +20,7 @@
 
     - ansible.builtin.include_role:
         name: eingram23.homelab.inmem_inv
+        tasks_from: linux
       
 - name: Run pre destroy tasks on host
   hosts: temp_group

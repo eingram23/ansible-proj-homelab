@@ -20,6 +20,7 @@
     - name: Import inmem_inv role
       ansible.builtin.include_role:
         name: eingram23.homelab.inmem_inv
+        tasks_from: linux
 
     - name: Import terraform_apply role
       ansible.builtin.include_role:

@@ -1,6 +1,6 @@
 ---
 - name: Backup awx
-  hosts: "{{ hostvar | default([]) }}"
+  hosts: localhost
   gather_facts: false
   become: false
 

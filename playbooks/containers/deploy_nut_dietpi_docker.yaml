@@ -21,13 +21,13 @@
         - openssh-client
         - git
 
-    - ansible.builtin.include_role:
+    - ansible.builtin.import_role:
         name: eingram23.containers.nut_upsd_docker
         tasks_from: build
       tags: 
         - build
         - never
 
-    - ansible.builtin.include_role:
+    - ansible.builtin.import_role:
         name: eingram23.containers.nut_upsd_docker
       tags: always

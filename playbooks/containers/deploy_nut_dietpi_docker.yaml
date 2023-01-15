@@ -13,11 +13,14 @@
         - requests
         - docker
 
-    - name: Install openssh-client for scp access
+    - name: Install prereq packages
       ansible.builtin.apt:
-        name: openssh-client
+        name: "{{ item }}"
         state: present
-
+      loop:
+        - openssh-client
+        - git
+        
     - ansible.builtin.include_role:
         name: eingram23.containers.nut_upsd_docker
         tasks_from: build

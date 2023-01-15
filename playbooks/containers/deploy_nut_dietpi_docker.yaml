@@ -20,11 +20,13 @@
       loop:
         - openssh-client
         - git
-        
+
     - ansible.builtin.include_role:
         name: eingram23.containers.nut_upsd_docker
         tasks_from: build
-      tags: build
+      tags: 
+        - build
+        - never
 
     - ansible.builtin.include_role:
         name: eingram23.containers.nut_upsd_docker

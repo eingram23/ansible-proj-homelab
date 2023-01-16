@@ -1,4 +1,9 @@
 ---
+# TAGS
+# grafana - Deploy/update grafana
+# alerts - Deploy/update alerting
+# update_promjobs - add/update scrape jobs
+# update_grafdash - add/update grafana dashboard config maps
 - name: Deploy monitoring to k3s
   hosts: "{{ hostvar }}"
   gather_facts: false

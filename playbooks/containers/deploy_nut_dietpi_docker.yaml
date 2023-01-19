@@ -12,6 +12,7 @@
       loop:
         - requests
         - docker
+      tags: always
 
     - name: Install prereq packages
       ansible.builtin.apt:
@@ -20,14 +21,29 @@
       loop:
         - openssh-client
         - git
+      tags: always
 
-    - ansible.builtin.import_role:
+    - name: Run nut_pwsh_upsd_docker role/build tasks
+      ansible.builtin.import_role:
         name: eingram23.containers.nut_pwsh_upsd_docker
         tasks_from: build
       tags: 
         - build
-        - never
 
-    - ansible.builtin.import_role:
+    - name: Run nut_pwsh_upsd_docker role
+      ansible.builtin.include_role:
         name: eingram23.containers.nut_pwsh_upsd_docker
-      tags: always
+        apply:
+          tags: 
+            - always
+            - build
+      tags:
+        - always
+        - build
+
+    - name: Update shutdown script
+      ansible.builtin.import_role:
+        name: eingram23.containers.nut_pwsh_upsd_docker
+        tasks_from: update_script
+      tags: 
+        - update_script

@@ -55,9 +55,9 @@ vm_disks_list: 'vm_disks_list = []'
 
 # Uncomment post build tasks to run
 task:
-  - none
+  # - none
   # - container_host
   # - webapps
   # - splunk_uf
   # - snmpd
-  # - node_exporter
+  - node_exporter

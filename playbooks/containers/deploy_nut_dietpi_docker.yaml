@@ -22,12 +22,12 @@
         - git
 
     - ansible.builtin.import_role:
-        name: eingram23.containers.nut_upsd_docker
+        name: eingram23.containers.nut_pwsh_upsd_docker
         tasks_from: build
       tags: 
         - build
         - never
 
     - ansible.builtin.import_role:
-        name: eingram23.containers.nut_upsd_docker
+        name: eingram23.containers.nut_pwsh_upsd_docker
       tags: always

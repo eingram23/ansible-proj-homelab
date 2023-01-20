@@ -7,25 +7,25 @@
   tasks:
 
     - name: Deploy metallb
-      ansible.builtin.include_role:
+      ansible.builtin.import_role:
         name: eingram23.kubernetes.metallb
       tags:
         - metallb
 
     - name: Deploy cert_manager
-      ansible.builtin.include_role:
+      ansible.builtin.import_role:
         name: eingram23.kubernetes.cert_manager
       tags:
         - cert-manager
 
     - name: Deploy traefik dashboard ingressroute
-      ansible.builtin.include_role:
+      ansible.builtin.import_role:
         name: eingram23.kubernetes.traefik_ingress
       tags:
         - traefik
 
     - name: Deploy kubernetes dashboard
-      ansible.builtin.include_role:
+      ansible.builtin.import_role:
         name: eingram23.kubernetes.kubernetes_dashboard
       tags:
         - dashboard
@@ -37,11 +37,13 @@
         - longhorn
 
     - name: Deploy monitoring stack
-      ansible.builtin.include_role:
+      ansible.builtin.import_role:
         name: eingram23.kubernetes.monitoring
+      tags:
+        - monitoring
         
     - name: Deploy vault
-      ansible.builtin.include_role:
+      ansible.builtin.import_role:
         name: eingram23.kubernetes.vault
       tags:
         - vault

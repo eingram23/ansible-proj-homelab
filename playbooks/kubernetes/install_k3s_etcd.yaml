@@ -11,7 +11,7 @@
     - name: Run k3s prereq role
       ansible.builtin.include_role:
         name: eingram23.kubernetes.k3s
-        tasks_from: prereqs
+        tasks_from: prereq
 
 - name: Install k3s on first node
   hosts: "{{ host_prefix }}1.local.lan"

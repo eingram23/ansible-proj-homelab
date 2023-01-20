@@ -17,6 +17,8 @@ vsphere_datastore_list:
   - XN_iSCSI_SSD1
   - XN_iSCSI_SSD2
   - XN_iSCSI_SSD2
+# vsphere_storage_policy: vSAN - No Fault Tolerance
+vsphere_storage_policy: VMFS Thin Provisioned
 vsphere_network_list:
   - Lab-LAN1
   - Lab-LAN1

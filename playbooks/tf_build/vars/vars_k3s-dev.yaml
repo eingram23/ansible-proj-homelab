@@ -14,9 +14,9 @@ vm_cpu: 2
 # All lists must have same # of elements
 
 vsphere_datastore_list:
-  - XN_iSCSI_SSD1
-  - XN_iSCSI_SSD2
-  - XN_iSCSI_SSD2
+  - esxinuc1:datastore1
+  - esxinuc2:datastore1
+  - esxinuc3:datastore1
 # vsphere_storage_policy: vSAN - No Fault Tolerance
 vsphere_storage_policy: VMFS Thin Provisioned
 vsphere_network_list:

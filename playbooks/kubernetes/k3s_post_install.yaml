@@ -16,7 +16,7 @@
       ansible.builtin.import_role:
         name: eingram23.kubernetes.cert_manager
       tags:
-        - cert-manager
+        - cert_manager
 
     - name: Deploy traefik dashboard ingressroute
       ansible.builtin.import_role:

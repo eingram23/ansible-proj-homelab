@@ -35,15 +35,3 @@
         name: eingram23.kubernetes.longhorn
       tags:
         - longhorn
-
-    - name: Deploy monitoring stack
-      ansible.builtin.import_role:
-        name: eingram23.kubernetes.monitoring
-      tags:
-        - monitoring
-        
-    - name: Deploy vault
-      ansible.builtin.import_role:
-        name: eingram23.kubernetes.vault
-      tags:
-        - vault

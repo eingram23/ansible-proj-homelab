@@ -43,6 +43,16 @@
   
   tasks:
 
+    - name: Disable swap for current session
+      ansible.builtin.command: swapoff -a
+
+    - name: Disable swap permanently, persist reboots
+      ansible.builtin.lineinfile:
+        path: /etc/fstab
+        regexp: '^(\s*)([^#\n]+\s+)(\w+\s+)swap(\s+.*)$'
+        line: '#\1\2\3swap\4'
+        backup: yes
+
     - name: Create folder for storing definition files for ansible to execute
       ansible.builtin.file:
         path: /opt/kubernetes/defs

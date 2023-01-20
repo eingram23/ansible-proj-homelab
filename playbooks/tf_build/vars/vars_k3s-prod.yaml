@@ -18,7 +18,7 @@ vm_folder_name: Linux
 # vm_folder_name: WindowsHL
 
 vm_ram: 4096
-vm_cpu: 2
+vm_cpu: 4
 
 # All lists must have same # of elements
 

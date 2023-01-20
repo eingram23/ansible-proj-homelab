@@ -20,7 +20,7 @@
 
     - name: Deploy traefik dashboard ingressroute
       ansible.builtin.include_role:
-        name: eingram23.kubernetes.traefik
+        name: eingram23.kubernetes.traefik_ingress
       tags:
         - traefik
 

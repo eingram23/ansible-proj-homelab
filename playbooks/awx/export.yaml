@@ -1,0 +1,15 @@
+---
+- name: Export config from awx
+  hosts: localhost
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - name: Run export tasks
+      awx.awx.export:
+        controller_host: https://awx.ycdisp.net
+        controller_username: eingram
+        controller_password: "{{ password }}"
+        all: true
+      register: awx_export

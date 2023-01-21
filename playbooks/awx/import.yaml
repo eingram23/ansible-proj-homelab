@@ -1,0 +1,14 @@
+---
+- name: Import config to awx
+  hosts: localhost
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - name: Run import tasks
+      awx.awx.import:
+        controller_host: https://awx.ycdisp.net
+        controller_username: eingram
+        controller_password: "{{ password }}"
+        assets: "{{ lookup('file', 'awx.json') | from_json() }}"

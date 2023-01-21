@@ -5,8 +5,8 @@ proj_root: "/var/tmp/terraform/projects/"
 
 # Edit this to change distro
 # vsphere_template: TMP-RHEL85_Packer
-vsphere_template: TMP-Rocky9_Packer
-# vsphere_template: TMP-Rocky85_Packer
+# vsphere_template: TMP-Rocky9_Packer
+vsphere_template: TMP-Rocky8_Packer
 # vsphere_template: TMP-CentOS_Packer
 # vsphere_template: TMP-Win2022Core_Packer
 # vsphere_template: TMP-Win2016_Packer
@@ -18,7 +18,7 @@ vm_folder_name: Linux
 # vm_folder_name: WindowsHL
 
 vm_ram: 4096
-vm_cpu: 4
+vm_cpu: 2
 
 # All lists must have same # of elements
 

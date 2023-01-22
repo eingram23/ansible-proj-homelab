@@ -1,0 +1,11 @@
+---
+- name: Deploy traefik ingress and cert to k3s
+  hosts: "{{ hostvar }}"
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - name: Deploy traefik ingress
+      ansible.builtin.include_role:
+        name: eingram23.kubernetes.traefik_ingress

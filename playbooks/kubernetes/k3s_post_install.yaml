@@ -18,12 +18,6 @@
       tags:
         - cert_manager
 
-    - name: Deploy traefik dashboard ingressroute
-      ansible.builtin.import_role:
-        name: eingram23.kubernetes.traefik_ingress
-      tags:
-        - traefik
-
     - name: Deploy kubernetes dashboard
       ansible.builtin.import_role:
         name: eingram23.kubernetes.kubernetes_dashboard
@@ -35,3 +29,9 @@
         name: eingram23.kubernetes.longhorn
       tags:
         - longhorn
+
+    - name: Deploy vault
+      ansible.builtin.import_role:
+        name: eingram23.kubernetes.vault
+      tags:
+        - vault

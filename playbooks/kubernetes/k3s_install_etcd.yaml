@@ -43,6 +43,3 @@
       ansible.builtin.include_role:
         name: eingram23.kubernetes.k3s
         tasks_from: remnodes
-
-
-    

@@ -5,8 +5,8 @@ proj_root: "/var/tmp/terraform/projects/"
 
 # Edit this to change distro
 # vsphere_template: TMP-RHEL85_Packer
-# vsphere_template: TMP-Rocky9_Packer
-vsphere_template: TMP-Rocky8_Packer
+vsphere_template: TMP-Rocky9_Packer
+# vsphere_template: TMP-Rocky8_Packer
 # vsphere_template: TMP-CentOS_Packer
 # vsphere_template: TMP-Win2022Core_Packer
 # vsphere_template: TMP-Win2016_Packer
@@ -23,11 +23,14 @@ vm_cpu: 2
 # All lists must have same # of elements
 
 vsphere_datastore_list:
-  - esxinuc1:datastore1
-  - esxinuc2:datastore1
-  - esxinuc3:datastore1
-# vsphere_storage_policy: vSAN - No Fault Tolerance
-vsphere_storage_policy: VMFS Thin Provisioned
+  # - esxinuc1:datastore1
+  # - esxinuc2:datastore1
+  # - esxinuc3:datastore1
+  - vsanDatastore
+  - vsanDatastore
+  - vsanDatastore
+vsphere_storage_policy: vSAN - No Fault Tolerance
+# vsphere_storage_policy: VMFS Thin Provisioned
 vsphere_network_list:
   - DPG-Services
   - DPG-Services

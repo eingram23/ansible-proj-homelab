@@ -24,14 +24,20 @@
       tags:
         - dashboard
 
-    # - name: Deploy longhorn
-    #   ansible.builtin.import_role:
-    #     name: eingram23.kubernetes.longhorn
-    #   tags:
-    #     - longhorn
+    - name: Deploy longhorn
+      ansible.builtin.import_role:
+        name: eingram23.kubernetes.longhorn
+      tags:
+        - longhorn
 
-    # - name: Deploy vault
-    #   ansible.builtin.import_role:
-    #     name: eingram23.kubernetes.vault
-    #   tags:
-    #     - vault
+    - name: Deploy vault
+      ansible.builtin.import_role:
+        name: eingram23.kubernetes.vault
+      tags:
+        - vault
+    
+    - name: Deploy traefik_ingress
+      ansible.builtin.import_role:
+        name: eingram23.kubernetes.traefik_ingress
+      tags:
+        - traefik_ingress

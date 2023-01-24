@@ -72,32 +72,3 @@
         tasks_from: samba
       when: "'samba' in task"
 
-# - name: Add target to prometheus server
-#   hosts: dbsrv1.local.lan
-#   gather_facts: false
-#   become: true
-#   become_user: poduser
-#   become_method: sudo
-
-#   tasks:
-
-#     - ansible.builtin.include_role:
-#         name: eingram23.metrics.prom_target_update
-#         tasks_from: add
-#       vars:
-#         prom_port: "9100"
-#       when: "'node_exporter' in task"
-
-# - name: Add host to LibreNMS
-#   hosts: librenms.local.lan
-#   gather_facts: false
-#   become: true
-#   become_user: librenms
-#   become_method: sudo
-
-#   tasks:
-
-#     - ansible.builtin.include_role:
-#         name: eingram23.homelab.snmpd
-#         tasks_from: add
-#       when: "'snmpd' is in task"

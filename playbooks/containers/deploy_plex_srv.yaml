@@ -27,7 +27,7 @@
         path: /mnt/pool0/PlexMedia
         state: directory
         owner: poduser
-        group: poduser
+        group: shareaccess
         mode: '0755'
 
 - name: Start plex_srv container

@@ -15,6 +15,9 @@
       ansible.builtin.include_role:
         name: eingram23.kubernetes.monitoring
       tags:
-        - always
+        - grafana
+        - update_grafdash
+        - update_promjobs
+        - alerts
 
 

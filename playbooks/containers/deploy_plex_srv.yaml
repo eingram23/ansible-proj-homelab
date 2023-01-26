@@ -29,7 +29,15 @@
         owner: poduser
         group: shareaccess
         mode: '0755'
+        recurse: true
 
+    - name: Set chmod g+s on PlexMedia folder
+      ansible.builtin.file:
+        path: /mnt/pool0/PlexMedia
+        state: directory
+        mode: 'g+s'
+        recurse: true
+        
 - name: Start plex_srv container
   hosts: "{{ hostvar | default([]) }}"
   gather_facts: false

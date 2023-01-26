@@ -1,0 +1,33 @@
+---
+- name: Deploy metrics pod and containers (prometheus, grafana, vmware_exporter)
+  hosts: "{{ hostvar | default([]) }}"
+  gather_facts: false
+  become: true
+  become_method: sudo
+  become_user: poduser
+
+  vars:
+    pod_name: "metrics"
+    publish_ports:
+      - "9091:9090"
+      - "3000:3000"
+      - "9272:9272"
+
+  tasks:
+
+    - name: Create metrics pod
+      ansible.builtin.include_role:
+        name: eingram23.containers.create_pod
+
+    - name: Create prometheus container
+      ansible.builtin.include_role:
+        name: eingram23.containers.prometheus
+      tags: update_promjob
+
+    - name: Create grafana container
+      ansible.builtin.include_role:
+        name: eingram23.containers.grafana
+
+    - name: Create vmware_exporter container
+      ansible.builtin.include_role:
+        name: eingram23.containers.vmware_exporter

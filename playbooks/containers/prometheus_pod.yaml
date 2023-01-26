@@ -5,11 +5,6 @@
   become: true
   become_method: sudo
 
-  vars:
-    pod_name: "prometheus_pod"
-    prometheus_container_ver: "v2.36.2"
-    prometheus_container_name: "prometheus"
-
   tasks:
 
     - name: Open firewall ports
@@ -32,16 +27,13 @@
           ansible.builtin.include_role:
             name: eingram23.containers.create_pod
           vars:
+            pod_name: "prometheus_pod"
             publish_ports:
               - "9091:9090"
-
+              
         - name: Create container
           ansible.builtin.include_role:
             name: eingram23.containers.prometheus
-          vars:
-            container_name: "{{ prometheus_container_name }}"
-            ver: "{{ prometheus_container_ver }}"
-
       become: true
       become_user: poduser
       become_method: sudo

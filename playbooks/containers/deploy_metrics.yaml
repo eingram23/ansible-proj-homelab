@@ -22,7 +22,7 @@
     - name: Create prometheus container
       ansible.builtin.include_role:
         name: eingram23.containers.prometheus
-      tags: update_promjob
+      tags: update_promjobs
 
     - name: Create grafana container
       ansible.builtin.include_role:

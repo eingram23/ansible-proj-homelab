@@ -18,6 +18,10 @@
 
   tasks:
 
+    - name: Disable SELinux (for allowing samba share on PlexMedia with podman)
+      ansible.posix.selinux:
+        state: disabled
+
     - name: Enable linger for shareaccess user
       ansible.builtin.command: loginctl enable-linger shareaccess
 

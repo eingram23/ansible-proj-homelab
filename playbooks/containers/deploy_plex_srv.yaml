@@ -18,32 +18,35 @@
 
   tasks:
 
+    - name: Enable linger for shareaccess user
+      ansible.builtin.command: loginctl enable-linger shareaccess
+
     - name: Open firewall port
       ansible.builtin.include_role:
         name: eingram23.homelab.firewall
     
-    - name: Change user/owner of Plex files to poduser
+    - name: Change user/owner of Plex files to shareaccess
       ansible.builtin.file:
         path: /mnt/pool0/PlexMedia
         state: directory
-        owner: poduser
+        owner: shareaccess
         group: shareaccess
         mode: '0755'
         recurse: true
 
-    - name: Set chmod g+s on PlexMedia folder
-      ansible.builtin.file:
-        path: /mnt/pool0/PlexMedia
-        state: directory
-        mode: 'g+s'
-        recurse: true
+    # - name: Set chmod g+s on PlexMedia folder
+    #   ansible.builtin.file:
+    #     path: /mnt/pool0/PlexMedia
+    #     state: directory
+    #     mode: 'g+s'
+    #     recurse: true
         
 - name: Start plex_srv container
   hosts: "{{ hostvar | default([]) }}"
   gather_facts: false
   become: true
   become_method: sudo
-  become_user: poduser
+  become_user: shareaccess
 
   tasks:
 

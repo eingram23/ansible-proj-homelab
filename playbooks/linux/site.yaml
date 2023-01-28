@@ -53,9 +53,9 @@
         tasks_from: remove
       when: "'rhel_sub_del' in task"
 
-    - ansible.builtin.include_role:
-        name: eingram23.metrics.windows_exporter
-      when: "'windows_exporter' in task"
+    # - ansible.builtin.include_role:
+    #     name: eingram23.metrics.windows_exporter
+    #   when: "'windows_exporter' in task"
 
     - ansible.builtin.include_role:
         name: eingram23.homelab.filesystem

@@ -8,8 +8,12 @@
 
     - name: Run export tasks
       awx.awx.export:
-        controller_host: https://awx.ycdisp.net
+        controller_host: "{{ awx_host }}"
         controller_username: eingram
         controller_password: "{{ password }}"
         all: true
+        validate_certs: false
       register: awx_export
+
+    - ansible.builtin.debug:
+        var: awx_export

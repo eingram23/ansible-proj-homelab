@@ -15,7 +15,7 @@ vsphere_template: TMP-Win11_Packer
 
 # vm_folder_name: Linux
 vm_folder_name: WindowsWG
-# workgroup: WORKGROUP
+workgroup: WORKGROUP
 # vm_folder_name: WindowsHL
 
 vm_ram: 4096

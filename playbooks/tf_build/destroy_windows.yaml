@@ -28,6 +28,7 @@
   gather_facts: false
   become: true
   become_method: sudo
+  serial: 1
 
   vars_files:
     - ./vars/vars_{{ proj_name }}.yaml

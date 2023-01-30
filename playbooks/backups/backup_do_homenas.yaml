@@ -2,7 +2,9 @@
 - name: Setup Digital Ocean backup (DO side)
   hosts: "yc-appsrv1"
   gather_facts: false
-  become: false
+  become: true
+  become_method: sudo
+  become_user: poduser
 
   tasks:
 
@@ -27,7 +29,7 @@
       become: true
       become_method: sudo
       become_user: root
-      
+
     - name: Check if ssh keys already exist
       ansible.builtin.stat:
         path: .ssh/id_rsa

@@ -1,5 +1,5 @@
 ---
-- name: Deploy metrics pod and containers (prometheus, grafana, vmware_exporter)
+- name: Deploy monitoring pod and containers (prometheus, grafana, vmware_exporter, alertmanager)
   hosts: "{{ hostvar | default([]) }}"
   gather_facts: false
   become: true
@@ -7,7 +7,7 @@
   become_user: poduser
 
   vars:
-    pod_name: "metrics"
+    pod_name: "monitoring"
     publish_ports:
       - "9091:9090"
       - "3000:3000"
@@ -15,14 +15,14 @@
 
   tasks:
 
-    - name: Create metrics pod
+    - name: Create monitoring pod
       ansible.builtin.include_role:
         name: eingram23.containers.create_pod
 
     - name: Create prometheus container
       ansible.builtin.include_role:
         name: eingram23.containers.prometheus
-      tags: update_promjobs
+      tags: update_prometheus
 
     - name: Create grafana container
       ansible.builtin.include_role:
@@ -31,3 +31,7 @@
     - name: Create vmware_exporter container
       ansible.builtin.include_role:
         name: eingram23.containers.vmware_exporter
+
+    - name: Create alertmanager container
+      ansible.builtin.include_role:
+        name: eingram23.containers.alertmanager

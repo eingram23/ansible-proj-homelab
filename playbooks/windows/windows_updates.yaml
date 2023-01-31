@@ -8,7 +8,7 @@
 
     - ansible.builtin.import_role:
         name: eingram23.homelab.wol
-      tags: always
+      tags: install
 
     - name: Search-only, return list of found updates (if any)
       ansible.windows.win_updates:
@@ -16,6 +16,8 @@
           - SecurityUpdates
           - CriticalUpdates
           - UpdateRollups
+          - Definition Updates
+          - Microsoft Defender Antivirus
         state: searched
       register: update_list
 
@@ -38,4 +40,4 @@
     - name: Show results
       ansible.builtin.debug:
         var: update_list
-      tags: always
+      tags: install

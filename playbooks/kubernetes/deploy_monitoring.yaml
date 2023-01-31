@@ -1,7 +1,7 @@
 ---
 # TAGS
 # grafana - Deploy/update grafana
-# alerts - Deploy/update alerting
+# alertmanager - Deploy/update alerting
 # update_promjobs - add/update scrape jobs
 # update_grafdash - add/update grafana dashboard config maps
 - name: Deploy monitoring to k3s
@@ -18,6 +18,6 @@
         - grafana
         - update_grafdash
         - update_promjobs
-        - alerts
+        - alertmanager
 
 

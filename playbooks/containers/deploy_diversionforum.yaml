@@ -37,7 +37,9 @@
       ansible.builtin.include_role:
         name: eingram23.containers.diversionforum
 
-    - name: Deploy diversionforum.net site
+    - name: Deploy diversionforum.net site (phpmyadmin update)
       ansible.builtin.include_role:
         name: eingram23.containers.diversionforum
-      tags: update_phpmyadmin
+      tags:
+        - update_phpmyadmin
+        - never

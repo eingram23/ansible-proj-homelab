@@ -38,8 +38,9 @@
     - name: Set up cronjob to copy down backups from DO
       ansible.builtin.cron:
         name: "rsync backups from DO"
+        minute: "0"
         hour: "2"
-        job: "rsync -a --delete -e 'ssh ansible@yc-appsrv1.ycdisp.net:/home/shared/app_backups/ /mnt/pool0/Shared/Backup/DigitalOcean'"
+        job: "rsync -a --delete -e 'ssh' ansible@yc-appsrv1.ycdisp.net:/home/shared/app_backups/ /mnt/pool0/Shared/Backup/DigitalOcean"
 
     - name: Add yc-appsrv1.ycdisp.net host key to known hosts
       ansible.builtin.shell: |

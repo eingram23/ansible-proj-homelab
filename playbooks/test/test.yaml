@@ -1,0 +1,11 @@
+---
+- hosts: yc-appsrv1-dev.local.lan
+  gather_facts: false
+  become: true
+
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: eingram23.containers.nginx_proxy_acme
+
+      

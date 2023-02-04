@@ -3,8 +3,8 @@
 - name: Deploy ycdisp.com
   hosts: "{{ hostvar | default([]) }}"
   become: true
-  become_method: sudo
-  become_user: poduser
+  # become_method: sudo
+  # become_user: poduser
   gather_facts: false
 
   vars:

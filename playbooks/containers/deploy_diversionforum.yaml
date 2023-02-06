@@ -1,37 +1,35 @@
 ---
-# NEEDED VARS: hostvar, env
+# NEEDED VARS: hostvar, env (test, www)
 - name: Deploy diversionforum.net
   hosts: "{{ hostvar | default([]) }}"
   become: true
-  become_method: sudo
-  become_user: poduser
   gather_facts: false
 
   tasks:
 
-    - block:
-        - name: Set facts (www)
-          when: env == "www"
-          block:
-            - name: Set nginx_port (www)
-              ansible.builtin.set_fact:
-                nginx_port: 8080
+    # - block:
+    #     - name: Set facts (www)
+    #       when: env == "www"
+    #       block:
+    #         - name: Set nginx_port (www)
+    #           ansible.builtin.set_fact:
+    #             nginx_port: 8080
 
-            - name: Set phymyadmin_port (www)
-              ansible.builtin.set_fact:
-                phpmyadmin_port: 8084
+    #         - name: Set phymyadmin_port (www)
+    #           ansible.builtin.set_fact:
+    #             phpmyadmin_port: 8084
 
-        - name: Set facts (test)
-          when: env == "test"
-          block:
-            - name: Set nginx_port (test)
-              ansible.builtin.set_fact:
-                nginx_port: 8082
+    #     - name: Set facts (test)
+    #       when: env == "test"
+    #       block:
+    #         - name: Set nginx_port (test)
+    #           ansible.builtin.set_fact:
+    #             nginx_port: 8082
 
-            - name: Set phpmyadmin_port (test)
-              ansible.builtin.set_fact:
-                phpmyadmin_port: 8085
-      tags: always
+    #         - name: Set phpmyadmin_port (test)
+    #           ansible.builtin.set_fact:
+    #             phpmyadmin_port: 8085
+    #   tags: always
 
     - name: Deploy diversionforum.net site
       ansible.builtin.include_role:

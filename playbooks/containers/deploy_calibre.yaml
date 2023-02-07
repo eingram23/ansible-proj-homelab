@@ -1,5 +1,5 @@
 ---
-# NEEDED VARS: hostvar, env (test)
+# NEEDED VARS: hostvar, env (-test)
 - name: Deploy calibre
   hosts: "{{ hostvar | default([]) }}"
   become: true

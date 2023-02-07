@@ -7,21 +7,6 @@
 
   tasks:
 
-    # - block:
-    #     - name: Set facts (www)
-    #       when: env == "www"
-    #       block:
-    #         - name: Set nginx_port (www)
-    #           ansible.builtin.set_fact:
-    #             nginx_port: 8081
-
-    #     - name: Set facts (test)
-    #       when: env == "test"
-    #       block:
-    #         - name: Set nginx_port (test)
-    #           ansible.builtin.set_fact:
-    #             nginx_port: 8083
-
     - name: Deploy ycdisp.com site
       ansible.builtin.include_role:
         name: eingram23.containers.ycdisp

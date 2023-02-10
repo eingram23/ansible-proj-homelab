@@ -19,5 +19,6 @@
         - update_grafdash
         - update_promjobs
         - alertmanager
+        - update_alerts
 
 

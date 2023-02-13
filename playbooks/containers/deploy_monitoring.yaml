@@ -21,19 +21,25 @@
         name: eingram23.containers.create_pod
 
     - name: Create prometheus container
-      ansible.builtin.include_role:
+      ansible.builtin.import_role:
         name: eingram23.containers.prometheus
-      tags: update_prometheus
+      tags:
+        - prometheus
 
     - name: Create grafana container
-      ansible.builtin.include_role:
+      ansible.builtin.import_role:
         name: eingram23.containers.grafana
+      tags:
+        - grafana
 
     - name: Create vmware_exporter container
-      ansible.builtin.include_role:
+      ansible.builtin.import_role:
         name: eingram23.containers.vmware_exporter
+      tags:
+        - vmware_exporter
 
     - name: Create alertmanager container
-      ansible.builtin.include_role:
+      ansible.builtin.import_role:
         name: eingram23.containers.alertmanager
-      tags: update_alertmanager
+      tags:
+        - alertmanager

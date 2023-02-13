@@ -42,15 +42,16 @@
         hour: "2"
         job: "rsync -a --delete -e 'ssh' ansible@yc-appsrv1.ycdisp.net:/home/shared/app_backups/ /mnt/pool0/Shared/Backup/DigitalOcean"
 
-    - name: Add yc-appsrv1.ycdisp.net host key to known hosts
-      ansible.builtin.shell: |
-        ssh-keyscan yc-appsrv1.ycdisp.net >> ~/.ssh/known_hosts
+    # - name: Add yc-appsrv1.ycdisp.net host key to known hosts
+    #   ansible.builtin.shell: |
+    #     ssh-keyscan yc-appsrv1.ycdisp.net >> ~/.ssh/known_hosts
+
 - name: Setup Digital Ocean backup (DO side)
   hosts: "yc-appsrv1.ycdisp.net"
   gather_facts: false
   become: true
   become_method: sudo
-  become_user: poduser
+  become_user: root
 
   tasks:
 
@@ -64,6 +65,3 @@
         user: ansible
         state: present
         key: "{{ hostvars['homenas.local.lan']['ssh_pub_key'] }}"
-      become: true
-      become_method: sudo
-      become_user: root

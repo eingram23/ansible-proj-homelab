@@ -14,16 +14,32 @@
         - secure
         - never
 
+- name: Deploy node-exporter (secure)
+  hosts: "{{ hostvar | default([]) }}"
+  become: true
+  become_method: sudo
+  become_user: poduser
+  gather_facts: false
+  tags: 
+    - secure
+    - never
+
+  tasks:
+
+    - name: Deploy node-exporter container
+      ansible.builtin.import_role:
+        name: eingram23.containers.node_exporter
+        tasks_from: main-secure
+
 - name: Deploy node-exporter
   hosts: "{{ hostvar | default([]) }}"
   become: true
   become_method: sudo
   become_user: poduser
   gather_facts: false
-  tags: always
 
   tasks:
 
-    - name: Deploy node-exporter
+    - name: Deploy node-exporter container
       ansible.builtin.include_role:
         name: eingram23.containers.node_exporter

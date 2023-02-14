@@ -1,35 +1,18 @@
 ---
-# NEEDED VARS: hostvar, ttl
-- name: Run vault tasks on localhost
-  hosts: localhost
-  become: false
+# NEEDED VARS: hostvar, ttl, vault_role (local-dot-lan ycdisp-dot-net)
+- name: Check cert already exists
+  hosts: "{{ hostvar | default([]) }}"
   gather_facts: false
-
-  vars:
-    ttl: "8760h"
+  become: false
 
   tasks:
 
-    - name: Login to vault and use the resulting token
-      community.hashi_vault.vault_login:
-        url: https://vault.local.lan
-        auth_method: userpass
-        username: "eingram"
-        password: "{{ lookup('hashi_vault', 'secret=secret/ssh/eingram:ssh_password') }}"
-        validate_certs: false
-      register: login_data
-
-    - name: Generate a certificate with an existing token
-      community.hashi_vault.vault_pki_generate_certificate:
-        role_name: ycdisp-dot-net
-        common_name: "{{ hostvar }}"
-        ttl: "{{ ttl }}"
-        url: https://vault.local.lan/
-        engine_mount_point: pki_int
-        auth_method: token
-        token: "{{ login_data.login.auth.client_token }}"
-        validate_certs: false
-      register: cert_data
+    - ansible.builtin.import_role:
+        name: eingram23.containers.node_exporter
+        tasks_from: check_cert
+      tags:
+        - secure
+        - never
 
 - name: Deploy node-exporter
   hosts: "{{ hostvar | default([]) }}"
@@ -37,6 +20,7 @@
   become_method: sudo
   become_user: poduser
   gather_facts: false
+  tags: always
 
   tasks:
 

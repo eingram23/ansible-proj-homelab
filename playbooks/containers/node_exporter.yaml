@@ -10,9 +10,6 @@
     - ansible.builtin.import_role:
         name: eingram23.containers.node_exporter
         tasks_from: check_cert
-      tags:
-        - secure
-        - never
 
 - name: Deploy node-exporter (secure)
   hosts: "{{ hostvar | default([]) }}"
@@ -20,16 +17,12 @@
   become_method: sudo
   become_user: poduser
   gather_facts: false
-  tags: 
-    - secure
-    - never
 
   tasks:
 
     - name: Deploy node-exporter container
       ansible.builtin.import_role:
         name: eingram23.containers.node_exporter
-        tasks_from: main-secure
 
 - name: Deploy node-exporter
   hosts: "{{ hostvar | default([]) }}"
@@ -43,3 +36,7 @@
     - name: Deploy node-exporter container
       ansible.builtin.include_role:
         name: eingram23.containers.node_exporter
+        tasks_from: main-insecure
+      tags:
+        - never
+        - insecure

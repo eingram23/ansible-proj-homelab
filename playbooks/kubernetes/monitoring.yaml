@@ -12,6 +12,8 @@
         api_version: v1
         kind: Namespace
         state: present
+        kubeconfig: /etc/rancher/k3s/k3s.yaml
+      tags: always
 
     - name: Deploy prometheus
       ansible.builtin.import_role:

@@ -1,17 +1,6 @@
 ---
-# NEEDED VARS: hostvar, ttl, vault_role (local-dot-lan ycdisp-dot-net)
-- name: Check cert already exists
-  hosts: "{{ hostvar | default([]) }}"
-  gather_facts: false
-  become: false
-
-  tasks:
-
-    - ansible.builtin.import_role:
-        name: eingram23.containers.node_exporter
-        tasks_from: check_cert
-
-- name: Deploy node-exporter (secure)
+# NEEDED VARS: hostvar, [ttl, vault_role (local-dot-lan ycdisp-dot-net)] # if using tls
+- name: Deploy node-exporter
   hosts: "{{ hostvar | default([]) }}"
   become: true
   become_method: sudo
@@ -24,7 +13,7 @@
       ansible.builtin.import_role:
         name: eingram23.containers.node_exporter
 
-- name: Deploy node-exporter
+- name: Deploy node-exporter (tls)
   hosts: "{{ hostvar | default([]) }}"
   become: true
   become_method: sudo
@@ -36,7 +25,7 @@
     - name: Deploy node-exporter container
       ansible.builtin.include_role:
         name: eingram23.containers.node_exporter
-        tasks_from: main-insecure
+        tasks_from: main-tls
       tags:
         - never
-        - insecure
+        - tls

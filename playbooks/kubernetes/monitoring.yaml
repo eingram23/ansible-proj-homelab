@@ -1,9 +1,4 @@
 ---
-# TAGS
-# grafana - Deploy/update grafana
-# alertmanager - Deploy/update alerting
-# update_promjobs - add/update scrape jobs
-# update_grafdash - add/update grafana dashboard config maps
 - name: Deploy monitoring to k3s
   hosts: "{{ hostvar }}"
   gather_facts: false
@@ -11,14 +6,76 @@
 
   tasks:
 
-    - name: Deploy monitoring stack
-      ansible.builtin.include_role:
+    - name: Create monitoring namespace
+      kubernetes.core.k8s:
+        name: monitoring
+        api_version: v1
+        kind: Namespace
+        state: present
+
+    - name: Deploy prometheus
+      ansible.builtin.import_role:
         name: eingram23.kubernetes.monitoring
+        tasks_from: prometheus
+      tags:
+        - prometheus
+    
+    - name: Deploy alertmanager
+      ansible.builtin.import_role:
+        name: eingram23.kubernetes.monitoring
+        tasks_from: alertmanager
+      tags:
+        - alertmanager
+    
+    - name: Deploy grafana
+      ansible.builtin.import_role:
+        name: eingram23.kubernetes.monitoring
+        tasks_from: grafana
       tags:
         - grafana
-        - update_grafdash
-        - update_promjobs
-        - alertmanager
-        - update_alerts
+
+    - name: Deploy node_exporter
+      ansible.builtin.import_role:
+        name: eingram23.kubernetes.monitoring
+        tasks_from: node_exporter
+      tags:
+        - node_exporter
+    
+    - name: Deploy vmware_exporter
+      ansible.builtin.import_role:
+        name: eingram23.kubernetes.monitoring
+        tasks_from: vmware_exporter
+      tags:
+        - vmware_exporter
+
+    - name: Deploy k3s monitoring
+      ansible.builtin.import_role:
+        name: eingram23.kubernetes.monitoring
+        tasks_from: k3s
+      tags:
+        - k3s
+
+    - name: Deploy alertrules
+      ansible.builtin.import_role:
+        name: eingram23.kubernetes.monitoring
+        tasks_from: alertrules
+      tags:
+        - alertrules
+
+    - name: Update grafana configs
+      ansible.builtin.include_role:
+        name: eingram23.kubernetes.grafana
+        tasks_from: grafana
+      tags:
+        - never
+        - update_grafconf
+
+    - name: Update prometheus configs
+      ansible.builtin.include_role:
+        name: eingram23.kubernetes.grafana
+        tasks_from: prometheus
+      tags:
+        - never
+        - update_promconf
 
 

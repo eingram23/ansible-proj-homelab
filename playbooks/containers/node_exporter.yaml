@@ -23,7 +23,7 @@
   tasks:
 
     - name: Deploy node-exporter container
-      ansible.builtin.include_role:
+      ansible.builtin.import_role:
         name: eingram23.containers.node_exporter
         tasks_from: main-tls
       tags:

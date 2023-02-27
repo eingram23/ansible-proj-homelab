@@ -19,7 +19,7 @@ vm_folder_name: Linux
 
 vm_ram: 4096
 vm_cpu: 2
-vm_efi_secure: "false"
+vm_efi_secure: false
 
 # All lists must have same # of elements
 

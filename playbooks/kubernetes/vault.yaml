@@ -13,3 +13,4 @@
       tags:
         - show_token
         - unseal
+        - update_vaultconf

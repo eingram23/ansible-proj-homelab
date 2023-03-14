@@ -13,6 +13,6 @@
       when: "'snmp' in task"
 
     - ansible.builtin.include_role:
-        name: eingram23.metrics.windows_exporter
+        name: eingram23.homelab.windows_exporter
       when: "'windows_exporter' in task"
 

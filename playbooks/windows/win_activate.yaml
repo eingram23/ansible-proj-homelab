@@ -19,13 +19,6 @@
       ansible.builtin.set_fact:
         lic: "{{ lookup('hashi_vault', 'secret=secret/microsoft/license:win2016dc') }}"
       when: ansible_distribution | regex_search("Microsoft Windows Server 2016")
-
-    - name: Display lic key
-      ansible.builtin.debug:
-        var: lic
-    
-    - name: Pause
-      ansible.builtin.pause:
         
     - name: Activate Windows
       ansible.windows.win_shell: |
@@ -34,7 +27,7 @@
       notify: Reboot after activation
 
   handlers:
-  
+
     - name: Reboot after activation
       ansible.windows.win_reboot:
         reboot_timeout: 60

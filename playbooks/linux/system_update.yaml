@@ -20,7 +20,7 @@
         name: eingram23.homelab.linux_update
         tasks_from: check_redhat
       when: (ansible_distribution == 'RedHat' or
-            ansible_distribution == 'CentOS' and
+            ansible_distribution == 'CentOS' or
             ansible_distribution == 'Rocky') and
             check == "y"
 

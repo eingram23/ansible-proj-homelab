@@ -13,7 +13,7 @@
       when: ansible_distribution != 'CentOS' and
             ansible_distribution != 'RedHat' and
             ansible_distribution != 'Rocky' and
-            check == "y"
+            check == "yes"
 
     - name: Check CentOS/Rocky/RHEL hosts
       ansible.builtin.include_role:
@@ -22,7 +22,7 @@
       when: (ansible_distribution == 'RedHat' or
             ansible_distribution == 'CentOS' or
             ansible_distribution == 'Rocky') and
-            check == "y"
+            check == "yes"
 
     - name: Update Ubuntu/Debian hosts
       ansible.builtin.include_role:
@@ -31,16 +31,16 @@
       when: ansible_distribution != 'CentOS' and
             ansible_distribution != 'RedHat' and
             ansible_distribution != 'Rocky' and
-            check_reboot == "n" and
-            install == "y"
+            check_reboot == "no" and
+            install == "yes"
 
     - name: Update CentOS hosts
       ansible.builtin.include_role:
         name: eingram23.homelab.linux_update
         tasks_from: update_centos
       when: ansible_distribution == 'CentOS' and
-            check_reboot == "n" and
-            install == "y"
+            check_reboot == "no" and
+            install == "yes"
 
     - name: Update Rocky/RHEL hosts
       ansible.builtin.include_role:
@@ -48,11 +48,11 @@
         tasks_from: update_redhat
       when: (ansible_distribution == 'RedHat' or
             ansible_distribution == 'Rocky') and
-            check_reboot == "n" and
-            install == "y"
+            check_reboot == "no" and
+            install == "yes"
 
     - name: Check if reboot required
       ansible.builtin.include_role:
         name: eingram23.homelab.linux_update
         tasks_from: checkreboot
-      when: check_reboot == "y"
+      when: check_reboot == "yes"

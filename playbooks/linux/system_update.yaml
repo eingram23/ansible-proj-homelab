@@ -6,33 +6,53 @@
 
   tasks:
 
+    - name: Check Ubuntu/Debian hosts
+      ansible.builtin.include_role:
+        name: eingram23.homelab.linux_update
+        tasks_from: update_deb_ub
+      when: ansible_distribution != 'CentOS' and
+            ansible_distribution != 'RedHat' and
+            ansible_distribution != 'Rocky' and
+            check == "y"
+
+    - name: Check CentOS/Rocky/RHEL hosts
+      ansible.builtin.include_role:
+        name: eingram23.homelab.linux_update
+        tasks_from: update_redhat
+      when: (ansible_distribution == 'RedHat' or
+            ansible_distribution == 'CentOS' and
+            ansible_distribution == 'Rocky') and
+            check == "y"
+
     - name: Update Ubuntu/Debian hosts
       ansible.builtin.include_role:
         name: eingram23.homelab.linux_update
         tasks_from: update_deb_ub
-      when: ansible_facts['distribution'] != 'CentOS' and
-            ansible_facts['distribution'] != 'RedHat' and
-            ansible_facts['distribution'] != 'Rocky' and
-            check_reboot == "n"
+      when: ansible_distribution != 'CentOS' and
+            ansible_distribution != 'RedHat' and
+            ansible_distribution != 'Rocky' and
+            check_reboot == "n" and
+            install == "y"
 
     - name: Update CentOS hosts
       ansible.builtin.include_role:
         name: eingram23.homelab.linux_update
         tasks_from: update_centos
-      when: ansible_facts['distribution'] == 'CentOS' and
-            check_reboot == "n"
+      when: ansible_distribution == 'CentOS' and
+            check_reboot == "n" and
+            install == "y"
 
     - name: Update Rocky/RHEL hosts
       ansible.builtin.include_role:
         name: eingram23.homelab.linux_update
         tasks_from: update_redhat
-      when: (ansible_facts['distribution'] == 'RedHat' or
-            ansible_facts['distribution'] == 'Rocky') and
-            check_reboot == "n"
+      when: (ansible_distribution == 'RedHat' or
+            ansible_distribution == 'Rocky') and
+            check_reboot == "n" and
+            install == "y"
 
     - name: Check if reboot required
       ansible.builtin.include_role:
         name: eingram23.homelab.linux_update
         tasks_from: checkreboot
       when: check_reboot == "y"
-

@@ -19,8 +19,10 @@
   tasks:
 
     - name: Create monitoring pod
-      ansible.builtin.include_role:
+      ansible.builtin.import_role:
         name: eingram23.containers.create_pod
+      tags:
+        - always
 
     - name: Create prometheus container
       ansible.builtin.import_role:

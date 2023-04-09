@@ -1,6 +1,6 @@
 ---
 # NEEDED VARS: hostvar, ttl, vault_role (local-dot-lan ycdisp-dot-net)
-- name: Deploy monitoring pod and containers (prometheus, grafana, vmware_exporter, alertmanager)
+- name: Deploy monitoring pod and containers (prometheus, grafana, vmware_exporter, alertmanager, loki)
   hosts: "{{ hostvar | default([]) }}"
   gather_facts: false
   become: true
@@ -14,6 +14,7 @@
       - "9093:9093"
       - "3000:3000"
       - "9272:9272"
+      - "3100:3100"
 
   tasks:
 
@@ -44,3 +45,9 @@
         name: eingram23.containers.alertmanager
       tags:
         - alertmanager
+
+    - name: Create loki container
+      ansible.builtin.import_role:
+        name: eingram23.containers.loki
+      tags:
+        - loki

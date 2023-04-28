@@ -1,0 +1,38 @@
+---
+### VARS NEEDED: hostprefix, hostvar
+- name: Install prereqs
+  hosts: "{{ hostvar }}"
+  gather_facts: false
+  become: true
+  become_method: sudo
+
+  tasks:
+
+    - name: Run k3s prereq role
+      ansible.builtin.include_role:
+        name: eingram23.kubernetes.k3s
+        tasks_from: prereq
+        
+- name: Finish setup
+  hosts: "{{ hostvar }}"
+  gather_facts: false
+  become: true
+  become_method: sudo
+
+  tasks:
+
+    - name: Run remnodes role
+      ansible.builtin.include_role:
+        name: eingram23.kubernetes.k3s
+        tasks_from: remnodes
+
+- name: Re-deploy longhorn
+  hosts: "{{ host_prefix }}1.local.lan"
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - name: Deploy longhorn
+      ansible.builtin.include_role:
+        name: eingram23.kubernetes.longhorn

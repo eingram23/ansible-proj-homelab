@@ -1,0 +1,4 @@
+- name: Run PowerShell script that modifies the module changed result
+  ansible.windows.win_powershell:
+    script: |
+      get-service spooler

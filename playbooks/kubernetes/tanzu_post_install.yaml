@@ -11,11 +11,11 @@
         name: eingram23.kubernetes.tanzu
         tasks_from: post_setup.yaml
 
-    - name: Deploy cert_manager
-      ansible.builtin.import_role:
-        name: eingram23.kubernetes.cert_manager_tanzu
-      tags:
-        - cert_manager
+    # - name: Deploy cert_manager
+    #   ansible.builtin.import_role:
+    #     name: eingram23.kubernetes.cert_manager_tanzu
+    #   tags:
+    #     - cert_manager
 
     - name: Deploy kubernetes dashboard
       ansible.builtin.import_role:

@@ -8,9 +8,9 @@
 
     - name: Tanzu post-install tasks
       ansible.builtin.include_role:
-        name: eingram23.kuberentes.tanzu
+        name: eingram23.kubernetes.tanzu
         tasks_from: post_setup.yaml
-        
+
     - name: Deploy cert_manager
       ansible.builtin.import_role:
         name: eingram23.kubernetes.cert_manager_tanzu

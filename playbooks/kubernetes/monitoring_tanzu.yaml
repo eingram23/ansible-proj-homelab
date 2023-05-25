@@ -4,12 +4,20 @@
   gather_facts: false
   become: false
 
+  vars:
+    clustername: "tkgs-cluster1"
+    
   tasks:
 
     - name: Create kubeconfig file
       ansible.builtin.copy:
         content: "{{ lookup('hashi_vault', 'secret=secret/kubernetes/kubeconfig:tanzu') }}"
         dest: "/var/tmp/tanzu.yaml"
+
+    - name: Switch context to cluster namespace
+      ansible.builtin.shell:
+        cmd: |
+          kubectl config use-context {{ clustername }}
 
     - name: Create monitoring namespace
       kubernetes.core.k8s:

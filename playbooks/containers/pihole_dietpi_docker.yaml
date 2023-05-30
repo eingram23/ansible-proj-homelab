@@ -31,8 +31,10 @@
         name: openssh-client
         state: present
 
-    - ansible.builtin.include_role:
+    - ansible.builtin.import_role:
         name: eingram23.containers.pihole_docker
+      tags:
+        update
 
     - ansible.builtin.include_role:
         name: eingram23.pihole.localdns

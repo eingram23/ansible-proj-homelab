@@ -6,23 +6,24 @@
 
   tasks:
 
-    - name: Create kubeconfig file
-      ansible.builtin.copy:
-        content: "{{ lookup('hashi_vault', 'secret=secret/kubernetes/kubeconfig:tanzu') }}"
-        dest: "/var/tmp/tanzu.yaml"
+    - block:
+        - name: Create kubeconfig file
+          ansible.builtin.copy:
+            content: "{{ lookup('hashi_vault', 'secret=secret/kubernetes/kubeconfig:tanzu') }}"
+            dest: "/var/tmp/tanzu.yaml"
 
-    - name: Login to Tanzu cluster
-      ansible.builtin.include_role:
-        name: eingram23.kubernetes.tanzu
-        tasks_from: login.yaml
+        - name: Login to Tanzu cluster
+          ansible.builtin.include_role:
+            name: eingram23.kubernetes.tanzu
+            tasks_from: login.yaml
 
-    - name: Create monitoring namespace
-      kubernetes.core.k8s:
-        name: monitoring
-        api_version: v1
-        kind: Namespace
-        state: present
-        kubeconfig: "/var/tmp/tanzu.yaml"
+        - name: Create monitoring namespace
+          kubernetes.core.k8s:
+            name: monitoring
+            api_version: v1
+            kind: Namespace
+            state: present
+            kubeconfig: "/var/tmp/tanzu.yaml"
       tags: always
 
     - name: Deploy prometheus
@@ -74,13 +75,14 @@
       tags:
         - alertrules
 
-    - name: Update grafana configs
+    - name: Update grafana
       ansible.builtin.include_role:
         name: eingram23.kubernetes.monitoring_tanzu
         tasks_from: grafana
       tags:
         - never
         - update_grafconf
+        - update_graf_chart
 
     - name: Update prometheus configs
       ansible.builtin.include_role:

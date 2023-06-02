@@ -1,0 +1,12 @@
+---
+- name: Run script on host
+  hosts: "{{ hostvar }}"
+  gather_facts: false
+  become: true
+  become_method: runas
+
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: eingram23.homelab.scripts
+        tasks_from: powershell.yaml

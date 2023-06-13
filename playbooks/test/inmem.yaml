@@ -9,13 +9,16 @@
       ansible.builtin.add_host:
         host: "{{ item }}"
         test: "test"
+        groups: "windows_servers"
       with_items: "{{ ansible_play_hosts_all }}"
       delegate_to: localhost
       run_once: true
 
-    - name: Display host var
-      ansible.builtin.debug:
-        var: "{{ hostvars[item]['test'] }}"
-      with_items: "{{ ansible_play_hosts_all }}"
-      delegate_to: localhost
-      run_once: true
+- name: Run tasks
+  hosts: windows_servers
+  gather_facts: false
+
+  tasks:
+
+    - ansible.builtin.setup:
+        

@@ -1,7 +1,8 @@
 - name: Test
   hosts: "{{ hostvar }}"
   gather_facts: true
-
+  become_user: SYSTEM
+  
   tasks:
 
     - name: Run PowerShell script that modifies the module changed result

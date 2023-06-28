@@ -9,4 +9,4 @@
 
     - ansible.builtin.include_role:
         name: eingram23.homelab.scripts
-        tasks_from: win_shell.yaml
+        tasks_from: win_script.yaml

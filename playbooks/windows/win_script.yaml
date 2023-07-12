@@ -14,5 +14,3 @@
     - ansible.builtin.include_role:
         name: eingram23.homelab.win_scripts
 
-    - ansible.builtin.fail:
-      when: output is defined and output.stderr != ""

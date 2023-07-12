@@ -2,9 +2,9 @@
 - name: Run script on host
   hosts: "{{ hostvar }}"
   gather_facts: false
-  become: true
-  become_user: SYSTEM
-  become_method: runas
+  # become: true
+  # become_user: SYSTEM
+  # become_method: runas
 
   vars:
     category: common

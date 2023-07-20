@@ -7,7 +7,7 @@
 
   tasks:
 
-    - name: Create script to host
+    - name: Create script on host
       ansible.windows.win_copy:
         content: "{{ script }}"
         dest: c:\temp\script.ps1

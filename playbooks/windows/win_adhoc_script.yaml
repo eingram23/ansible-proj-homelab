@@ -2,6 +2,7 @@
   hosts: "{{ hostvar }}"
   gather_facts: false
   become: true
+  become_user: SYSTEM
   become_method: runas
 
   tasks:

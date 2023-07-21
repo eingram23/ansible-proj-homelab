@@ -12,7 +12,8 @@
 
   tasks:
 
-    - ansible.builtin.include_role:
+    - name: Run win_scripts role
+      ansible.builtin.include_role:
         name: eingram23.homelab.win_scripts
 
     - ansible.builtin.fail:

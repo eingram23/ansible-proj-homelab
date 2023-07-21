@@ -5,32 +5,23 @@
   become_user: SYSTEM
   become_method: runas
 
+  vars:
+    schtask: disabled
+
   tasks:
 
     - name: Create script on host
       ansible.windows.win_copy:
         content: "{{ script }}"
-        dest: c:\temp\script.ps1
+        dest: c:\temp\tempscript.{{ extension }}
 
-    - name: Run script on host
-      ansible.windows.win_shell: c:\temp\script.ps1 {{ param }}
-      register: output
-      ignore_errors: true
+    - name: Run win_scripts role
+      ansible.builtin.include_role:
+        name: eingram23.homelab.win_scripts
+      vars:
+        script: tempscript.{{ extension }}
 
-    - name: Script output 
-      ansible.builtin.debug:
-        var: output.stdout_lines
-      when: output is defined
-        
-    - name: Script error
-      ansible.builtin.debug:
-        var: output.stderr
-      when: output is defined and output.stderr != ""
-
-    - name: Clean up script
-      ansible.windows.win_file:
-        path: c:\temp\script.ps1
-        state: absent
-    
     - ansible.builtin.fail:
-      when: output is defined and output.stderr != ""
+      when: schtask == "disabled" and ((ps1_output.stderr is defined and ps1_output.stderr != "") or
+            (vbs_output.stderr is defined and vbs_output.stderr != "") or
+            (bat_output.stderr is defined and bat_output.stderr != ""))

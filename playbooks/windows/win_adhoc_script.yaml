@@ -12,7 +12,7 @@
 
     - name: Create script on host
       ansible.windows.win_copy:
-        content: "{{ script }}"
+        content: "{{ script_content }}"
         dest: c:\temp\ans_ah_script.{{ extension }}
 
     - name: Run script via win_shell

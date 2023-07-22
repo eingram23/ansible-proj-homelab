@@ -10,6 +10,14 @@
 
   tasks:
 
+    - name: End play if trying to run non ps1 file with scheduled task
+      when: schtask == "enabled" and extension != "ps1"
+      block:
+        - ansible.builtin.debug:
+            msg: "*** Scheduled Task only allowed with powershell scripts ***"
+        
+        - meta: end_play      
+
     - name: Create script on host
       ansible.windows.win_copy:
         content: "{{ script_content }}"
@@ -27,7 +35,7 @@
         name: eingram23.homelab.win_schtasks
       vars:
         script: ans_ah_script.{{ extension }}
-      when: schtask == "enabled"
+      when: schtask == "enabled" and extension == "ps1"
 
     - name: Clean up script
       ansible.windows.win_file:

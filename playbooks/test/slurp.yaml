@@ -7,7 +7,7 @@
 
     - name: Read std error output
       ansible.builtin.slurp:
-        src: c:\temp\backup-path.txt
+        src: "{{ filename }}"
       register: output_encoded
 
     - name: Set fact with err output

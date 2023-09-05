@@ -10,6 +10,11 @@
         name: eingram23.homelab.wol
       tags: install
 
+    - name: "[{{ inventory_hostname }}] Run Update Session Orchestrator check to clear GUI cached results"
+      win_shell: |
+        UsoClient RefreshSettings
+        UsoClient ScanInstallWait
+
     - name: Search-only, return list of found updates (if any)
       ansible.windows.win_updates:
         category_names:

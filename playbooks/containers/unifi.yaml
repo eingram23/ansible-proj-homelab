@@ -1,6 +1,6 @@
 ---
 - name: Deploy unifi-controller container - Pre tasks
-  hosts: "{{ hostvar | default([]) }}"
+  hosts: "{{ hostvar | default('homenas.local.lan') }}"
   gather_facts: false
   become: true
   become_method: sudo

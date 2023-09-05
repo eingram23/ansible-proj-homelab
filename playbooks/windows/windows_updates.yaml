@@ -10,7 +10,7 @@
         name: eingram23.homelab.wol
       tags: install
 
-    - name: "[{{ inventory_hostname }}] Run Update Session Orchestrator check to clear GUI cached results"
+    - name: "Run Update Session Orchestrator check to clear GUI cached results"
       win_shell: |
         UsoClient RefreshSettings
         UsoClient ScanInstallWait

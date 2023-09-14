@@ -8,4 +8,4 @@
 
     - name: Run win_grafana_agent role
       ansible.builtin.import_role:
-        name: collections.eingram23.homelab.win_grafana_agent
+        name: eingram23.homelab.win_grafana_agent

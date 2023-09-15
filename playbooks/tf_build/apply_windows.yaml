@@ -5,7 +5,7 @@
   gather_facts: false
   become: false
   vars_files:
-    - ./vars/vars_{{ proj_name }}.yaml
+    - "{{ playbook_dir }}/vars/vars_{{ proj_name }}.yaml"
 
   tasks:
 
@@ -41,7 +41,7 @@
   serial: 1
   
   vars_files:
-    - ./vars/vars_{{ proj_name }}.yaml
+    - "{{ playbook_dir }}/vars/vars_{{ proj_name }}.yaml"
 
   tasks:
 
@@ -57,7 +57,7 @@
   become: false
 
   vars_files:
-    - ./vars/vars_{{ proj_name }}.yaml
+    - "{{ playbook_dir }}/vars/vars_{{ proj_name }}.yaml"
 
   tasks:
 
@@ -78,7 +78,7 @@
   become_method: runas
 
   vars_files:
-    - ./vars/vars_{{ proj_name }}.yaml
+    - "{{ playbook_dir }}/vars/vars_{{ proj_name }}.yaml"
 
   tasks:
 

@@ -35,6 +35,7 @@
         name: eingram23.kubernetes.vault
       tags:
         - vault
+        - never
     
     - name: Deploy traefik_ingress
       ansible.builtin.import_role:

@@ -24,8 +24,8 @@ vm_cpu: 2
 
 vsphere_datastore_list:
   - esxinuc1:datastore1
-  - esxinuc2:datastore1
-  - esxinuc3:datastore1
+  # - esxinuc2:datastore1
+  # - esxinuc3:datastore1
   # - vsanDatastore
   # - vsanDatastore
   # - vsanDatastore
@@ -33,24 +33,24 @@ vsphere_datastore_list:
 vsphere_storage_policy: VMFS Thin Provisioned
 vsphere_network_list:
   - DPG-Services
-  - DPG-Services
-  - DPG-Services
+  # - DPG-Services
+  # - DPG-Services
 vm_name_list:
-  - k3s-prod1
-  - k3s-prod2
-  - k3s-prod3
+  - k3s1
+  # - k3s-prod2
+  # - k3s-prod3
 ip_address_list:
   - 192.168.1.221
-  - 192.168.1.222
-  - 192.168.1.223
+  # - 192.168.1.222
+  # - 192.168.1.223
 ip_gateway_list:
   - 192.168.1.1
-  - 192.168.1.1
-  - 192.168.1.1
+  # - 192.168.1.1
+  # - 192.168.1.1
 dns_suffix_list:
   - local.lan
-  - local.lan
-  - local.lan
+  # - local.lan
+  # - local.lan
 
 # For any extra vmdks (For Windows, start with ID 2)
 # vm_disks_list: 'vm_disks_list = []'

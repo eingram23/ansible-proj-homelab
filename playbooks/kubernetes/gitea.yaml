@@ -1,5 +1,5 @@
 ---
-# TAGS: hostvar, cert, domain, env
+# TAGS: hostvar, cert, env
 - name: Deploy gitea to k3s
   hosts: "{{ hostvar }}"
   gather_facts: false

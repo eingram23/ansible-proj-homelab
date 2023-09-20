@@ -1,0 +1,14 @@
+---
+- name: Deploy grafana agent to k3s
+  hosts: "{{ hostvar }}"
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - name: Run grafana_agent role
+      ansible.builtin.import_role:
+        name: eingram23.kubernetes.grafana_agent
+
+
+

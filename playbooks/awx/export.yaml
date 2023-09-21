@@ -7,7 +7,7 @@
   tasks:
 
     - name: Run export tasks
-      export:
+      awx.awx.export:
         controller_host: "{{ awx_host }}"
         controller_username: eingram
         controller_password: "{{ lookup('hashi_vault', 'secret=secret/ssh/eingram:ssh_password') }}"

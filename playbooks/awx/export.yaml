@@ -10,8 +10,8 @@
       awx.awx.export:
         controller_host: "{{ awx_host }}"
         controller_username: eingram
-        controller_password: "{{ password }}"
-        all: true
+        controller_password: "{{ lookup('hashi_vault', 'secret=secret/ssh/eingram:ssh_password') }}"
+        job_templates: "Linux Updates"
         validate_certs: false
       register: awx_export
 

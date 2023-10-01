@@ -8,6 +8,12 @@
 
   tasks:
 
+    - name: Migrate from node-exporter/promtail
+      ansible.builtin.import_role:
+        name: eingram23.containers.grafana_agent
+        tasks_from: migrate
+      when: migrate == "yes"
+
     - name: Deploy grafana_agent container
       ansible.builtin.import_role:
         name: eingram23.containers.grafana_agent

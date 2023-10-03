@@ -6,7 +6,7 @@
 
   tasks:
 
-    - name: Run import tasks
+    - name: Run import template
       awx.awx.import:
         controller_host: "{{ awx_host }}"
         controller_username: admin

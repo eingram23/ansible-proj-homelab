@@ -11,7 +11,7 @@
         controller_host: awx.local.lan
         controller_username: eingram
         controller_password: "{{ lookup('hashi_vault', 'secret=secret/ssh/eingram:ssh_password') }}"
-        job_templates: 'TF - Destroy Windows Project'
+        job_templates: 'TEST - Inmem'
         validate_certs: false
       register: awx_export
 

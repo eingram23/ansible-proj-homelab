@@ -11,7 +11,7 @@
         test: "test"
         groups: "windows_servers"
       with_items: "{{ ansible_play_hosts_all }}"
-      delegate_to: localhost
+      # delegate_to: localhost
       run_once: true
 
 - name: Run tasks
@@ -20,5 +20,7 @@
 
   tasks:
 
-    - ansible.builtin.setup:
+    - name: winping
+      ansible.windows.win_ping:
+        
         

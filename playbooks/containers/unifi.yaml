@@ -1,45 +1,4 @@
 ---
-- name: Deploy unifi-controller container - Pre tasks
-  hosts: "{{ hostvar | default('homenas.local.lan') }}"
-  gather_facts: false
-  become: true
-  become_method: sudo
-
-  # vars_prompt:
-  #   - name: setup_backup
-  #     prompt: "Also setup backups? (y/n)"
-  #     default: "n"
-  #     private: false
-  #   - name: restore
-  #     prompt: "Restore backup? (y/n)"
-  #     default: "n"
-  #     private: false
-  #   - name: backup_filename
-  #     prompt: "Enter name of backup file to restore (unifi_backup_mo-dd.tar.gz) (Enter to skip)"
-  #     private: false
-  #     default: ""
-
-  tasks:
-
-    - name: Open firewall ports
-      ansible.builtin.include_role:
-        name: eingram23.homelab.firewall
-      vars:
-        fw_port:
-          - "3478/udp"
-          - "10001/udp"
-          - "8080/tcp"
-          - "8443/tcp"
-          - "1900/udp"
-          - "8843/tcp"
-          - "8880/tcp"
-          - "6789/tcp"
-          - "5514/tcp"
-
-    - name: Setup poduser environment
-      ansible.builtin.include_role:
-        name: eingram23.homelab.container_host
-
 - name: Deploy unifi-controller
   hosts: "{{ hostvar | default('homenas.local.lan') }}"
   gather_facts: false
@@ -49,5 +8,6 @@
 
   tasks:
 
-    - ansible.builtin.include_role:
+    - name: Run unifi controller role
+      ansible.builtin.import_role:
         name: eingram23.containers.unifi

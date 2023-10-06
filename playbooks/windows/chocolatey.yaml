@@ -1,0 +1,27 @@
+- name: Chocolatey Tasks
+  hosts: "{{ hostvar | default([]) }}"
+  become: false
+  gather_facts: false
+
+  tasks:
+
+    - name: Wake PC if in sleep mode
+      ansible.builtin.include_role:
+        name: eingram23.homelab.wol
+
+    - name: Install/Upgrade Choco Package
+      chocolatey.chocolatey.win_chocolatey:
+        name: "{{ package }}"
+        state: latest
+      when: install == "yes"
+
+    - name: Gather facts from chocolatey
+      chocolatey.chocolatey.win_chocolatey_facts:
+
+    - name: Displays the Packages
+      debug:
+        var: ansible_chocolatey.packages
+
+    - name: Displays the Outdated packages
+      debug:
+        var: ansible_chocolatey.outdated

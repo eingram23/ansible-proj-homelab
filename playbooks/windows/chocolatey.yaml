@@ -3,13 +3,21 @@
   become: false
   gather_facts: false
 
+  vars:
+    install: no
+    upgrade_all: no
+
   tasks:
 
     - name: Wake PC if in sleep mode
       ansible.builtin.include_role:
         name: eingram23.homelab.wol
 
-    - name: Install/Upgrade Choco Package
+    - name: Ensure Chocolatey itself is installed, using community repo for the bootstrap
+      chocolatey.chocolatey.win_chocolatey:
+        name: chocolatey
+
+    - name: Install/Upgrade individual Choco Package
       chocolatey.chocolatey.win_chocolatey:
         name: "{{ package }}"
         state: latest
@@ -18,10 +26,18 @@
     - name: Gather facts from chocolatey
       chocolatey.chocolatey.win_chocolatey_facts:
 
-    - name: Displays the Packages
-      debug:
-        var: ansible_chocolatey.packages
-
     - name: Displays the Outdated packages
-      debug:
-        var: ansible_chocolatey.outdated
+      ansible.builtin.debug:
+        msg: "{{ item.package }}"
+      with_items: "{{ ansible_chocolatey.outdated }}"
+
+    - name: Install/Upgrade all outdated Choco Package
+      chocolatey.chocolatey.win_chocolatey:
+        name: "{{ item.package }}"
+        state: latest
+      with_items: "{{ ansible_chocolatey.outdated }}"
+      when: upgrade_all == "yes"
+
+    - name: Displays the Packages
+      ansible.builtin.debug:
+        var: ansible_chocolatey.packages

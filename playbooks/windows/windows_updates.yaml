@@ -1,7 +1,7 @@
 ---
 - name: Windows updates
   hosts: "{{ hostvar | default([]) }}"
-  gather_facts: false
+  gather_facts: true
   become: true
 
   tasks:
@@ -46,3 +46,9 @@
       ansible.builtin.debug:
         var: update_list
       tags: install
+    
+    - name: Write update data to postgres
+      community.postgresql.postgresql_query:
+        db: homelab_cmdb
+        query: INSERT INTO servers (server_name, os, hardware_type) VALUES ( {{ ansible_inventory_hostname }}, {{ ansible_distribution }} {{ ansible_distribution_version }}, {{ ansible_bios_vendor }} }})
+      tags: update_db

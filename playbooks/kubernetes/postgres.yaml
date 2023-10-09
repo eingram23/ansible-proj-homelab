@@ -1,0 +1,10 @@
+---
+- name: Deploy postgres to k3s
+  hosts: "{{ hostvar }}"
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - ansible.builtin.import_role:
+        name: eingram23.kubernetes.postgres

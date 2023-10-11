@@ -67,7 +67,7 @@
         login_user: "homelab"
         login_password: "{{ lookup('hashi_vault', 'secret=secret/ssh/eingram:ssh_password') }}"
         db: homelab_cmdb
-        query: INSERT INTO servers (server_name, os, hardware_type) VALUES ( {{ inventory_hostname }}, {{ ansible_distribution }} {{ ansible_distribution_version }}, {{ ansible_bios_vendor }} }}) ON CONFLICT (server_name) DO UPDATE
+        query: INSERT INTO servers (server_name, os, hardware_type) VALUES ( '{{ inventory_hostname }}', '{{ ansible_distribution }} {{ ansible_distribution_version }}', '{{ ansible_bios_vendor }}' ) ON CONFLICT (server_name) DO UPDATE SET os = '{{ ansible_distribution }} {{ ansible_distribution_version }}', hardware_type = '{{ ansible_bios_vendor }}';
       when: update_db == "yes"
       delegate_to: localhost
       become: false

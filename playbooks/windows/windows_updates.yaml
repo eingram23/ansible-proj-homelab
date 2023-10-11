@@ -49,6 +49,14 @@
     
     - name: Write update data to postgres
       community.postgresql.postgresql_query:
+        connect_params:
+          target_session_attrs: read-write
+          connect_timeout: 10
+        login_host: "postgres.local.lan"
+        login_user: "homelab"
+        login_password: "{{ lookup('hashi_vault', 'secret=secret/ssh/eingram:ssh_password') }}"
         db: homelab_cmdb
-        query: INSERT INTO servers (server_name, os, hardware_type) VALUES ( {{ ansible_inventory_hostname }}, {{ ansible_distribution }} {{ ansible_distribution_version }}, {{ ansible_bios_vendor }} }})
-      tags: update_db
+        query: INSERT INTO servers (server_name, os, hardware_type) VALUES ( '{{ inventory_hostname }}', '{{ ansible_distribution }} {{ ansible_distribution_version }}', '{{ ansible_bios_vendor }}' ) ON CONFLICT (server_name) DO UPDATE SET os = '{{ ansible_distribution }} {{ ansible_distribution_version }}', hardware_type = '{{ ansible_bios_vendor }}';
+      when: update_db == "yes"
+      delegate_to: localhost
+      become: false

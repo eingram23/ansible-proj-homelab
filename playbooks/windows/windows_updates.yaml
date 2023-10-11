@@ -1,15 +1,17 @@
 ---
 - name: Windows updates
   hosts: "{{ hostvar | default([]) }}"
-  gather_facts: true
+  gather_facts: false
   become: true
 
   tasks:
 
     - ansible.builtin.import_role:
         name: eingram23.homelab.wol
-      tags: install
 
+    - name: Gather facts
+      ansible.builtin.setup:
+        
     - name: "Run Update Session Orchestrator check to clear GUI cached results"
       win_shell: |
         UsoClient RefreshSettings
@@ -38,14 +40,11 @@
         reboot: true
         reboot_timeout: 1200
       register: update_list
-      tags:
-        - install
-        - never
+      when: install == "yes"
 
     - name: Show results
       ansible.builtin.debug:
         var: update_list
-      tags: install
     
     - name: Write update data to postgres
       community.postgresql.postgresql_query:
@@ -56,7 +55,10 @@
         login_user: "homelab"
         login_password: "{{ lookup('hashi_vault', 'secret=secret/ssh/eingram:ssh_password') }}"
         db: homelab_cmdb
-        query: INSERT INTO servers (server_name, os, hardware_type) VALUES ( '{{ inventory_hostname }}', '{{ ansible_distribution }} {{ ansible_distribution_version }}', '{{ ansible_bios_vendor }}' ) ON CONFLICT (server_name) DO UPDATE SET os = '{{ ansible_distribution }} {{ ansible_distribution_version }}', hardware_type = '{{ ansible_bios_vendor }}';
+        query: >
+          INSERT INTO servers (server_name, os, hardware_type)
+          VALUES ( '{{ inventory_hostname }}', '{{ ansible_os_name }}', '{{ ansible_system_vendor }}' )
+          ON CONFLICT (server_name) DO UPDATE SET os = '{{ ansible_os_name }}', hardware_type = '{{ ansible_system_vendor }}';
       when: update_db == "yes"
       delegate_to: localhost
       become: false

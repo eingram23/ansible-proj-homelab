@@ -17,7 +17,7 @@
       chocolatey.chocolatey.win_chocolatey:
         name: chocolatey
 
-    - name: Install/Upgrade individual Choco Package
+    - name: Install/Upgrade {{ package }} Choco Package
       chocolatey.chocolatey.win_chocolatey:
         name: "{{ package }}"
         state: latest

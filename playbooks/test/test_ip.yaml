@@ -6,8 +6,8 @@
   tasks:
 
     - ansible.builtin.debug:
-        msg: IP is {{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}
-      delegate_to: localhost
+        msg: IP is {{ inventory_hostname.ansible_default_ipv4.address }}
+      # delegate_to: localhost
     
     # - ansible.builtin.setup:
     #   register: setup

@@ -4,6 +4,9 @@
   gather_facts: false
   become: false
 
+  vars:
+    ansible_user: testuser
+    
   tasks:
 
     - ansible.builtin.debug:

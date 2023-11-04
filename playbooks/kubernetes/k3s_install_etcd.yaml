@@ -5,6 +5,7 @@
   gather_facts: false
   become: true
   become_method: sudo
+  ignore_unreachable: true
 
   tasks:
 
@@ -35,6 +36,7 @@
   gather_facts: false
   become: true
   become_method: sudo
+  ignore_unreachable: true
 
   tasks:
 

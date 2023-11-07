@@ -13,7 +13,7 @@ vsphere_template: TMP-Win2022Core_Packer
 # vsphere_template: TMP-Win2019_Packer
 
 # vm_folder_name: Linux
-vm_folder_name: WindowsHL
+vm_folder_name: WindowsWG
 # workgroup: WORKGROUP
 # vm_folder_name: WindowsHL
 
@@ -46,7 +46,7 @@ ip_gateway_list:
   # - 10.10.0.1
   # - 10.10.0.1
 dns_suffix_list:
-  - homelab.qa
+  - local.lan
   # - local.lan
   # - local.lan
 

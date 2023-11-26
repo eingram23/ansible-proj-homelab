@@ -3,10 +3,6 @@
   become: false
   gather_facts: false
 
-  vars:
-    install: no
-    upgrade_all: no
-
   tasks:
 
     - name: Wake PC if in sleep mode
@@ -21,7 +17,13 @@
       chocolatey.chocolatey.win_chocolatey:
         name: "{{ package }}"
         state: latest
-      when: install == "yes"
+      when: action == "install"
+
+    - name: Remove {{ package }} Choco Package
+      chocolatey.chocolatey.win_chocolatey:
+        name: "{{ package }}"
+        state: absent
+      when: action == "uninstall"
 
     - name: Gather facts from chocolatey
       chocolatey.chocolatey.win_chocolatey_facts:
@@ -36,7 +38,7 @@
         name: "{{ item.package }}"
         state: latest
       with_items: "{{ ansible_chocolatey.outdated }}"
-      when: upgrade_all == "yes"
+      when: action == "upgrade_all"
 
     - name: Displays the Packages
       ansible.builtin.debug:

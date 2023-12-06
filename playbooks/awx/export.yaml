@@ -1,5 +1,5 @@
 ---
-- name: Export config from awx
+- name: Export config from awxr
   hosts: localhost
   gather_facts: false
   become: false

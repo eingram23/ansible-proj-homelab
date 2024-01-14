@@ -4,6 +4,9 @@
   gather_facts: false
   become: false
 
+  environment:
+    K8S_AUTH_KUBECONFIG: "{{ lookup('hashi_vault', 'secret=secret/kubernetes/kubeconfig:k3s') }}"
+    
   tasks:
 
     - name: Deploy awx

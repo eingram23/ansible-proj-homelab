@@ -24,14 +24,14 @@ vm_efi_secure: false
 # All lists must have same # of elements
 
 vsphere_datastore_list:
-  - esxinuc1:datastore1
+  # - esxinuc1:datastore1
   # - esxinuc2:datastore1
   # - esxinuc3:datastore1
-  # - vsanDatastore
+  - vsanDatastore
   # - vsanDatastore
   # - vsanDatastore
 # vsphere_storage_policy: vSAN - No Fault Tolerance
-vsphere_storage_policy: VMFS Thin Provisioned
+vsphere_storage_policy: vSAN Default Storage Policy
 vsphere_network_list:
   - DPG-Services
   # - DPG-Services

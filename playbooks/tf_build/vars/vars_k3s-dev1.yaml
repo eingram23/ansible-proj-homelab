@@ -33,7 +33,7 @@ vsphere_datastore_list:
 # vsphere_storage_policy: vSAN - No Fault Tolerance
 vsphere_storage_policy: vSAN Default Storage Policy
 vsphere_network_list:
-  - Lab-LAN1
+  - DPG-Lab-LAN1
   # - DPG-Services
   # - DPG-Services
 vm_name_list:

@@ -7,6 +7,9 @@
   environment:
     K8S_AUTH_KUBECONFIG: "{{ lookup('hashi_vault', 'secret=secret/kubernetes/kubeconfig:k3s-dev') }}"
 
+  vars:
+    env: -dev
+
   tasks:
 
     - name: Deploy metallb
@@ -38,7 +41,7 @@
         name: eingram23.kubernetes.vault
       tags:
         - vault
-      
+
     - name: Deploy traefik_ingress
       ansible.builtin.import_role:
         name: eingram23.kubernetes.traefik_ingress

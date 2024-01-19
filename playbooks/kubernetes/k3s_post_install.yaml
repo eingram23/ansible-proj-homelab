@@ -1,11 +1,11 @@
 - name: Post k3s install tasks
-# VARS NEEDED: hostvar, ip_range (xxx.xxx.xxx.xxx-xxx.xxx.xxx.xxx), env (-dev)
+# VARS NEEDED: ip_range (xxx.xxx.xxx.xxx-xxx.xxx.xxx.xxx), env (-dev)
   hosts: localhost
   gather_facts: false
   become: false
 
   environment:
-    K8S_AUTH_KUBECONFIG: "{{ lookup('hashi_vault', 'secret=secret/kubernetes/kubeconfig:k3s') }}"
+    K8S_AUTH_KUBECONFIG: "{{ lookup('hashi_vault', 'secret=secret/kubernetes/kubeconfig:k3s' + env) }}"
 
   tasks:
 
@@ -38,7 +38,7 @@
         name: eingram23.kubernetes.vault
       tags:
         - vault
-    
+
     - name: Deploy traefik_ingress
       ansible.builtin.import_role:
         name: eingram23.kubernetes.traefik_ingress

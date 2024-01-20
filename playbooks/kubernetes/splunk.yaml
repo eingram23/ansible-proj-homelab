@@ -19,7 +19,7 @@
       ansible.builtin.copy:
         content: "{{ kubeconfig }}"
         dest: ~/.kube/config
-        mode: '0644'
+        mode: '0400'
 
     - name: Deploy splunk
       ansible.builtin.include_role:

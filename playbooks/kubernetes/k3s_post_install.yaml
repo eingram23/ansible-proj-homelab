@@ -9,6 +9,12 @@
 
   tasks:
 
+    - name: Create kubconfig
+      ansible.builtin.copy:
+        content: "{{ kubeconfig }}"
+        dest: ~/.kube/config
+        mode: '0644'
+
     - name: Deploy metallb
       ansible.builtin.import_role:
         name: eingram23.kubernetes.metallb

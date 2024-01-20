@@ -1,14 +1,26 @@
 ---
 - name: Deploy grafana agent to k3s
-  hosts: "{{ hostvar }}"
+  hosts: localhost
   gather_facts: false
   become: false
 
+  vars:
+    kubeconfig: "{{ lookup('hashi_vault', 'secret=secret/kubernetes/kubeconfig:k3s' + env) }}"
+
   tasks:
+
+    - name: Create .kube folder
+      ansible.builtin.file:
+        path: ~/.kube
+        state: directory
+        mode: '0755'
+
+    - name: Create kubeconfig
+      ansible.builtin.copy:
+        content: "{{ kubeconfig }}"
+        dest: ~/.kube/config
+        mode: '0400'
 
     - name: Run grafana_agent role
       ansible.builtin.import_role:
         name: eingram23.kubernetes.grafana_agent
-
-
-

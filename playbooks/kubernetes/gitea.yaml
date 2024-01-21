@@ -1,5 +1,5 @@
 ---
-# TAGS: hostvar, cert, env
+# VARS: cert, env
 - name: Deploy gitea to k3s
   hosts: localhost
   gather_facts: false

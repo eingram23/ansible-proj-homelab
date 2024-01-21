@@ -6,6 +6,7 @@
 
   vars:
     kubeconfig: "{{ lookup('hashi_vault', 'secret=secret/kubernetes/kubeconfig:k3s' + env) }}"
+    backupfile: "backup-{{ '%Y-%m-%d' | strftime(ansible_date_time.epoch | int - 86400) }}.sql"
 
   tasks:
 
@@ -24,7 +25,7 @@
     - name: Retrieve awx postgres backup
       delegate_to: homenas.local.lan
       ansible.builtin.fetch:
-        src: /mnt/pool0/Shared/Backup/AWX/backup-{{ '%Y-%m-%d' | strftime(ansible_date_time.epoch | int - 86400) }}.sql
+        src: /mnt/pool0/Shared/Backup/AWX/{{ backupfile }}
         dest: /var/tmp/backup.sql
         flat: true
 

@@ -44,18 +44,11 @@
 
     - name: Use kubectl to copy pg awx database to container
       ansible.builtin.shell: |
-        # kubectl scale deployment awx-operator-controller-manager --replicas=0 -n awx
-        # kubectl scale deployment awx-web --replicas=0 -n awx
-        # kubectl scale deployment awx-task --replicas=0 -n awx
-
-        kubectl exec pod/awx-postgres-13-0 -n awx -- psql -U awx -d postgres
-        kubectl exec pod/awx-postgres-13-0 -n awx -- psql drop database awx
-        kubectl exec pod/awx-postgres-13-0 -n awx -- psql create database awx
-        kubectl exec pod/awx-postgres-13-0 -n awx -- psql -U awx < /var/tmp/backup.sql
-
-        # kubectl scale deployment awx-operator-controller-manager --replicas=1 -n awx
-        # kubectl scale deployment awx-web --replicas=1 -n awx
-        # kubectl scale deployment awx-task --replicas=1 -n awx
+        kubectl exec pod/awx-postgres-13-0 -n awx -- dropdb -U awx awx
+        kubectl exec pod/awx-postgres-13-0 -n awx -- createdb -U awx awx
+        kubectl cp /var/tmp/backup.sql awx/awx-postgres-13-0:./backup.sql
+        kubectl exec pod/awx-postgres-13-0 -n awx -- psql -U awx -f backup.sql
+        kubectl exec pod/awx-postgres-13-0 -n awx -- rm backup.sql
 
     - name: Scale up awx
       kubernetes.core.k8s_scale:

@@ -28,14 +28,14 @@ vsphere_datastore_list:
   # - esxinuc2:datastore1
   # - esxinuc3:datastore1
   - vsanDatastore
-  # - vsanDatastore
+  - vsanDatastore
   # - vsanDatastore
 vsphere_storage_policy: vSAN - No Fault Tolerance
 # vsphere_storage_policy: vSAN Default Storage Policy
 vsphere_network_list:
   # - DPG-Lab-LAN1
   - DPG-Services
-  # - DPG-Services
+  - DPG-Services
 vm_name_list:
   # - k3s-dev1
   - k3s-prod2

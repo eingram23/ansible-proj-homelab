@@ -4,7 +4,7 @@
   become: false
 
   vars:
-    kubeconfig: "{{ lookup('hashi_vault', 'secret=secret/kubernetes/kubeconfig:k3s' + env) }}"
+    kubeconfig: "{{ lookup('hashi_vault', 'secret=secret/kubernetes/kubeconfig:k3s' + env | default('')) }}"
 
   tasks:
 

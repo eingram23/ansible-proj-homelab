@@ -38,8 +38,8 @@ vsphere_network_list:
   - DPG-Services
 vm_name_list:
   # - k3s-dev1
-  - k3s-prod2
-  - k3s-prod3
+  - k3s2
+  - k3s3
 ip_address_list:
   # - 10.10.0.221
   - 192.168.1.222

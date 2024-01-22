@@ -30,7 +30,6 @@
   hosts: localhost
   gather_facts: false
   become: false
-  tags: addnode
 
   vars:
     kubeconfig: "{{ lookup('hashi_vault', 'secret=secret/kubernetes/kubeconfig:k3s' + env | default('')) }}"
@@ -54,4 +53,4 @@
     - name: Deploy longhorn
       ansible.builtin.include_role:
         name: eingram23.kubernetes.longhorn
-      tags: addnode
+        tasks_from: addnode

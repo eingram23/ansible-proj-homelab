@@ -1,7 +1,7 @@
 ---
 # VARS: cert, env
-- name: Deploy gitea certs to k3s
-  hosts: "{{ hostvar | default([]) }}"
+- name: Prepare kubeconfig
+  hosts: localhost
   gather_facts: false
   become: false
 
@@ -15,14 +15,19 @@
         path: ~/.kube
         state: directory
         mode: '0755'
-      delegate_to: localhost
 
     - name: Create kubeconfig
       ansible.builtin.copy:
         content: "{{ kubeconfig }}"
         dest: ~/.kube/config
         mode: '0400'
-      delegate_to: localhost
+
+- name: Deploy gitea certs to k3s
+  hosts: "{{ hostvar | default([]) }}"
+  gather_facts: false
+  become: true
+
+  tasks:
 
     - name: Deploy gitea
       ansible.builtin.include_role:

@@ -32,4 +32,4 @@
     - name: Deploy gitea
       ansible.builtin.include_role:
         name: eingram23.kubernetes.gitea
-        tasks_from: priv_registry
+        tasks_from: copy_certs

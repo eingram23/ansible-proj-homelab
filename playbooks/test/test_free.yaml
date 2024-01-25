@@ -3,7 +3,7 @@
   gather_facts: false
   become: false
   strategy: free
-  timeout: 1.5
+  timeout: 1
 
   tasks:
 

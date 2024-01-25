@@ -1,21 +1,14 @@
 ---
 - hosts: "{{ hostvar }}"
-  gather_facts: true
-  become: false
-  strategy: free
-  timeout: 3
-
-  tasks:
-   
-    - debug:
-        msg: "{{ ansible_date_time.time }}"
-
-- hosts: "{{ hostvar }}"
   gather_facts: false
   become: false
   strategy: free
+  timeout: 1.5
 
   tasks:
+
+    - debug:
+        msg: "{{ ansible_date_time.time }}"
 
     - shell:
         cmd: sleep $((RANDOM % 300 + 0))

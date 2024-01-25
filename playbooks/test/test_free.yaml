@@ -1,6 +1,6 @@
 ---
 - hosts: "{{ hostvar }}"
-  gather_facts: false
+  gather_facts: true
   become: false
   strategy: free
   timeout: 1

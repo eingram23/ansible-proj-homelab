@@ -1,0 +1,31 @@
+---
+- hosts: "{{ hostvar }}"
+  gather_facts: true
+  become: false
+  strategy: free
+
+  tasks:
+   
+    - debug:
+        msg: "{{ ansible_date_time.time }}"
+
+- hosts: "{{ hostvar }}"
+  gather_facts: false
+  become: false
+  strategy: free
+
+  tasks:
+
+    - shell:
+        cmd: sleep $((RANDOM % 300 + 0))
+
+- hosts: "{{ hostvar }}"
+  gather_facts: true
+  become: false
+  strategy: free
+
+  tasks:
+   
+    - debug:
+        msg: "{{ ansible_date_time.time }}"
+        

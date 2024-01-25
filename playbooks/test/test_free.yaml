@@ -12,6 +12,9 @@
     - shell:
         cmd: sleep $((RANDOM % 300 + 0))
 
+    - debug:
+        msg: "Done"
+
 # - hosts: "{{ hostvar }}"
 #   gather_facts: true
 #   become: false

@@ -52,6 +52,7 @@
         state: latest
       when: action == "install" and force_install == "no"
       loop: "{{ package }}"
+      ignore_errors: true
 
     - name: Install/Upgrade Choco Package(s) (FORCE)
       chocolatey.chocolatey.win_chocolatey:
@@ -60,6 +61,10 @@
         force: true
       when: action == "install" and force_install == "yes"
       loop: "{{ package }}"
+      ignore_errors: true
+
+    - name: Wait 600 seconds for target connection to become reachable/usable
+      ansible.builtin.wait_for_connection:
 
     - name: Remove Choco Package(s)
       chocolatey.chocolatey.win_chocolatey:
@@ -82,6 +87,7 @@
         state: latest
       loop: "{{ ansible_chocolatey.outdated }}"
       when: action == "upgrade_all" and force_install == "no"
+      ignore_errors: true
 
     - name: Install/Upgrade all outdated Choco Package (FORCE)
       chocolatey.chocolatey.win_chocolatey:
@@ -90,6 +96,10 @@
         force: true
       loop: "{{ ansible_chocolatey.outdated }}"
       when: action == "upgrade_all" and force_install == "yes"
+      ignore_errors: true
+
+    - name: Wait 600 seconds for target connection to become reachable/usable
+      ansible.builtin.wait_for_connection:
 
     - name: Displays the Packages
       ansible.builtin.debug:

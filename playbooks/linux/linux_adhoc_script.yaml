@@ -9,6 +9,7 @@
       ansible.builtin.copy:
         content: "{{ script_content }}"
         dest: /var/tmp/ans_ah_script.{{ extension }}
+        mode: +x
 
     - name: Run script via shell
       ansible.builtin.include_role:

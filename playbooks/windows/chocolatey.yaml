@@ -87,7 +87,7 @@
         state: latest
       loop: "{{ ansible_chocolatey.outdated }}"
       when: action == "upgrade_all" and force_install == "no"
-      ignore_errors: true
+      ignore_unreachable: true
 
     - name: Install/Upgrade all outdated Choco Package (FORCE)
       chocolatey.chocolatey.win_chocolatey:
@@ -96,7 +96,7 @@
         force: true
       loop: "{{ ansible_chocolatey.outdated }}"
       when: action == "upgrade_all" and force_install == "yes"
-      ignore_errors: true
+      ignore_unreachable: true
 
     - name: Wait 600 seconds for target connection to become reachable/usable
       ansible.builtin.wait_for_connection:

@@ -13,6 +13,35 @@
       ansible.builtin.include_role:
         name: eingram23.homelab.wol
 
+    # - name: Obtain information about a registry key using short form
+    #   ansible.windows.win_reg_stat:
+    #     path: HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\Release
+    #   register: dotnet48_version
+
+    - name: ensure .NET Framework 4.8 requirement is satisfied for Chocolatey CLI v2.0.0+
+      # when: dotnet48_version not exists or dotnet48_version < "528040"
+      when: package == "dotnet48_prereq"
+      block:
+        - name: install Chocolatey CLI v1.4.0
+          win_chocolatey:
+            name: 'chocolatey'
+            state: present
+            version: '1.4.0'
+
+        - name: install Microsoft .NET Framework 4.8
+          win_chocolatey:
+            name: 'netfx-4.8'
+            state: present
+
+        - name: Reboot the host to complete .NET Framework 4.8 install
+          when: reboot == "yes"
+          ansible.windows.win_reboot:
+
+        - name: install Chocolatey CLI v2.0.0+ when .NET Framework 4.8 dependency is met
+          win_chocolatey:
+            name: 'chocolatey'
+            state: latest
+
     - name: Ensure Chocolatey itself is installed, using community repo for the bootstrap
       chocolatey.chocolatey.win_chocolatey:
         name: chocolatey

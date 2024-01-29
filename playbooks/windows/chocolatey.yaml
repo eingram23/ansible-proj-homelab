@@ -3,6 +3,9 @@
   become: false
   gather_facts: false
 
+  vars:
+    reboot: "no"
+
   tasks:
 
     - name: Wake PC if in sleep mode

@@ -49,3 +49,7 @@
     - name: Displays the Packages
       ansible.builtin.debug:
         var: ansible_chocolatey.packages
+
+    - name: Reboot host
+      ansible.windows.win_reboot:
+      when: reboot = "yes"

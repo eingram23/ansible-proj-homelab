@@ -51,4 +51,4 @@
 
     - name: Reboot host
       ansible.windows.win_reboot:
-      when: reboot = "yes"
+      when: reboot == "yes"

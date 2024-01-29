@@ -22,5 +22,5 @@
         state: absent      
 
     - ansible.builtin.fail:
-      when: ((bash_output.stderr is defined and bash_output.stderr != "") or
+      when: ((sh_output.stderr is defined and sh_output.stderr != "") or
             (py_output.stderr is defined and py_output.stderr != "")

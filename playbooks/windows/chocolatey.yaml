@@ -5,6 +5,7 @@
 
   vars:
     reboot: "no"
+    force_install: "no"
 
   tasks:
 
@@ -20,7 +21,15 @@
       chocolatey.chocolatey.win_chocolatey:
         name: "{{ item }}"
         state: latest
-      when: action == "install"
+      when: action == "install" and force_install == "no"
+      loop: "{{ package }}"
+
+    - name: Install/Upgrade Choco Package(s) (FORCE)
+      chocolatey.chocolatey.win_chocolatey:
+        name: "{{ item }}"
+        state: latest
+        force: true
+      when: action == "install" and force_install == "yes"
       loop: "{{ package }}"
 
     - name: Remove Choco Package(s)
@@ -43,7 +52,15 @@
         name: "{{ item.package }}"
         state: latest
       loop: "{{ ansible_chocolatey.outdated }}"
-      when: action == "upgrade_all"
+      when: action == "upgrade_all" and force_install == "no"
+
+    - name: Install/Upgrade all outdated Choco Package (FORCE)
+      chocolatey.chocolatey.win_chocolatey:
+        name: "{{ item.package }}"
+        state: latest
+        force: true
+      loop: "{{ ansible_chocolatey.outdated }}"
+      when: action == "upgrade_all" and force_install == "yes"
 
     - name: Displays the Packages
       ansible.builtin.debug:

@@ -35,14 +35,14 @@
 
     - name: Displays the Outdated packages
       ansible.builtin.debug:
-        msg: "{{ item }}"
-      loop: "{{ ansible_chocolatey.outdated.package }}"
+        msg: "{{ item.package }}"
+      loop: "{{ ansible_chocolatey.outdated }}"
 
     - name: Install/Upgrade all outdated Choco Package
       chocolatey.chocolatey.win_chocolatey:
-        name: "{{ item }}"
+        name: "{{ item.package }}"
         state: latest
-      loop: "{{ ansible_chocolatey.outdated.package }}"
+      loop: "{{ ansible_chocolatey.outdated }}"
       when: action == "upgrade_all"
 
     - name: Displays the Packages

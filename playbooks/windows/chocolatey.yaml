@@ -21,16 +21,14 @@
         name: "{{ item }}"
         state: latest
       when: action == "install"
-      loop:
-        - "{{ package }}"
+      loop: "{{ package }}"
 
     - name: Remove Choco Package(s)
       chocolatey.chocolatey.win_chocolatey:
         name: "{{ item }}"
         state: absent
       when: action == "uninstall"
-      loop:
-        - "{{ package }}"
+      loop: "{{ package }}"
 
     - name: Gather facts from chocolatey
       chocolatey.chocolatey.win_chocolatey_facts:
@@ -38,15 +36,13 @@
     - name: Displays the Outdated packages
       ansible.builtin.debug:
         msg: "{{ item }}"
-      loop:
-        - "{{ ansible_chocolatey.outdated.package }}"
+      loop: "{{ ansible_chocolatey.outdated.package }}"
 
     - name: Install/Upgrade all outdated Choco Package
       chocolatey.chocolatey.win_chocolatey:
         name: "{{ item }}"
         state: latest
-      loop:
-        - "{{ ansible_chocolatey.outdated.package }}"
+      loop: "{{ ansible_chocolatey.outdated.package }}"
       when: action == "upgrade_all"
 
     - name: Displays the Packages

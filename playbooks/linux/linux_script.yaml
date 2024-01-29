@@ -14,5 +14,5 @@
         name: eingram23.homelab.linux_scripts
 
     - ansible.builtin.fail:
-      when: ((bash_output.stderr is defined and bash_output.stderr != "") or
+      when: (bash_output.stderr is defined and bash_output.stderr != "") or
             (py_output.stderr is defined and py_output.stderr != "")

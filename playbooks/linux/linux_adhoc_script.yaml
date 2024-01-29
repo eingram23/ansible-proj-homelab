@@ -17,7 +17,7 @@
         script: ans_ah_script.{{ extension }}
 
     - name: Clean up script
-      ansible.windows.file:
+      ansible.builtin.file:
         path: /var/tmp/ans_ah_script.{{ extension }}
         state: absent      
 

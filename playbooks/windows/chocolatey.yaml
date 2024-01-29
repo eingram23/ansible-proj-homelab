@@ -20,7 +20,7 @@
 
     - name: ensure .NET Framework 4.8 requirement is satisfied for Chocolatey CLI v2.0.0+
       # when: dotnet48_version not exists or dotnet48_version < "528040"
-      when: '"dotnet48_prereq" in package'
+      when: '"netfx-4.8" in package'
       block:
         - name: install Chocolatey CLI v1.4.0
           win_chocolatey:

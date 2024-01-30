@@ -4,6 +4,7 @@
   gather_facts: false
   become: true
   strategy: free
+  ignore_unreachable: true
 
   tasks:
 

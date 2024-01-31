@@ -6,13 +6,16 @@
 
   tasks:
 
-    - debug:
+    - name: Display timestamp
+      debug:
         msg: "{{ ansible_date_time.time }}"
 
-    - shell:
+    - name: Run shell command
+      shell:
         cmd: sleep $((RANDOM % 300 + 0))
 
-    - debug:
+    - name: Display end message
+      debug:
         msg: "Done"
 
 # - hosts: "{{ hostvar }}"

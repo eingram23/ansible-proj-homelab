@@ -33,20 +33,20 @@ vsphere_datastore_list:
 vsphere_storage_policy: "vSAN - No Fault Tolerance"
 # vsphere_storage_policy: vSAN Default Storage Policy
 vsphere_network_list:
-  - DPG-Lab-LAN1
-  # - DPG-Services
+  # - DPG-Lab-LAN1
+  - DPG-Services
   # - DPG-Services
 vm_name_list:
-  - k3s-dev1
+  - k3s-prod1
   # - k3s-prod2
   # - k3s-prod3
 ip_address_list:
-  - 10.10.0.221
+  - 192.168.1.221
   # - 192.168.1.222
   # - 192.168.1.223
 ip_gateway_list:
-  - 10.10.0.1
-  # - 192.168.1.1
+  # - 10.10.0.1
+  - 192.168.1.1
   # - 192.168.1.1
 dns_suffix_list:
   - local.lan

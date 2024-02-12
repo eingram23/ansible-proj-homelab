@@ -5,7 +5,7 @@
   become: false
 
   vars:
-    kubeconfig: "{{ lookup('hashi_vault', 'secret=secret/kubernetes/kubeconfig:k3s' + env) }}"
+    kubeconfig: "{{ lookup('hashi_vault', 'secret=secret/kubernetes/' + k8shost + ':kubeconfig') }}"
     backupfile: "backup-{{ '%Y-%m-%d' | strftime(ansible_date_time.epoch | int - 86400) }}.sql"
 
   tasks:

@@ -5,7 +5,7 @@
   become: false
 
   vars:
-    kubeconfig: "{{ lookup('hashi_vault', 'secret=secret/kubernetes/kubeconfig:k3s' + env | default('')) }}"
+    kubeconfig: "{{ lookup('hashi_vault', 'secret=secret/kubernetes/' + k8shost + ':kubeconfig' | default('')) }}"
 
   tasks:
 
@@ -22,6 +22,13 @@
         dest: ~/.kube/config
         mode: '0400'
       tags: always
+
+    # - name: Deploy longhorn
+    #   when: storage == "longhorn"
+    #   ansible.builtin.import_role:
+    #     name: eingram23.kubernetes.longhorn
+    #   tags:
+    #     - longhorn
 
     - name: Deploy metallb
       ansible.builtin.import_role:
@@ -40,12 +47,6 @@
         name: eingram23.kubernetes.kubernetes_dashboard
       tags:
         - dashboard
-
-    - name: Deploy longhorn
-      ansible.builtin.import_role:
-        name: eingram23.kubernetes.longhorn
-      tags:
-        - longhorn
 
     - name: Deploy vault
       ansible.builtin.import_role:

@@ -1,0 +1,33 @@
+---
+- name: Run first task
+  hosts: "podhost1.local.lan,k3s-prod1.local.lan"
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    # - ansible.builtin.slurp:
+    #     path: /var/tmp/test
+    - command: sleep 1000
+      timeout: 1
+    # - name: Display timestamp
+    #   debug:
+    #     msg: "{{ ansible_date_time.time }}"
+
+    # - name: Run shell command
+    #   shell:
+    #     cmd: sleep 10000
+
+    # - name: Display end message
+    #   debug:
+    #     msg: "Done"
+
+# - name: Run second task
+#   hosts: "podhost1.local.lan,k3s-prod1.local.lan"
+#   gather_facts: true
+#   become: false
+
+#   tasks:
+   
+#     - command: /bin/true
+        

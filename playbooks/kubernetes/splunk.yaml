@@ -4,23 +4,11 @@
   gather_facts: false
   become: false
 
-  vars:
-    env: ""
-    kubeconfig: "{{ lookup('hashi_vault', 'secret=secret/kubernetes/' + k8shost + ':kubeconfig' | default('')) }}"
-
   tasks:
 
-    - name: Create .kube folder
-      ansible.builtin.file:
-        path: ~/.kube
-        state: directory
-        mode: '0755'
-
-    - name: Create kubeconfig
-      ansible.builtin.copy:
-        content: "{{ kubeconfig }}"
-        dest: ~/.kube/config
-        mode: '0400'
+    - name: Set environment
+      ansible.builtin.import_role:
+        name: eingram23.kubernetes.kubeconfig
 
     - name: Deploy splunk
       ansible.builtin.include_role:

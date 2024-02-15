@@ -6,9 +6,13 @@
 
   tasks:
 
-    - name: Test task
-      command: /bin/true
-      failed_when: true
+    - block:
+        - name: Test task
+          command: /bin/true
+          failed_when: true
+      rescue:
+        - debug: 
+            msg: "rescue task"
 
 
         

@@ -8,7 +8,7 @@
 
     - name: Test task
       command: /bin/true
-      failed_when: always
+      failed_when: true
 
 
         

@@ -1,0 +1,23 @@
+---
+- name: Check dotnet version
+  hosts: "{{ hostvar | default([]) }}"
+  gather_facts: false
+  become: true
+
+  tasks:
+
+    - name: Get dotnet version from registry
+      ansible.windows.win_reg_stat:
+        path: HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\
+        name: Release
+      register: dot_net_ver
+
+    - name: Display version
+      ansible.builtin.debug:
+        var: dot_net_ver.value
+
+    - name: 4.8.1 or later
+      when: dot_net_ver.value
+      ansible.builtin.debug:
+        msg: "4.8.1 or later"
+      

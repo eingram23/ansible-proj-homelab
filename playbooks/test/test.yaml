@@ -6,13 +6,21 @@
 
   tasks:
 
-    - block:
-        - name: Test task
-          command: /bin/true
-          failed_when: true
-      rescue:
-        - debug: 
-            msg: "rescue task"
+    - name: sleep 1
+      ansible.windows.win_shell:
+        cmd: start-sleep 30
+
+    - name: sleep 2
+      ansible.windows.win_shell:
+        cmd: start-sleep 30
+
+    - name: sleep 3
+      ansible.windows.win_shell:
+        cmd: start-sleep 30
+
+    - name: sleep 4
+      ansible.windows.win_shell:
+        cmd: start-sleep 30
 
 
         

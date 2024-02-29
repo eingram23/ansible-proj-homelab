@@ -2,6 +2,7 @@
 - name: Run first task
   hosts: "{{ hostvar }}"
   gather_facts: false
+  become: true
 
   tasks:
 

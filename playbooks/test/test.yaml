@@ -7,16 +7,17 @@
   tasks:
 
     - name: sleep 1
-      ansible.windows.win_shell: start-sleep 30
+      ansible.builtin.pause:
+        seconds: 30
 
     - name: sleep 2
-      ansible.windows.win_shell: start-sleep 30
+      ansible.builtin.pause:
+        seconds: 30
 
     - name: sleep 3
-      ansible.windows.win_shell: start-sleep 30
-
-    - name: sleep 4
-      ansible.windows.win_shell: start-sleep 30
-
-
+      ansible.builtin.pause:
+        seconds: 30
         
+    - name: sleep 4
+      ansible.builtin.pause:
+        seconds: 30

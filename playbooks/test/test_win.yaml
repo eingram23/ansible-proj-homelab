@@ -3,6 +3,7 @@
   hosts: "{{ hostvar }}"
   gather_facts: false
   become: true
+  ignore_unreachable: true
 
   tasks:
 

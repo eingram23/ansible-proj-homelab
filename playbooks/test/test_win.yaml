@@ -7,17 +7,13 @@
   tasks:
 
     - name: task 1
-      ansible.builtin.win_shell:
-        cmd: sleep 30
+      ansible.builtin.win_shell: sleep 30
 
     - name: task 2
-      ansible.builtin.win_shell:
-        cmd: sleep 30
+      ansible.builtin.win_shell: sleep 30
 
     - name: task 3
-      ansible.builtin.win_shell:
-        cmd: sleep 30
+      ansible.builtin.win_shell: sleep 30
         
     - name: task 4
-      ansible.builtin.win_shell:
-        cmd: sleep 30
+      ansible.builtin.win_shell: sleep 30

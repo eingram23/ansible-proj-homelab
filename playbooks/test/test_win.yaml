@@ -8,6 +8,8 @@
 
     - name: task 1
       ansible.builtin.win_shell: sleep 30
+      retries: 10
+      delay: 1
 
     - name: task 2
       ansible.builtin.win_shell: sleep 30

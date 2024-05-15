@@ -1,0 +1,15 @@
+---
+- name: Create postgresql database
+  hosts: "{{ hostvar | default([]) }}"
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - name: Assert proper vars set
+      ansible.builtin.assert:
+        that:
+          - db_name is defined
+          - db_user is defined
+
+          

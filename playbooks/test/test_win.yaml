@@ -3,20 +3,12 @@
   hosts: "{{ hostvar }}"
   gather_facts: false
   become: true
-  ignore_unreachable: true
 
   tasks:
 
-    - name: task 1
-      ansible.builtin.win_shell: sleep 30
-      retries: 10
-      delay: 1
-
-    - name: task 2
-      ansible.builtin.win_shell: sleep 30
-
-    - name: task 3
-      ansible.builtin.win_shell: sleep 30
-        
-    - name: task 4
-      ansible.builtin.win_shell: sleep 30
+    - ansible.builtin.set_fact:
+        test: true
+    
+    - ansible.builtin.debug:
+        var: test
+      when: test

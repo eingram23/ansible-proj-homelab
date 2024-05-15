@@ -7,14 +7,21 @@
 
   tasks:
 
-    - ansible.builtin.import_role:
+    - name: Assert proper vars set
+      ansible.builtin.assert:
+        that:
+          - install == "yes" or install == "no"
+          - update_db == "yes" or update_db == "no"
+
+    - name: Run WakeOnLAN role
+      ansible.builtin.import_role:
         name: eingram23.homelab.wol
 
     - name: Gather facts
       ansible.builtin.setup:
-        
+
     - name: "Run Update Session Orchestrator check to clear GUI cached results"
-      win_shell: |
+      ansible.windows.win_shell: |
         UsoClient RefreshSettings
         UsoClient ScanInstallWait
 
@@ -46,7 +53,7 @@
     - name: Show results
       ansible.builtin.debug:
         var: update_list
-    
+
     - name: Write update data to postgres
       community.postgresql.postgresql_query:
         connect_params:
